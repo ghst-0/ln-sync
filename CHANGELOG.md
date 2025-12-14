@@ -1,6 +1,6 @@
 # Versions
 
-## 6.5.1
+## 6.5.2
 
 - `getNetwork`: Add support for signet and testnet4
 
