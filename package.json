@@ -9,7 +9,7 @@
     "async": "3.2.6",
     "asyncjs-util": "1.2.12",
     "bech32": "2.0.0",
-    "bitcoinjs-lib": "7.0.1",
+    "bitcoinjs-lib": "6.1.7",
     "bolt07": "1.9.4",
     "colorette": "2.0.20",
     "ecpair": "3.0.1",
