@@ -1,4 +1,4 @@
-const {updateForwardHtlc} = require('./../sync');
+import { updateForwardHtlc } from './../sync/index.js';
 
 /** Event forward HTLC
 
@@ -20,7 +20,7 @@ const {updateForwardHtlc} = require('./../sync');
     [timeout]: <Forward CLTV Timeout Height Number>
   }
 */
-module.exports = async (args) => {
+export default async (args) => {
   const synced = await updateForwardHtlc({
     at: args.at,
     db: args.db,

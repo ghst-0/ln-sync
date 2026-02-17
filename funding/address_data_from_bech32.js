@@ -1,5 +1,4 @@
-const {bech32} = require('bech32');
-const {bech32m} = require('bech32');
+import { bech32, bech32m } from 'bech32';
 
 /** Parse address data from a bech32 or bech32m encoded string
 
@@ -16,7 +15,7 @@ const {bech32m} = require('bech32');
     version: <Address Version Number>
   }
 */
-module.exports = ({address}) => {
+export default ({address}) => {
   // Support v0 stye bech32 addresses
   try {
     const [version, ...data] = bech32.decode(address).words;

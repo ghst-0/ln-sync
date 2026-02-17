@@ -1,10 +1,8 @@
-const asyncAuto = require('async/auto');
-const asyncEach = require('async/each');
-const asyncUntil = require('async/until');
-const {getChainTransactions} = require('ln-service');
-const {getHeight} = require('ln-service');
-const {lockUtxo} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import asyncEach from 'async/each.js';
+import asyncUntil from 'async/until.js';
+import { getChainTransactions, getHeight, lockUtxo } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
 const asOutpoint = n => `${n.transaction_id}:${n.transaction_vout}`;
 const blockHeightBuffer = 144;
@@ -27,7 +25,7 @@ const {max} = Math;
 
   @returns via cbk or Promise
 */
-module.exports = ({id, inputs, interval, lnd}, cbk) => {
+export default ({id, inputs, interval, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

@@ -1,9 +1,8 @@
-const {equal} = require('node:assert').strict;
-const {rejects} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { rejects, equal } from 'node:assert/strict';
 
-const {getInfoResponse} = require('./../fixtures');
-const {getNetwork} = require('./../../');
+import { getInfoResponse } from './../fixtures/index.js';
+import { getNetwork } from './../../index.js';
 
 const getInfoRes = () => JSON.parse(JSON.stringify(getInfoResponse));
 
@@ -55,7 +54,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     if (!!error) {
       await rejects(getNetwork(args), error, 'Got expected error');
     } else {
@@ -63,7 +62,5 @@ tests.forEach(({args, description, error, expected}) => {
 
       equal(network, expected.network, 'Got expected network');
     }
-
-    return;
   });
 });

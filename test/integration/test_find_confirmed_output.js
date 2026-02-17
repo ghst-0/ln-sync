@@ -1,14 +1,13 @@
-const {deepEqual} = require('node:assert').strict;
-const {fail} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual, fail } from 'node:assert/strict';
 
-const asyncRetry = require('async/retry');
-const {createChainAddress} = require('ln-service');
-const {getUtxos} = require('ln-service');
-const {sendToChainAddress} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
+import asyncRetry from 'async/retry.js';
+import { createChainAddress } from 'ln-service';
+import { getUtxos } from 'ln-service';
+import { sendToChainAddress } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
 
-const {findConfirmedOutput} = require('./../../');
+import { findConfirmedOutput } from './../../index.js';
 
 const count = 200;
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -90,6 +89,4 @@ test('Find confirmed output', async () => {
   }
 
   await kill({});
-
-  return;
 });

@@ -1,10 +1,9 @@
-const {deepEqual} = require('node:assert').strict;
-const {rejects} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { rejects } from 'node:assert/strict';
 
-const {chanInfoResponse} = require('./../fixtures');
-const {pendingChannelsResponse} = require('./../fixtures');
-const updateChannelFee = require('./../../peers/update_channel_fee');
+import { chanInfoResponse } from './../fixtures/index.js';
+import { pendingChannelsResponse } from './../fixtures/index.js';
+import updateChannelFee from './../../peers/update_channel_fee.js';
 
 const makeLnd = overrides => {
   return {
@@ -179,13 +178,11 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     if (!!error) {
       await rejects(updateChannelFee(args), error, 'Got expected error');
     } else {
       await updateChannelFee(args);
     }
-
-    return;
   });
 });

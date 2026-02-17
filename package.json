@@ -4,6 +4,7 @@
     "url": "https://github.com/alexbosworth/ln-sync/issues"
   },
   "description": "LN metadata persistence methods",
+  "type": "module",
   "dependencies": {
     "async": "3.2.6",
     "asyncjs-util": "1.2.12",
@@ -12,14 +13,15 @@
     "bolt07": "1.9.4",
     "colorette": "2.0.20",
     "ecpair": "3.0.1",
+    "lightning": "11.0.1",
     "ln-service": "workspace:*",
     "psbt": "4.0.0",
     "tiny-secp256k1": "2.2.4"
   },
   "devDependencies": {
-    "oxlint": "^1.48.0",
     "ln-docker-daemons": "6.0.28",
-    "mock-lnd": "2.0.0"
+    "mock-lnd": "2.0.0",
+    "oxlint": "^1.48.0"
   },
   "engines": {
     "node": ">=18"

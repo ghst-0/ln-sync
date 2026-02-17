@@ -1,12 +1,11 @@
-const asyncAuto = require('async/auto');
-const {getNode} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { getNode } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
-const keyForRecord = require('./key_for_record');
-const nodeRecord = require('./node_record');
-const nodeUpdate = require('./node_update');
+import keyForRecord from './key_for_record.js';
+import nodeRecord from './node_record.js';
+import nodeUpdate from './node_update.js';
 
-const bufferAsHex = buffer => buffer.toString('hex');
 const fresh = ['public_key'];
 const hexAsBuffer = hex => Buffer.from(hex, 'hex');
 const {isArray} = Array;
@@ -51,7 +50,7 @@ const type = 'node';
     }
   }
 */
-module.exports = ({db, id, lnd}, cbk) => {
+export default ({db, id, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

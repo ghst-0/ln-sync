@@ -1,12 +1,11 @@
-const {equal} = require('node:assert').strict;
-const {rejects} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { equal, rejects } from 'node:assert/strict';
 
-const {chanInfoResponse} = require('./../fixtures');
-const {listChannelsResponse} = require('./../fixtures');
-const {getNodeInfoResponse} = require('./../fixtures');
-const {getPeerLiquidity} = require('./../../');
-const {pendingChannelsResponse} = require('./../fixtures');
+import { chanInfoResponse } from './../fixtures/index.js';
+import { listChannelsResponse } from './../fixtures/index.js';
+import { getNodeInfoResponse } from './../fixtures/index.js';
+import { getPeerLiquidity } from './../../index.js';
+import { pendingChannelsResponse } from './../fixtures/index.js';
 
 const tests = [
   {
@@ -52,7 +51,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     if (!!error) {
       await rejects(getPeerLiquidity(args), error, 'Got expected error');
     } else {
@@ -62,7 +61,5 @@ tests.forEach(({args, description, error, expected}) => {
       equal(peer.inbound, expected.inbound, 'Total inbound is returned');
       equal(peer.outbound, expected.outbound, 'Total outbound is returned');
     }
-
-    return;
   });
 });

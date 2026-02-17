@@ -1,14 +1,14 @@
-const acceptsChannelOpen = require('./accepts_channel_open');
-const connectPeer = require('./connect_peer');
-const findKey = require('./find_key');
-const getLiquidity = require('./get_liquidity');
-const getPeerLiquidity = require('./get_peer_liquidity');
-const stopAllHtlcs = require('./stop_all_htlcs');
-const updateChannelFee = require('./update_channel_fee');
-const waitForConnectedPeer = require('./wait_for_connected_peer');
-const waitForPendingOpen = require('./wait_for_pending_open');
+import acceptsChannelOpen from './accepts_channel_open.js';
+import connectPeer from './connect_peer.js';
+import findKey from './find_key.js';
+import getLiquidity from './get_liquidity.js';
+import getPeerLiquidity from './get_peer_liquidity.js';
+import stopAllHtlcs from './stop_all_htlcs.js';
+import updateChannelFee from './update_channel_fee.js';
+import waitForConnectedPeer from './wait_for_connected_peer.js';
+import waitForPendingOpen from './wait_for_pending_open.js';
 
-module.exports = {
+export {
   acceptsChannelOpen,
   connectPeer,
   findKey,

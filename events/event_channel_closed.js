@@ -1,4 +1,4 @@
-const {markChannelClosed} = require('./../sync');
+import { markChannelClosed } from './../sync/index.js';
 
 /** Channel closed event
 
@@ -17,7 +17,7 @@ const {markChannelClosed} = require('./../sync');
     public_keys: [<Public Key Hex String>]
   }
 */
-module.exports = async ({capacity, db, emitter, height, id}) => {
+export default async ({capacity, db, emitter, height, id}) => {
   const marked = await markChannelClosed({db, height, id});
 
   // Exit early when the channel was already known to be closed

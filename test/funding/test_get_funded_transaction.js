@@ -1,10 +1,11 @@
-const {deepEqual} = require('node:assert').strict;
-const {makeLnd} = require('mock-lnd');
-const {rejects} = require('node:assert').strict;
-const test = require('node:test');
-const {Transaction} = require('bitcoinjs-lib');
+import 'node:assert';
+import { deepEqual, rejects } from 'node:assert/strict';
 
-const {getFundedTransaction} = require('./../../');
+import { makeLnd } from 'mock-lnd';
+import test from 'node:test';
+import { Transaction } from 'bitcoinjs-lib';
+
+import { getFundedTransaction } from './../../index.js';
 
 const method = getFundedTransaction;
 
@@ -82,7 +83,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     if (!!error) {
       await rejects(method(args), error, 'Got expected error');
     } else {
@@ -90,7 +91,5 @@ tests.forEach(({args, description, error, expected}) => {
 
       deepEqual(got, expected, 'Got expected result');
     }
-
-    return;
   });
 });

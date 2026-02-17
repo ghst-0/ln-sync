@@ -1,12 +1,10 @@
-const EventEmitter = require('events');
+import EventEmitter from 'node:events';
+import asyncDoUntil from 'async/doUntil.js';
+import { subscribeToChannels, subscribeToGraph } from 'lightning';
 
-const asyncDoUntil = require('async/doUntil');
-const {subscribeToChannels} = require('lightning/lnd_methods');
-const {subscribeToGraph} = require('lightning/lnd_methods');
-
-const emitError = require('./emit_error');
-const subscribeToForwards = require('./subscribe_to_forwards');
-const syncFromDataEvents = require('./sync_from_data_events');
+import emitError from './emit_error.js';
+import subscribeToForwards from './subscribe_to_forwards.js';
+import syncFromDataEvents from './sync_from_data_events.js';
 
 const subRestartDelayMs = 1000 * 5;
 
@@ -29,7 +27,7 @@ const subRestartDelayMs = 1000 * 5;
     id: <Block Hash Hex String>
   }
 */
-module.exports = ({db, lnd}) => {
+export default ({db, lnd}) => {
   if (!db) {
     throw new Error('ExpectedDatabaseToSubscribeToChanges');
   }

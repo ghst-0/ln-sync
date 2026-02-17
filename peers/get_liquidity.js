@@ -1,12 +1,9 @@
-const asyncAuto = require('async/auto');
-const {getChannels} = require('lightning/lnd_methods');
-const {getNode} = require('lightning/lnd_methods');
-const {getWalletInfo} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { getChannels, getNode, getWalletInfo } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
-const liquidityTokens = require('./liquidity_tokens');
-const {getNetwork} = require('./../chain');
-const {getScoredNodes} = require('./../graph');
+import liquidityTokens from './liquidity_tokens.js';
+import { getNetwork } from './../chain/index.js';
 
 const {isArray} = Array;
 
@@ -25,7 +22,7 @@ const {isArray} = Array;
     tokens: [<Liquidity Tokens Number>]
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

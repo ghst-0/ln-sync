@@ -1,8 +1,8 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
-const {Transaction} = require('bitcoinjs-lib');
+import test from 'node:test';
+import { deepEqual } from 'node:assert/strict';
 
-const transactionRecords = require('./../../chain/transaction_records');
+import { Transaction } from 'bitcoinjs-lib';
+import transactionRecords from './../../chain/transaction_records.js';
 
 const tests = [
   {
@@ -20,7 +20,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, expected}) => {
-  return test(description, (t, end) => {
+  test(description, (t, end) => {
     const res = transactionRecords(args);
 
     deepEqual(res, expected, 'Got expected result');

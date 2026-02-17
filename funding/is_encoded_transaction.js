@@ -1,4 +1,4 @@
-const {Transaction} = require('bitcoinjs-lib');
+import { Transaction } from 'bitcoinjs-lib';
 
 const {fromHex} = Transaction;
 
@@ -13,7 +13,7 @@ const {fromHex} = Transaction;
     is_transaction: <String is Encoded Transaction Bool>
   }
 */
-module.exports = ({input}) => {
+export default ({input}) => {
   try {
     return {is_transaction: !!fromHex(input)};
   } catch (e) {

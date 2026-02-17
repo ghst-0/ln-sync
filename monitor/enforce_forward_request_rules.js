@@ -1,12 +1,8 @@
-const EventEmitter = require('events');
+import EventEmitter from 'node:events';
 
-const asyncMap = require('async/map');
-const {decodeChanId} = require('bolt07');
-const {getChannel} = require('ln-service');
-const {getWalletInfo} = require('ln-service');
-const {subscribeToBlocks} = require('ln-service');
-const {subscribeToForwardRequests} = require('ln-service');
-const {subscribeToForwards} = require('ln-service');
+import asyncMap from 'async/map.js';
+import { decodeChanId } from 'bolt07';
+import { getChannel, getWalletInfo, subscribeToBlocks, subscribeToForwardRequests, subscribeToForwards } from 'ln-service';
 
 const htlcId = n => [n.in_channel, n.in_payment, n.out_channel, n.out_payment];
 const {isArray} = Array;
@@ -47,7 +43,7 @@ const secondsPerHour = 60 * 60;
   @returns
   <Forward Request Enforcement EventEmitter Object>
 */
-module.exports = args => {
+export default args => {
   if (!!args.only_allow && !!args.only_disallow) {
     throw new Error('ExpectedEitherAllowOrDisallowPairsToEnforceForwardRules');
   }

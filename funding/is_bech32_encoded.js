@@ -1,6 +1,4 @@
-const {address} = require('bitcoinjs-lib');
-
-const addressDatafromBech32 = require('./address_data_from_bech32');
+import addressDataFromBech32 from './address_data_from_bech32.js';
 
 /** Determine if a string is bech32 encoded
 
@@ -13,9 +11,9 @@ const addressDatafromBech32 = require('./address_data_from_bech32');
     is_bech32: <String is Bech32 Encoded Bool>
   }
 */
-module.exports = ({input}) => {
+export default ({input}) => {
   try {
-    return {is_bech32: !!addressDatafromBech32({address: input})};
+    return {is_bech32: !!addressDataFromBech32({address: input})};
   } catch (e) {
     return {is_bech32: false};
   }

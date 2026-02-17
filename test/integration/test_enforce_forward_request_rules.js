@@ -1,21 +1,21 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual } from 'node:assert/strict';
 
-const {addPeer} = require('ln-service');
-const asyncRetry = require('async/retry');
-const {createChainAddress} = require('ln-service');
-const {createHodlInvoice} = require('ln-service');
-const {createInvoice} = require('ln-service');
-const {deleteForwardingReputations} = require('ln-service');
-const {getChannels} = require('ln-service');
-const {openChannel} = require('ln-service');
-const {pay} = require('ln-service');
-const {sendToChainAddress} = require('ln-service');
-const {settleHodlInvoice} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
-const {subscribeToInvoice} = require('ln-service');
-
-const {enforceForwardRequestRules} = require('./../../');
+import { addPeer } from 'ln-service';
+import asyncRetry from 'async/retry.js';
+import { createChainAddress } from 'ln-service';
+import { createHodlInvoice } from 'ln-service';
+import { createInvoice } from 'ln-service';
+import { deleteForwardingReputations } from 'ln-service';
+import { getChannels } from 'ln-service';
+import { openChannel } from 'ln-service';
+import { pay } from 'ln-service';
+import { sendToChainAddress } from 'ln-service';
+import { settleHodlInvoice } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
+import { subscribeToInvoice } from 'ln-service';
+import { enforceForwardRequestRules } from './../../index.js';
+import lnService from 'ln-service';
 
 const capacity = 1e6;
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -27,9 +27,8 @@ const targetTokens = 1e7;
 const times = 1000;
 const tokens = 100;
 
-const lnService = require('ln-service');
 
-return test('Request rules are enforced', async () => {
+test('Request rules are enforced', async () => {
   const {kill, nodes} = await spawnLightningCluster({size});
 
   const [{generate, id, lnd}, target, remote] = nodes;
@@ -599,6 +598,4 @@ return test('Request rules are enforced', async () => {
   }
 
   await kill({});
-
-  return;
 });

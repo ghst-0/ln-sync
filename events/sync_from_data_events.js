@@ -1,22 +1,19 @@
-const asyncAuto = require('async/auto');
-const {getWalletInfo} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { getWalletInfo } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
-const emitError = require('./emit_error');
-const eventBlockMined = require('./event_block_mined');
-const eventChannelActive = require('./event_channel_active');
-const eventChannelClosed = require('./event_channel_closed');
-const eventCreateChannel = require('./event_create_channel');
-const eventForwardHtlc = require('./event_forward_htlc');
-const eventNodeUpdated = require('./event_node_updated');
-const eventPaymentHtlc = require('./event_payment_htlc');
-const eventPeerConnection = require('./event_peer_connection');
-const eventPolicyUpdated = require('./event_policy_updated');
-const eventReceiveHtlc = require('./event_receive_htlc');
+import emitError from './emit_error.js';
+import eventChannelActive from './event_channel_active.js';
+import eventChannelClosed from './event_channel_closed.js';
+import eventCreateChannel from './event_create_channel.js';
+import eventForwardHtlc from './event_forward_htlc.js';
+import eventNodeUpdated from './event_node_updated.js';
+import eventPaymentHtlc from './event_payment_htlc.js';
+import eventPolicyUpdated from './event_policy_updated.js';
+import eventReceiveHtlc from './event_receive_htlc.js';
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const flutterDelayMs = 1000 * 90;
-const peerConnectionEvents = ['connected', 'disconnected'];
 
 /** Keep the local db using data event streams
 
@@ -31,7 +28,7 @@ const peerConnectionEvents = ['connected', 'disconnected'];
 
   @returns via cbk or Promise
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

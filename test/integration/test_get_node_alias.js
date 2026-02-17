@@ -1,10 +1,9 @@
-const {deepEqual} = require('node:assert').strict;
-const {fail} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual, fail } from 'node:assert/strict';
 
-const {spawnLightningCluster} = require('ln-docker-daemons');
+import { spawnLightningCluster } from 'ln-docker-daemons';
 
-const {getNodeAlias} = require('./../../');
+import { getNodeAlias } from './../../index.js';
 
 const tests = [
   {
@@ -20,7 +19,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     const [{id, kill, lnd}] = (await spawnLightningCluster({})).nodes;
 
     try {
@@ -32,7 +31,5 @@ tests.forEach(({args, description, error, expected}) => {
     }
 
     await kill({});
-
-    return;
   });
 });

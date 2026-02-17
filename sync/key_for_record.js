@@ -1,4 +1,4 @@
-const {createHash} = require('crypto');
+import { createHash } from 'node:crypto';
 
 const hash160 = n => createHash('sha256').update(Buffer.from(n)).digest();
 const separator = ':';
@@ -15,6 +15,6 @@ const separator = ':';
     key: <Key Buffer Object>
   }
 */
-module.exports = ({id, type}) => {
+export default ({id, type}) => {
   return {key: hash160([type, id].join(separator))};
 };

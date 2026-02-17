@@ -1,6 +1,6 @@
-const getGraphNode = require('./get_graph_node');
-const getGraphPair = require('./get_graph_pair');
-const getNodeFunds = require('./get_node_funds');
-const getNodePeers = require('./get_node_peers');
+import getGraphNode from './get_graph_node.js';
+import getGraphPair from './get_graph_pair.js';
+import getNodeFunds from './get_node_funds.js';
+import getNodePeers from './get_node_peers.js';
 
-module.exports = {getGraphNode, getGraphPair, getNodeFunds, getNodePeers};
+export { getGraphNode, getGraphPair, getNodeFunds, getNodePeers };

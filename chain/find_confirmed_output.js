@@ -1,7 +1,7 @@
-const asyncAuto = require('async/auto');
-const {returnResult} = require('asyncjs-util');
-const {subscribeToChainAddress} = require('ln-service');
-const {Transaction} = require('bitcoinjs-lib');
+import asyncAuto from 'async/auto.js';
+import { returnResult } from 'asyncjs-util';
+import { subscribeToChainAddress } from 'ln-service';
+import { Transaction } from 'bitcoinjs-lib';
 
 const defaultMinConfirmations = 1;
 const {fromHex} = Transaction;
@@ -27,7 +27,7 @@ const notFoundIndex = -1;
     transaction_vout: <Transaction Output Index Number>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

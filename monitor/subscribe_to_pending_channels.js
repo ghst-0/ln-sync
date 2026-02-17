@@ -1,7 +1,7 @@
-const EventEmitter = require('events');
+import EventEmitter from 'node:events';
 
-const asyncForever = require('async/forever');
-const {getPendingChannels} = require('ln-service');
+import asyncForever from 'async/forever.js';
+import { getPendingChannels } from 'ln-service';
 
 const asOutpoint = chan => `${chan.transaction_id}:${chan.transaction_vout}`;
 const defaultPollingDelay = 1000 * 60;
@@ -44,7 +44,7 @@ const sumOf = arr => arr.reduce((sum, n) => sum + n, Number());
     }]
   }
 */
-module.exports = ({delay, lnd}) => {
+export default ({delay, lnd}) => {
   const emitter = new EventEmitter();
   const state = {};
 

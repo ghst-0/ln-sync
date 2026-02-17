@@ -1,7 +1,6 @@
-const asyncRetry = require('async/retry');
+import asyncRetry from 'async/retry.js';
 
-const {syncNode} = require('./../sync');
-const {syncPeer} = require('./../sync');
+import { syncNode, syncPeer } from './../sync/index.js';
 
 const interval = () => Math.round(Math.random() * 1e5);
 const times = 20;
@@ -18,7 +17,7 @@ const times = 20;
 
   @returns via Promise
 */
-module.exports = async ({db, emitter, id, lnd, node}) => {
+export default async ({db, emitter, id, lnd, node}) => {
   return await asyncRetry({interval, times}, async () => {
     await syncNode({db, id, lnd});
 

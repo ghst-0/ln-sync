@@ -1,4 +1,4 @@
-const {decodePsbt} = require('psbt');
+import { decodePsbt } from 'psbt';
 
 /** Determine if a string is PSBT encoded
 
@@ -12,7 +12,7 @@ const {decodePsbt} = require('psbt');
     is_psbt: <String is PSBT Encoded Bool>
   }
 */
-module.exports = ({ecp, input}) => {
+export default ({ecp, input}) => {
   try {
     return {is_psbt: !!decodePsbt({ecp, psbt: input})};
   } catch (e) {

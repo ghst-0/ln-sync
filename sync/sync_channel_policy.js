@@ -1,10 +1,10 @@
-const asyncAuto = require('async/auto');
-const {getChannel} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { getChannel } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
-const keyForRecord = require('./key_for_record');
-const policyRecord = require('./policy_record');
-const policyUpdate = require('./policy_update');
+import keyForRecord from './key_for_record.js';
+import policyRecord from './policy_record.js';
+import policyUpdate from './policy_update.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const fresh = ['id'];
@@ -57,7 +57,7 @@ const type = 'policy';
     }
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

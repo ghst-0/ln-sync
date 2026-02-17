@@ -1,4 +1,4 @@
-const conflictingBalances = require('./conflicting_balances');
+import conflictingBalances from './conflicting_balances.js';
 
 const addressTypePayToTaproot = 'p2tr';
 const anchorOutputAmount = 330;
@@ -75,7 +75,7 @@ const witnessSizeCounterVByteLength = 0.25;
     onchain_vbytes: <Estimated Virtual Bytes to Spend On-Chain Funds Number>
   }
 */
-module.exports = ({channels, locked, pending, transactions, utxos}) => {
+export default ({channels, locked, pending, transactions, utxos}) => {
   const channelBalances = channels.map(n => n.local_balance);
   const confirmedUtxos = utxos.filter(n => !!n.confirmation_count);
 

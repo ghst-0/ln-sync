@@ -1,4 +1,4 @@
-const changesToRecord = require('./changes_to_record');
+import changesToRecord from './changes_to_record.js';
 
 /** Policy update
 
@@ -79,7 +79,7 @@ const changesToRecord = require('./changes_to_record');
     }
   }
 */
-module.exports = args => {
+export default args => {
   if (!args.channel) {
     throw new Error('ExpectedChannelToDerivePolicyUpdate');
   }

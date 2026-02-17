@@ -1,14 +1,13 @@
-const {deepEqual} = require('node:assert').strict;
-const {ok} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { ok } from 'node:assert/strict';
 
-const asyncAuto = require('async/auto');
-const asyncRetry = require('async/retry');
-const {getChainTransactions} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
+import asyncAuto from 'async/auto.js';
+import asyncRetry from 'async/retry.js';
+import { getChainTransactions } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
 
-const {broadcastTransaction} = require('./../../');
-const {reserveTransitFunds} = require('./../../');
+import { broadcastTransaction } from './../../index.js';
+import { reserveTransitFunds } from './../../index.js';
 
 const interval = 10;
 const logger = {info: () => {}, error: () => {}};
@@ -73,8 +72,6 @@ test(`Reserve transit funds`, async () => {
           }
 
           ok(transaction.is_confirmed, 'Transaction was confirmed');
-
-          return;
         });
       },
 
@@ -109,8 +106,6 @@ test(`Reserve transit funds`, async () => {
           }
 
           ok(transaction.is_confirmed, 'Refund transaction was confirmed');
-
-          return;
         });
       }],
     });
@@ -119,6 +114,4 @@ test(`Reserve transit funds`, async () => {
   }
 
   await kill({});
-
-  return;
 });

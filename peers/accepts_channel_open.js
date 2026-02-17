@@ -1,7 +1,6 @@
-const asyncAuto = require('async/auto');
-const {cancelPendingChannel} = require('ln-service');
-const {openChannels} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { cancelPendingChannel, openChannels } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
 /** Confirm that a peer will accept a channel open
 
@@ -23,7 +22,7 @@ const {returnResult} = require('asyncjs-util');
     is_accepted: <Channel Proposal Is Accepted Bool>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

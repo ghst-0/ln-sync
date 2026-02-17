@@ -1,11 +1,9 @@
-const asyncAuto = require('async/auto');
-const asyncEach = require('async/each');
-const asyncReflect = require('async/reflect');
-const {fundPsbt} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
-const {signPsbt} = require('ln-service');
-const {Transaction} = require('bitcoinjs-lib');
-const {unlockUtxo} = require('ln-service');
+import asyncAuto from 'async/auto.js';
+import asyncEach from 'async/each.js';
+import asyncReflect from 'async/reflect.js';
+import { fundPsbt, signPsbt, unlockUtxo } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
+import { Transaction } from 'bitcoinjs-lib';
 
 const adjustFactor = 10;
 const allowZeroConfirmationInputs = 0;
@@ -34,7 +32,7 @@ const sumOf = arr => arr.reduce((sum, n) => sum + n, Number());
     max_tokens: <Maximum Spendable Tokens Number>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

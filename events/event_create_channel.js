@@ -1,6 +1,6 @@
-const asyncRetry = require('async/retry');
+import asyncRetry from 'async/retry.js';
 
-const {syncChannel} = require('./../sync');
+import { syncChannel } from './../sync/index.js';
 
 const interval = () => Math.round(Math.random() * 1e5);
 const times = 1e3;
@@ -19,7 +19,7 @@ const times = 1e3;
     id: <Channel Id String>
   }
 */
-module.exports = async ({db, emitter, lnd, id}) => {
+export default async ({db, emitter, lnd, id}) => {
   return await asyncRetry({interval, times}, async () => {
     const synced = await syncChannel({db, id, lnd});
 

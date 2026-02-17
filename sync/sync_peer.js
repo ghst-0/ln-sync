@@ -1,10 +1,9 @@
-const asyncAuto = require('async/auto');
-const {getPeers} = require('lightning/lnd_methods');
-const {getWalletInfo} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { getPeers, getWalletInfo } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
-const keyForRecord = require('./key_for_record');
-const peerUpdate = require('./peer_update');
+import keyForRecord from './key_for_record.js';
+import peerUpdate from './peer_update.js';
 
 const add = 1;
 const createRecordRev = 0;
@@ -55,7 +54,7 @@ const type = 'peer';
     }
   }
 */
-module.exports = ({db, id, lnd}, cbk) => {
+export default ({db, id, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

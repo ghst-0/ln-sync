@@ -1,8 +1,7 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
+import test from 'node:test';
+import { deepEqual, throws } from 'node:assert/strict';
 
-const detailedBalances = require('./../../nodes/detailed_balances');
+import detailedBalances from './../../nodes/detailed_balances.js';
 
 const tests = [
   {
@@ -126,7 +125,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
+  test(description, (t, end) => {
     if (!!error) {
       throws(() => detailedBalances(args), new Error(error));
     } else {

@@ -1,13 +1,9 @@
-const asyncAuto = require('async/auto');
-const {getChainTransactions} = require('ln-service');
-const {getChannels} = require('ln-service');
-const {getLockedUtxos} = require('ln-service');
-const {getPendingChannels} = require('ln-service');
-const {getUtxos} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
-const {Transaction} = require('bitcoinjs-lib');
+import asyncAuto from 'async/auto.js';
+import { getChainTransactions, getChannels, getLockedUtxos, getPendingChannels, getUtxos } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
+import { Transaction } from 'bitcoinjs-lib';
 
-const detailedBalances = require('./detailed_balances');
+import detailedBalances from './detailed_balances.js';
 
 const {fromHex} = Transaction;
 
@@ -31,7 +27,7 @@ const {fromHex} = Transaction;
     [utxos_count]: <Total UTXOs Count Number>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

@@ -1,10 +1,9 @@
-const asyncAuto = require('async/auto');
-const {fundPsbt} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
-const {signPsbt} = require('ln-service');
-const {Transaction} = require('bitcoinjs-lib');
+import asyncAuto from 'async/auto.js';
+import { fundPsbt, signPsbt } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
+import { Transaction } from 'bitcoinjs-lib';
 
-const askForFeeRate = require('./ask_for_fee_rate');
+import askForFeeRate from './ask_for_fee_rate.js';
 
 const {fromHex} = Transaction;
 const {isArray} = Array;
@@ -34,7 +33,7 @@ const {isArray} = Array;
     transaction: <Signed Raw Transaction Hex String>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

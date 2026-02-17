@@ -1,9 +1,9 @@
-const asyncAuto = require('async/auto');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { returnResult } from 'asyncjs-util';
 
-const getExternalFundedTransaction = require('./get_external_funded_tx');
-const getInternalFundedTransaction = require('./get_internal_funded_tx');
-const isExternalFunding = require('./is_external_funding');
+import getExternalFundedTransaction from './get_external_funded_tx.js';
+import getInternalFundedTransaction from './get_internal_funded_tx.js';
+import isExternalFunding from './is_external_funding.js';
 
 const {isArray} = Array;
 
@@ -34,7 +34,7 @@ const {isArray} = Array;
     transaction: <Raw Transaction Hex String>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

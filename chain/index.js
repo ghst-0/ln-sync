@@ -1,11 +1,11 @@
-const broadcastTransaction = require('./broadcast_transaction');
-const findConfirmedOutput = require('./find_confirmed_output');
-const getMaxFundAmount = require('./get_max_fund_amount');
-const getNetwork = require('./get_network');
-const getTransactionRecord = require('./get_transaction_record');
-const signAndFundPsbt = require('./sign_and_fund_psbt');
+import broadcastTransaction from './broadcast_transaction.js';
+import findConfirmedOutput from './find_confirmed_output.js';
+import getMaxFundAmount from './get_max_fund_amount.js';
+import getNetwork from './get_network.js';
+import getTransactionRecord from './get_transaction_record.js';
+import signAndFundPsbt from './sign_and_fund_psbt.js';
 
-module.exports = {
+export {
   broadcastTransaction,
   findConfirmedOutput,
   getMaxFundAmount,

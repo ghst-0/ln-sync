@@ -1,13 +1,12 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual } from 'node:assert/strict';
 
-const {addPeer} = require('ln-service');
-const asyncRetry = require('async/retry');
-const {closeChannel} = require('ln-service');
-const {openChannel} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
+import asyncRetry from 'async/retry.js';
+import { closeChannel } from 'ln-service';
+import { openChannel } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
 
-const {subscribeToPendingChannels} = require('./../../');
+import { subscribeToPendingChannels } from './../../index.js';
 
 const capacity = 1e6;
 const count = 100;
@@ -16,7 +15,7 @@ const interval = 10;
 const size = 2;
 const times = 1000;
 
-return test('Subscribe to pending chans', async () => {
+test('Subscribe to pending chans', async () => {
   const {kill, nodes} = (await spawnLightningCluster({size}));
 
   const [{generate, lnd}, target] = nodes;
@@ -64,6 +63,4 @@ return test('Subscribe to pending chans', async () => {
   }
 
   await kill({});
-
-  return;
 });

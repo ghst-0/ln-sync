@@ -1,6 +1,6 @@
-const asyncAuto = require('async/auto');
-const {getNode} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { getNode } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
 const isPublicKey = n => !!n && /^[0-9A-F]{66}$/i.test(n);
 
@@ -17,7 +17,7 @@ const isPublicKey = n => !!n && /^[0-9A-F]{66}$/i.test(n);
     id: <Node Identity Public Key Hex String>
   }
 */
-module.exports = ({id, lnd}, cbk) => {
+export default ({id, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

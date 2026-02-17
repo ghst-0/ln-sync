@@ -1,12 +1,10 @@
-const asyncAuto = require('async/auto');
-const {getChannels} = require('lightning/lnd_methods');
-const {getWalletInfo} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { getChannels } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
-const keyForRecord = require('./key_for_record');
-const localChannelUpdate = require('./local_channel_update');
+import keyForRecord from './key_for_record.js';
+import localChannelUpdate from './local_channel_update.js';
 
-const add = 1;
 const createRecordRev = 0;
 const fresh = ['id'];
 const hexAsBuffer = hex => Buffer.from(hex, 'hex');
@@ -78,7 +76,7 @@ const type = 'local_channel';
     }
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

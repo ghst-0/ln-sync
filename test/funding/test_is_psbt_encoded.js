@@ -1,10 +1,9 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
+import test from 'node:test';
+import { deepEqual, throws } from 'node:assert/strict';
 
-const tinysecp = require('tiny-secp256k1');
+import * as tinysecp from 'tiny-secp256k1';
 
-const method = require('./../../funding/is_psbt_encoded');
+import method from './../../funding/is_psbt_encoded.js';
 
 const tests = [
   {
@@ -22,7 +21,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     const ecp = (await import('ecpair')).ECPairFactory(tinysecp);
 
     args.ecp = ecp;
@@ -34,7 +33,5 @@ tests.forEach(({args, description, error, expected}) => {
 
       deepEqual(got, expected, 'Got expected result');
     }
-
-    return;
   });
 });

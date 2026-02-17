@@ -1,19 +1,19 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual } from 'node:assert/strict';
 
-const asyncRetry = require('async/retry');
-const {broadcastChainTransaction} = require('ln-service');
-const {createChainAddress} = require('ln-service');
-const {getChainTransactions} = require('ln-service');
-const {getPublicKey} = require('ln-service');
-const {networks} = require('bitcoinjs-lib');
-const {payments} = require('bitcoinjs-lib');
-const {sendToChainAddress} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
-const {Transaction} = require('bitcoinjs-lib');
+import asyncRetry from 'async/retry.js';
+import { broadcastChainTransaction } from 'ln-service';
+import { createChainAddress } from 'ln-service';
+import { getChainTransactions } from 'ln-service';
+import { getPublicKey } from 'ln-service';
+import { networks } from 'bitcoinjs-lib';
+import { payments } from 'bitcoinjs-lib';
+import { sendToChainAddress } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
+import { Transaction } from 'bitcoinjs-lib';
 
-const {getNetwork} = require('./../../');
-const {getTransitRefund} = require('./../../');
+import { getNetwork } from './../../index.js';
+import { getTransitRefund } from './../../index.js';
 
 const {fromHex} = Transaction;
 const hexAsBuffer = hex => Buffer.from(hex, 'hex');
@@ -22,10 +22,10 @@ const {p2wpkh} = payments;
 const tokens = 1e6;
 const transitKeyFamily = 805;
 
-return test('Get a refund transaction', async () => {
+test('Get a refund transaction', async () => {
   const {kill, nodes} = await spawnLightningCluster({});
 
-  const [{generate, id, lnd}] = nodes;
+  const [{generate, lnd}] = nodes;
 
   try {
     // Make some coins
@@ -86,6 +86,4 @@ return test('Get a refund transaction', async () => {
   }
 
   await kill({});
-
-  return;
 });

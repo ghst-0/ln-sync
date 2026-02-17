@@ -14,7 +14,7 @@
     }
   }
 */
-module.exports = ({height, id}) => {
+export default ({height, id}) => {
   return {
     description: {
       action: `advanced to height ${height}`,

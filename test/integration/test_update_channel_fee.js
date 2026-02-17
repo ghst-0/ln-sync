@@ -1,14 +1,13 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual } from 'node:assert/strict';
 
-const asyncAuto = require('async/auto');
-const asyncRetry = require('async/retry');
-const {getChannel} = require('ln-service');
-const {getChannels} = require('ln-service');
-const {openChannel} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
+import asyncRetry from 'async/retry.js';
+import { getChannel } from 'ln-service';
+import { getChannels } from 'ln-service';
+import { openChannel } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
 
-const {updateChannelFee} = require('./../../');
+import { updateChannelFee } from './../../index.js';
 
 const capacity = 1e6;
 const interval = 10;
@@ -16,10 +15,10 @@ const maturityBlocks = 100;
 const size = 2;
 const times = 2000;
 
-return test('Update a channel fee', async () => {
+test('Update a channel fee', async () => {
   const {kill, nodes} = await spawnLightningCluster({size});
 
-  const [{generate, id, lnd}, target] = nodes;
+  const [{generate, lnd}, target] = nodes;
 
   const expected = {
     base_fee_mtokens: '2000',
@@ -81,6 +80,4 @@ return test('Update a channel fee', async () => {
 
   // Always clean up the test instances
   await kill({});
-
-  return;
 });

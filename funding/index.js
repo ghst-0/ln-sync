@@ -1,12 +1,12 @@
-const askForFeeRate = require('./ask_for_fee_rate');
-const assembleUnsignedPsbt = require('./assemble_unsigned_psbt');
-const fundPsbtDisallowingInputs = require('./fund_psbt_disallowing_inputs');
-const getFundedTransaction = require('./get_funded_transaction');
-const getTransitRefund = require('./get_transit_refund');
-const maintainUtxoLocks = require('./maintain_utxo_locks');
-const reserveTransitFunds = require('./reserve_transit_funds');
+import askForFeeRate from './ask_for_fee_rate.js';
+import assembleUnsignedPsbt from './assemble_unsigned_psbt.js';
+import fundPsbtDisallowingInputs from './fund_psbt_disallowing_inputs.js';
+import getFundedTransaction from './get_funded_transaction.js';
+import getTransitRefund from './get_transit_refund.js';
+import maintainUtxoLocks from './maintain_utxo_locks.js';
+import reserveTransitFunds from './reserve_transit_funds.js';
 
-module.exports = {
+export {
   askForFeeRate,
   assembleUnsignedPsbt,
   fundPsbtDisallowingInputs,

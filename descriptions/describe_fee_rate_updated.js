@@ -1,7 +1,7 @@
-const asyncAuto = require('async/auto');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { returnResult } from 'asyncjs-util';
 
-const {getGraphPair} = require('./../graph');
+import { getGraphPair } from './../nodes/index.js';
 
 const asDisplay = rate => `${(rate / 1e4).toFixed(2)}% (${rate})`;
 const {isArray} = Array;
@@ -29,7 +29,7 @@ const shortKey = key => key.substring(0, 16);
     }
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

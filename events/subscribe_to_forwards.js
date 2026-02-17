@@ -1,6 +1,5 @@
-const EventEmitter = require('events');
-
-const {subscribeToForwards} = require('lightning/lnd_methods');
+import EventEmitter from 'node:events';
+import { subscribeToForwards } from 'lightning';
 
 /** Subscribe to HTLC forwarding events
 
@@ -13,7 +12,7 @@ const {subscribeToForwards} = require('lightning/lnd_methods');
     forwards: <Forwards EventEmitter Object>
   }
 */
-module.exports = ({lnd}) => {
+export default ({lnd}) => {
   try {
     return {forwards: subscribeToForwards({lnd})};
   } catch (err) {

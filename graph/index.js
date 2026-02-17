@@ -1,5 +1,5 @@
-const getNodeAlias = require('./get_node_alias');
-const getScoredNodes = require('./get_scored_nodes');
-const getSeedNodes = require('./get_seed_nodes');
+import getNodeAlias from './get_node_alias.js';
+import getScoredNodes from './get_scored_nodes.js';
+import getSeedNodes from './get_seed_nodes.js';
 
-module.exports = {getNodeAlias, getScoredNodes, getSeedNodes};
+export { getNodeAlias, getScoredNodes, getSeedNodes };

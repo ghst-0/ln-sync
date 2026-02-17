@@ -1,20 +1,17 @@
-const asyncAuto = require('async/auto');
-const asyncEachSeries = require('async/eachSeries');
-const asyncRetry = require('async/retry');
-const {getNetworkGraph} = require('lightning/lnd_methods');
-const {getPeers} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import asyncEachSeries from 'async/eachSeries.js';
+import asyncRetry from 'async/retry.js';
+import { getNetworkGraph, getPeers } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
-const {shuffle} = require('./../arrays');
-const syncChannel = require('./sync_channel');
-const syncChannelPolicy = require('./sync_channel_policy');
-const syncNode = require('./sync_node');
-const syncPeer = require('./sync_peer');
+import { shuffle } from './../arrays/index.js';
+import syncChannel from './sync_channel.js';
+import syncChannelPolicy from './sync_channel_policy.js';
+import syncNode from './sync_node.js';
+import syncPeer from './sync_peer.js';
 
-const conflictError = 409;
 const flatten = arr => [].concat(...arr);
 const interval = () => Math.round(Math.random() * 1e4);
-const {isArray} = Array;
 const times = 1e3;
 
 /** Sync records from a node into the database
@@ -24,7 +21,7 @@ const times = 1e3;
     lnd: <Authenticated LND API Object>
   }
 */
-module.exports = ({db, lnd}, cbk) => {
+export default ({db, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

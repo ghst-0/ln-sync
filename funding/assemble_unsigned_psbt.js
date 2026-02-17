@@ -1,9 +1,8 @@
-const asyncAuto = require('async/auto');
-const {returnResult} = require('asyncjs-util');
-const {createPsbt} = require('psbt');
-const {extendPsbt} = require('psbt');
-const tinysecp = require('tiny-secp256k1');
-const {Transaction} = require('bitcoinjs-lib');
+import asyncAuto from 'async/auto.js';
+import { returnResult } from 'asyncjs-util';
+import { createPsbt, extendPsbt } from 'psbt';
+import * as tinysecp from 'tiny-secp256k1';
+import { Transaction } from 'bitcoinjs-lib';
 
 const {ceil} = Math;
 const committed = (funds, m) => m.length === 2 ? funds / 2 : funds;
@@ -45,7 +44,7 @@ const sumOf = arr => arr.reduce((sum, n) => sum + n, 0);
     psbt: <Unsigned Funding Transaction PSBT Hex String>
   }
 */
-module.exports = ({capacity, proposed, rate}, cbk) => {
+export default ({capacity, proposed, rate}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Import ECPair library

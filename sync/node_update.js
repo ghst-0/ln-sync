@@ -1,4 +1,4 @@
-const changesToRecord = require('./changes_to_record');
+import changesToRecord from './changes_to_record.js';
 
 /** Node update
 
@@ -60,7 +60,7 @@ const changesToRecord = require('./changes_to_record');
     }
   }
 */
-module.exports = ({node, record}) => {
+export default ({node, record}) => {
   if (!node) {
     throw new Error('ExpectedNodeoDeriveNodeUpdate');
   }

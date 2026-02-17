@@ -1,13 +1,12 @@
-const {address} = require('bitcoinjs-lib');
-const asyncAuto = require('async/auto');
-const {decodePsbt} = require('psbt');
-const {returnResult} = require('asyncjs-util');
-const tinysecp = require('tiny-secp256k1');
-const {Transaction} = require('bitcoinjs-lib');
+import asyncAuto from 'async/auto.js';
+import { decodePsbt } from 'psbt';
+import { returnResult } from 'asyncjs-util';
+import * as tinysecp from 'tiny-secp256k1';
+import { Transaction } from 'bitcoinjs-lib';
 
-const isBech32Encoded = require('./is_bech32_encoded');
-const transactionFromPsbt = require('./transaction_from_psbt');
-const validateTransactionInput = require('./validate_transaction_input');
+import isBech32Encoded from './is_bech32_encoded.js';
+import transactionFromPsbt from './transaction_from_psbt.js';
+import validateTransactionInput from './validate_transaction_input.js';
 
 const base64AsHex = base64 => Buffer.from(base64, 'base64').toString('hex');
 const {fromHex} = Transaction;
@@ -37,7 +36,7 @@ const tokAsBigUnit = tokens => (tokens / 1e8).toFixed(8);
     transaction: <Signed Raw Transaction Hex String>
   }
 */
-module.exports = ({ask, logger, outputs}, cbk) => {
+export default ({ask, logger, outputs}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Import ECPair library

@@ -1,3 +1,3 @@
-const subscribeToChanges = require('./subscribe_to_changes');
+import subscribeToChanges from './subscribe_to_changes.js';
 
-module.exports = {subscribeToChanges};
+export { subscribeToChanges };

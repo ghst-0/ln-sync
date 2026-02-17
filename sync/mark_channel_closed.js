@@ -1,7 +1,7 @@
-const asyncAuto = require('async/auto');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { returnResult } from 'asyncjs-util';
 
-const keyForRecord = require('./key_for_record');
+import keyForRecord from './key_for_record.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const table = 'channels';
@@ -24,7 +24,7 @@ const type = 'channel';
     public_keys: [<Public Key Hex String>]
   }
 */
-module.exports = ({db, height, id}, cbk) => {
+export default ({db, height, id}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

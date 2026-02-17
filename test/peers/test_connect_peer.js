@@ -1,10 +1,8 @@
-const {deepEqual} = require('node:assert').strict;
-const {randomBytes} = require('node:crypto');
-const {rejects} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { rejects } from 'node:assert/strict';
 
-const {connectPeer} = require('./../../');
-const {getNodeInfoResponse} = require('./../fixtures');
+import { randomBytes } from 'node:crypto';
+import { connectPeer } from './../../index.js';
 
 const makePublicKey = () => `03${randomBytes(32).toString('hex')}`;
 
@@ -112,13 +110,11 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     if (!!error) {
       await rejects(connectPeer(args), error, 'Got expected error');
     } else {
       await connectPeer(args);
     }
-
-    return;
   });
 });

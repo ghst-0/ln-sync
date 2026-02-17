@@ -1,21 +1,21 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual } from 'node:assert/strict';
 
-const asyncAuto = require('async/auto');
-const asyncMap = require('async/map');
-const asyncRetry = require('async/retry');
-const {closeChannel} = require('ln-service');
-const {createChainAddress} = require('ln-service');
-const {createInvoice} = require('ln-service');
-const {deleteForwardingReputations} = require('ln-service');
-const {getChannels} = require('ln-service');
-const {getHeight} = require('ln-service');
-const {openChannel} = require('ln-service');
-const {pay} = require('ln-service');
-const {sendToChainAddress} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
+import asyncAuto from 'async/auto.js';
+import asyncMap from 'async/map.js';
+import asyncRetry from 'async/retry.js';
+import { closeChannel } from 'ln-service';
+import { createChainAddress } from 'ln-service';
+import { createInvoice } from 'ln-service';
+import { deleteForwardingReputations } from 'ln-service';
+import { getChannels } from 'ln-service';
+import { getHeight } from 'ln-service';
+import { openChannel } from 'ln-service';
+import { pay } from 'ln-service';
+import { sendToChainAddress } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
 
-const {stopAllHtlcs} = require('./../../');
+import { stopAllHtlcs } from './../../index.js';
 
 const capacity = 1e6;
 const interval = 100;
@@ -25,7 +25,7 @@ const times = 2000;
 const tokens = 10;
 const uniq = arr => Array.from(new Set(arr));
 
-return test('Stop all HTLCs', async () => {
+test('Stop all HTLCs', async () => {
   const {kill, nodes} = (await spawnLightningCluster({size}));
 
   const [control, target, remote] = nodes;
@@ -41,7 +41,7 @@ return test('Stop all HTLCs', async () => {
       return (await getHeight({lnd: n})).current_block_hash;
     });
 
-    const [hash, other] = uniq(hashes);
+    const [other] = uniq(hashes);
 
     if (!!other) {
       throw new Error('ExpectedNoOtherHash');
@@ -128,8 +128,8 @@ return test('Stop all HTLCs', async () => {
           await pay({lnd, request});
 
           throw new Error('ExpectedAttemptIsRejected');
-        } catch (err) {
-          return;
+        } catch {
+          /**/
         }
       },
 
@@ -143,6 +143,4 @@ return test('Stop all HTLCs', async () => {
   }
 
   await kill({});
-
-  return;
 });

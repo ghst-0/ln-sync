@@ -1,7 +1,7 @@
-const asyncAuto = require('async/auto');
-const asyncRetry = require('async/retry');
-const {getPendingChannels} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import asyncRetry from 'async/retry.js';
+import { getPendingChannels } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
 /** Wait for an incoming pending open channel matching specific criteria
 
@@ -22,7 +22,7 @@ const {returnResult} = require('asyncjs-util');
     transaction_vout: <Transaction Output Index Number>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

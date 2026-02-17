@@ -1,8 +1,7 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
+import test from 'node:test';
+import { deepEqual, throws } from 'node:assert/strict';
 
-const method = require('./../../funding/address_data_from_bech32');
+import method from './../../funding/address_data_from_bech32.js';
 
 const tests = [
   {
@@ -18,7 +17,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
+  test(description, (t, end) => {
     if (!!error) {
       throws(() => method(args), new Error(error), 'Error returned');
 

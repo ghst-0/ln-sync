@@ -1,6 +1,6 @@
-const asyncAuto = require('async/auto');
-const {getChainFeeRate} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { getChainFeeRate } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
 const fastConfirmationTarget = 2;
 const {floor} = Math;
@@ -19,7 +19,7 @@ const slowConfirmationTarget = 1e3;
     tokens_per_vbyte: <Chain Fee Tokens Per VByte Number>
   }
 */
-module.exports = ({ask, lnd}, cbk) => {
+export default ({ask, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

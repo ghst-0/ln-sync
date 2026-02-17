@@ -1,5 +1,5 @@
-const getAllInvoices = require('./get_all_invoices');
-const getPayments = require('./get_payments');
-const getRebalancePayments = require('./get_rebalance_payments');
+import getAllInvoices from './get_all_invoices.js';
+import getPayments from './get_payments.js';
+import getRebalancePayments from './get_rebalance_payments.js';
 
-module.exports = {getAllInvoices, getPayments, getRebalancePayments};
+export { getAllInvoices, getPayments, getRebalancePayments };

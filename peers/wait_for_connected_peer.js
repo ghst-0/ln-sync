@@ -1,7 +1,6 @@
-const asyncAuto = require('async/auto');
-const {getPeers} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
-const {subscribeToPeers} = require('ln-service');
+import asyncAuto from 'async/auto.js';
+import { getPeers, subscribeToPeers } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
 const defaultTimeoutMs = 1000 * 60 * 3;
 const isPublicKey = n => !!n && /^[0-9A-F]{66}$/i.test(n);
@@ -16,7 +15,7 @@ const isPublicKey = n => !!n && /^[0-9A-F]{66}$/i.test(n);
 
   @returns via cbk or Promise
 */
-module.exports = ({id, lnd, timeout}, cbk) => {
+export default ({id, lnd, timeout}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

@@ -12,7 +12,7 @@ const bufferFromBase64 = base64 => Buffer.from(base64, 'base64');
     is_base64: <String is Base64 Encoded Bool>
   }
 */
-module.exports = ({input}) => {
+export default ({input}) => {
   try {
     bufferFromBase64(input)
   } catch (e) {

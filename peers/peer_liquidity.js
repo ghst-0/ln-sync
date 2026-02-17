@@ -27,7 +27,7 @@
     outbound_pending: <Pending Outbound Liquidity Tokens Number>
   }
 */
-module.exports = ({channels, opening, settled}) => {
+export default ({channels, opening, settled}) => {
   // Inbound is the sum of remote balances
   const inbound = channels.reduce((sum, channel) => {
     // Settled payment is known so it can be considered part of remote balance

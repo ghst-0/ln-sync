@@ -1,17 +1,17 @@
-const keyForRecord = require('./key_for_record');
-const markChannelClosed = require('./mark_channel_closed');
-const syncBlock = require('./sync_block');
-const syncChannel = require('./sync_channel');
-const syncChannelPolicy = require('./sync_channel_policy');
-const syncCurrentRecords = require('./sync_current_records');
-const syncLocalChannel = require('./sync_local_channel');
-const syncNode = require('./sync_node');
-const syncPeer = require('./sync_peer');
-const updateForwardHtlc = require('./update_forward_htlc');
-const updatePaymentHtlc = require('./update_payment_htlc');
-const updateReceiveHtlc = require('./update_receive_htlc');
+import keyForRecord from './key_for_record.js';
+import markChannelClosed from './mark_channel_closed.js';
+import syncBlock from './sync_block.js';
+import syncChannel from './sync_channel.js';
+import syncChannelPolicy from './sync_channel_policy.js';
+import syncCurrentRecords from './sync_current_records.js';
+import syncLocalChannel from './sync_local_channel.js';
+import syncNode from './sync_node.js';
+import syncPeer from './sync_peer.js';
+import updateForwardHtlc from './update_forward_htlc.js';
+import updatePaymentHtlc from './update_payment_htlc.js';
+import updateReceiveHtlc from './update_receive_htlc.js';
 
-module.exports = {
+export {
   keyForRecord,
   markChannelClosed,
   syncBlock,

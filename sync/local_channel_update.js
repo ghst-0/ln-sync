@@ -1,6 +1,4 @@
-const changesToRecord = require('./changes_to_record');
-
-const {isArray} = Array;
+import changesToRecord from './changes_to_record.js';
 
 /** Local channel update
 
@@ -81,7 +79,7 @@ const {isArray} = Array;
     }
   }
 */
-module.exports = ({channel, record}) => {
+export default ({channel, record}) => {
   if (!channel) {
     throw new Error('ExpectedChannelToDeriveLocalChannelUpdate');
   }

@@ -1,7 +1,7 @@
-const asyncAuto = require('async/auto');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { returnResult } from 'asyncjs-util';
 
-const {getGraphPair} = require('./../graph');
+import { getGraphPair } from './../nodes/index.js';
 
 const bigUnits = tokens => !tokens ? String() : (tokens / 1e8).toFixed(8);
 const short = key => key.substring(0, 16);
@@ -22,7 +22,7 @@ const short = key => key.substring(0, 16);
     }
   }
 */
-module.exports = ({db, id}, cbk) => {
+export default ({db, id}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

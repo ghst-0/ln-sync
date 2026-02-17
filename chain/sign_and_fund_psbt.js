@@ -1,20 +1,11 @@
-const {address} = require('bitcoinjs-lib');
-const asyncAuto = require('async/auto');
-const {createChainAddress} = require('ln-service');
-const {createPsbt} = require('psbt');
-const {decodePsbt} = require('psbt');
-const {extendPsbt} = require('psbt');
-const {getChainFeeRate} = require('ln-service');
-const {getHeight} = require('ln-service');
-const {partiallySignPsbt} = require('ln-service');
-const {payments} = require('bitcoinjs-lib');
-const {returnResult} = require('asyncjs-util');
-const {signPsbt} = require('ln-service');
-const tinysecp = require('tiny-secp256k1');
-const {Transaction} = require('bitcoinjs-lib');
-const {unextractTransaction} = require('psbt');
+import { address, payments, Transaction } from 'bitcoinjs-lib';
+import asyncAuto from 'async/auto.js';
+import { createChainAddress, getChainFeeRate, getHeight, partiallySignPsbt, signPsbt } from 'ln-service';
+import { createPsbt, decodePsbt, extendPsbt, unextractTransaction } from 'psbt';
+import { returnResult } from 'asyncjs-util';
+import * as tinysecp from 'tiny-secp256k1';
 
-const getMaxFundAmount = require('./get_max_fund_amount');
+import getMaxFundAmount from './get_max_fund_amount.js';
 
 const allowedAttributes = ['non_witness_utxo', 'witness_utxo'];
 const bufferAsHex = buffer => buffer.toString('hex');
@@ -70,7 +61,7 @@ const spendAsOutpoint = n => `${n.hash.reverse().toString('hex')}:${n.index}`;
     psbt: <Partially Signed PSBT Hex String>
   }
 */
-module.exports = ({lnd, psbt, utxos}, cbk) => {
+export default ({lnd, psbt, utxos}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Import ECPair library

@@ -1,10 +1,8 @@
-const asyncAuto = require('async/auto');
-const asyncEach = require('async/each');
-const asyncReflect = require('async/reflect');
-const {fundPsbt} = require('ln-service');
-const {getWalletVersion} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
-const {unlockUtxo} = require('ln-service');
+import asyncAuto from 'async/auto.js';
+import asyncEach from 'async/each.js';
+import asyncReflect from 'async/reflect.js';
+import { fundPsbt, getWalletVersion, unlockUtxo } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
 const {isArray} = Array;
 const noInternalFundingVersions = ['0.11.0-beta', '0.11.1-beta'];
@@ -26,7 +24,7 @@ const slowConfirmationTarget = 1000;
     is_external: <Use External Funding Bool>
   }
 */
-module.exports = ({ask, lnd, outputs}, cbk) => {
+export default ({ask, lnd, outputs}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

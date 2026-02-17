@@ -1,8 +1,7 @@
-const asyncEach = require('async/each');
-const asyncRetry = require('async/retry');
+import asyncEach from 'async/each.js';
+import asyncRetry from 'async/retry.js';
 
-const {syncChannelPolicy} = require('./../sync');
-const {syncNode} = require('./../sync');
+import { syncChannelPolicy, syncNode } from './../sync/index.js';
 
 const interval = () => Math.round(Math.random() * 1e5);
 const times = 1e3;
@@ -20,7 +19,7 @@ const times = 1e3;
 
   @returns via Promise
 */
-module.exports = async (args) => {
+export default async (args) => {
   const {id} = args;
   const [key] = args.public_keys;
 

@@ -1,11 +1,7 @@
-const {address} = require('bitcoinjs-lib');
-const asyncAuto = require('async/auto');
-const {getChainFeeRate} = require('ln-service');
-const {networks} = require('bitcoinjs-lib');
-const {payments} = require('bitcoinjs-lib');
-const {returnResult} = require('asyncjs-util');
-const {signTransaction} = require('ln-service');
-const {Transaction} = require('bitcoinjs-lib');
+import { address, networks, payments, Transaction } from 'bitcoinjs-lib';
+import asyncAuto from 'async/auto.js';
+import { getChainFeeRate, signTransaction } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const {ceil} = Math;
@@ -39,7 +35,7 @@ const transitKeyFamily = 805;
     refund: <Fully Signed Refund Transaction Hex String>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Accepted networks are ones known to BitcoinJS

@@ -1,9 +1,8 @@
-const {deepEqual} = require('node:assert').strict;
-const {rejects} = require('node:assert').strict;
-const test = require('node:test');
-const {Transaction} = require('bitcoinjs-lib');
+import test from 'node:test';
+import { deepEqual, rejects } from 'node:assert/strict';
 
-const method = require('./../../funding/get_external_funded_tx');
+import { Transaction } from 'bitcoinjs-lib';
+import method from './../../funding/get_external_funded_tx.js';
 
 const makeArgs = overrides => {
   const args = {
@@ -91,7 +90,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     if (!!error) {
       await rejects(method(args), error, 'Got expected error');
     } else {
@@ -99,7 +98,5 @@ tests.forEach(({args, description, error, expected}) => {
 
       deepEqual(got, expected, 'Got expected result');
     }
-
-    return;
   });
 });

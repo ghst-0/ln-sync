@@ -1,7 +1,6 @@
-const asyncRetry = require('async/retry');
+import asyncRetry from 'async/retry.js';
 
-const emitError = require('./emit_error');
-const {updatePaymentHtlc} = require('./../sync');
+import { updatePaymentHtlc } from './../sync/index.js';
 
 const interval = 200;
 const times = 1e3;
@@ -23,7 +22,7 @@ const times = 1e3;
 
   @returns via Promise
 */
-module.exports = async args => {
+export default async args => {
   return await asyncRetry({interval, times}, async () => {
     const synced = await updatePaymentHtlc({
       at: args.at,

@@ -1,10 +1,8 @@
-const asyncAuto = require('async/auto');
-const {getChannels} = require('lightning/lnd_methods');
-const {getNode} = require('lightning/lnd_methods');
-const {getPendingChannels} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { getChannels, getNode, getPendingChannels } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
-const peerLiquidity = require('./peer_liquidity');
+import peerLiquidity from './peer_liquidity.js';
 
 /** Get the rundown on liquidity with a specific peer
 
@@ -23,7 +21,7 @@ const peerLiquidity = require('./peer_liquidity');
     outbound_pending: <Pending Outbound Liquidity Tokens Number>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

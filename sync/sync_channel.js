@@ -1,12 +1,12 @@
-const asyncAuto = require('async/auto');
-const asyncEach = require('async/each');
-const {getChannel} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import asyncEach from 'async/each.js';
+import { getChannel } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
-const keyForRecord = require('./key_for_record');
-const channelRecord = require('./channel_record');
-const channelUpdate = require('./channel_update');
-const syncNode = require('./sync_node');
+import keyForRecord from './key_for_record.js';
+import channelRecord from './channel_record.js';
+import channelUpdate from './channel_update.js';
+import syncNode from './sync_node.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const fresh = ['id'];
@@ -37,7 +37,7 @@ const type = 'channel';
     }
   }
 */
-module.exports = ({db, id, lnd}, cbk) => {
+export default ({db, id, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

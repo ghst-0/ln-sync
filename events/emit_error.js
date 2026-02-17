@@ -7,7 +7,7 @@ const {isArray} = Array;
     err: <Error To Emit Object>
   }
 */
-module.exports = ({emitter, err}) => {
+export default ({emitter, err}) => {
   if (!emitter.listenerCount('error')) {
     return;
   }

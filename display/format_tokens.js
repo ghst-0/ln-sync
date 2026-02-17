@@ -1,6 +1,4 @@
-const {bold} = require('colorette');
-const {dim} = require('colorette');
-const {green} = require('colorette');
+import { bold, dim, green } from 'colorette';
 
 const emptyTokens = ' ';
 const level0 = 1e3;
@@ -20,7 +18,7 @@ const tokensAsBigTokens = tokens => (tokens / 1e8).toFixed(8);
     display: <Display Formatted Tokens String>
   }
 */
-module.exports = args => {
+export default args => {
   // Exit early and display nothing when there are no tokens
   if (!args.tokens) {
     return {display: emptyTokens};

@@ -1,9 +1,6 @@
-const asyncAuto = require('async/auto');
-const {getChannel} = require('ln-service');
-const {getChannels} = require('ln-service');
-const {getPendingChannels} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
-const {updateRoutingFees} = require('ln-service');
+import asyncAuto from 'async/auto.js';
+import { getChannel, getChannels, getPendingChannels, updateRoutingFees } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
 const {abs} = Math;
 const asOut = n => `${n.transaction_id}:${n.transaction_vout}`;
@@ -26,7 +23,7 @@ const feeRateBuffer = 1;
 
   @returns via cbk or Promise
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

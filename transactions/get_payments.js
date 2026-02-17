@@ -1,7 +1,7 @@
-const asyncAuto = require('async/auto');
-const asyncUntil = require('async/until');
-const {getPayments} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import asyncUntil from 'async/until.js';
+import { getPayments } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
 const defaultLimit = 250;
 
@@ -85,7 +85,7 @@ const defaultLimit = 250;
     }]
   }
 */
-module.exports = ({after, lnd}, cbk) => {
+export default ({after, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

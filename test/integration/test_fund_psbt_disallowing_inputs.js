@@ -1,14 +1,13 @@
-const {deepEqual} = require('node:assert').strict;
-const {rejects} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual, rejects } from 'node:assert/strict';
 
-const asyncRetry = require('async/retry');
-const {createChainAddress} = require('ln-service');
-const {getUtxos} = require('ln-service');
-const {sendToChainAddress} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
+import asyncRetry from 'async/retry.js';
+import { createChainAddress } from 'ln-service';
+import { getUtxos } from 'ln-service';
+import { sendToChainAddress } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
 
-const {fundPsbtDisallowingInputs} = require('./../../');
+import { fundPsbtDisallowingInputs } from './../../index.js';
 
 const format = 'np2wpkh';
 const interval = 10;
@@ -17,7 +16,7 @@ const size = 2;
 const times = 2000;
 const tokens = 1e6;
 
-return test('Fund disallowing inputs', async () => {
+test('Fund disallowing inputs', async () => {
   const {kill, nodes} = await spawnLightningCluster({size});
 
   const [{generate, lnd}, target] = nodes;
@@ -76,6 +75,4 @@ return test('Fund disallowing inputs', async () => {
   }
 
   await kill({});
-
-  return;
 });

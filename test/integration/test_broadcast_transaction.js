@@ -1,17 +1,16 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual } from 'node:assert/strict';
 
-const asyncAuto = require('async/auto');
-const asyncRetry = require('async/retry');
-const {createChainAddress} = require('ln-service');
-const {extractTransaction} = require('psbt');
-const {getChainTransactions} = require('ln-service');
-const {fundPsbt} = require('ln-service');
-const {signPsbt} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
-const tinysecp = require('tiny-secp256k1');
-
-const {broadcastTransaction} = require('./../../');
+import asyncAuto from 'async/auto.js';
+import asyncRetry from 'async/retry.js';
+import { createChainAddress } from 'ln-service';
+import { extractTransaction } from 'psbt';
+import { getChainTransactions } from 'ln-service';
+import { fundPsbt } from 'ln-service';
+import { signPsbt } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
+import * as tinysecp from 'tiny-secp256k1';
+import { broadcastTransaction } from './../../index.js';
 
 const description = 'description';
 const interval = 10;
@@ -19,7 +18,7 @@ const maturity = 100;
 const times = 2000;
 const tokens = 1e6;
 
-return test('Transaction is broadcast', async () => {
+test('Transaction is broadcast', async () => {
   const [{generate, kill, lnd}] = (await spawnLightningCluster({})).nodes;
 
   const ecp = (await import('ecpair')).ECPairFactory(tinysecp);
@@ -75,6 +74,4 @@ return test('Transaction is broadcast', async () => {
   }
 
   await kill({});
-
-  return;
 });

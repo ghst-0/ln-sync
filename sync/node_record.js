@@ -1,6 +1,5 @@
 const bufferFromHex = hex => Buffer.from(hex, 'hex');
 const createRecordRev = 0;
-const emptyId = Buffer.alloc(32).toString('hex');
 
 /** Node record creation
 
@@ -28,7 +27,7 @@ const emptyId = Buffer.alloc(32).toString('hex');
     }
   }
 */
-module.exports = ({node}) => {
+export default ({node}) => {
   if (!node) {
     throw new Error('ExpectedNodeToDeriveNodeRecord');
   }

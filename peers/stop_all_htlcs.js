@@ -1,8 +1,7 @@
-const asyncAuto = require('async/auto');
-const asyncUntil = require('async/until');
-const {getChannels} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
-const {subscribeToForwardRequests} = require('ln-service');
+import asyncAuto from 'async/auto.js';
+import asyncUntil from 'async/until.js';
+import { getChannels, subscribeToForwardRequests } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
 const {isArray} = Array;
 const stopHtlcsIntervalMs = 3000;
@@ -18,7 +17,7 @@ const stopHtlcsIntervalMs = 3000;
 
   @returns via cbk or Promise
 */
-module.exports = ({id, ids, lnd, peer}, cbk) => {
+export default ({id, ids, lnd, peer}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

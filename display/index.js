@@ -1,3 +1,3 @@
-const formatTokens = require('./format_tokens');
+import formatTokens from './format_tokens.js';
 
-module.exports = {formatTokens};
+export { formatTokens };

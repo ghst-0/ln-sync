@@ -1,4 +1,4 @@
-const percentile = require('./percentile');
+import percentile from './percentile.js';
 
 const above = 0.9;
 const {round} = Math;
@@ -29,7 +29,7 @@ const {round} = Math;
     tokens: [<Tokens Number>]
   }
 */
-module.exports = args => {
+export default args => {
   const inboundFeeRates = args.policies.reduce((sum, policies) => {
     const peer = policies.find(n => n.public_key !== args.public_key);
 

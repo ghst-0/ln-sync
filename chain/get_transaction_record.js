@@ -1,14 +1,10 @@
-const asyncAuto = require('async/auto');
-const asyncMap = require('async/map');
-const {getChainTransactions} = require('lightning/lnd_methods');
-const {getChannels} = require('lightning/lnd_methods');
-const {getClosedChannels} = require('lightning/lnd_methods');
-const {getNode} = require('lightning/lnd_methods');
-const {getPendingChannels} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
-const {Transaction} = require('bitcoinjs-lib');
+import asyncAuto from 'async/auto.js';
+import asyncMap from 'async/map.js';
+import { getChainTransactions, getChannels, getClosedChannels, getNode, getPendingChannels } from 'lightning';
+import { returnResult } from 'asyncjs-util';
+import { Transaction } from 'bitcoinjs-lib';
 
-const transactionRecords = require('./transaction_records');
+import transactionRecords from './transaction_records.js';
 
 const {fromHex} = Transaction;
 const uniq = arr => Array.from(new Set(arr));
@@ -117,7 +113,7 @@ const uniq = arr => Array.from(new Set(arr));
     [tx]: <Transaction Id Hex String>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

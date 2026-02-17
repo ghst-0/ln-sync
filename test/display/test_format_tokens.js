@@ -1,7 +1,7 @@
-const {equal} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { equal } from 'node:assert/strict';
 
-const {formatTokens} = require('./../../');
+import { formatTokens } from './../../index.js';
 
 const asHex = str => Buffer.from(str).toString('hex');
 
@@ -39,7 +39,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, expected}) => {
-  return test(description, (t, end) => {
+  test(description, (t, end) => {
     const {display} = formatTokens(args);
 
     equal(asHex(display), expected, 'Got expected display value');

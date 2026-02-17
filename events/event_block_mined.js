@@ -1,4 +1,4 @@
-const {syncBlock} = require('./../sync');
+import { syncBlock } from './../sync/index.js';
 
 /** Handle a block mined event
 
@@ -17,7 +17,7 @@ const {syncBlock} = require('./../sync');
 
   @returns via Promise
 */
-module.exports = async ({db, emitter, height, id}) => {
+export default async ({db, emitter, height, id}) => {
   const {created} = await syncBlock({db, height, id});
 
   if (!created) {

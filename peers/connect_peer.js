@@ -1,9 +1,7 @@
-const {addPeer} = require('ln-service');
-const asyncAuto = require('async/auto');
-const asyncDetectSeries = require('async/detectSeries');
-const {getNode} = require('ln-service');
-const {getPeers} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
+import { addPeer, getNode, getPeers } from 'ln-service';
+import asyncAuto from 'async/auto.js';
+import asyncDetectSeries from 'async/detectSeries.js';
+import { returnResult } from 'asyncjs-util';
 
 const defaultRetryDelayMs = 1;
 const {isArray} = Array;
@@ -19,7 +17,7 @@ const isPublicKey = n => !!n && /^[0-9A-F]{66}$/i.test(n);
 
   @returns via cbk or Promise
 */
-module.exports = ({id, lnd, sockets}, cbk) => {
+export default ({id, lnd, sockets}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

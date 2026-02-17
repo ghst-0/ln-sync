@@ -29,7 +29,7 @@ const uniq = arr => Array.from(new Set(arr));
     }
   }
 */
-module.exports = ({record, updated}) => {
+export default ({record, updated}) => {
   const attributes = uniq([].concat(keys(record)).concat(keys(updated)));
 
   const changed = attributes.filter(n => {

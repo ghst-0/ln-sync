@@ -1,10 +1,9 @@
-const {deepEqual} = require('node:assert').strict;
-const {makeWalletVersionResponse} = require('mock-lnd');
-const {makeLnd} = require('mock-lnd');
-const {rejects} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual, rejects } from 'node:assert/strict';
 
-const method = require('./../../funding/is_external_funding');
+import { makeWalletVersionResponse } from 'mock-lnd';
+import { makeLnd } from 'mock-lnd';
+import method from './../../funding/is_external_funding.js';
 
 const makeArgs = overrides => {
   const args = {
@@ -56,7 +55,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     if (!!error) {
       await rejects(method(args), error, 'Got expected error');
     } else {
@@ -64,7 +63,5 @@ tests.forEach(({args, description, error, expected}) => {
 
       deepEqual(got, expected, 'Got expected result');
     }
-
-    return;
   });
 });

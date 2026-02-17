@@ -1,7 +1,6 @@
-const {bold} = require('colorette');
-const colorette = require('colorette');
+import * as colorette from 'colorette';
 
-const {colors} = require('./log_line_styling');
+import styling from './log_line_styling.json' with { type: 'json' };
 
 /** Styled action for an event log line
 
@@ -15,14 +14,14 @@ const {colors} = require('./log_line_styling');
   @returns
   <Action String>
 */
-module.exports = args => {
+export default args => {
   if (!!args.is_local && !!args.is_major) {
-    return bold(colorette[colors[args.event]](args.action));
+    return colorette.bold(colorette[styling.colors[args.event]](args.action));
   }
 
   if (!!args.is_local) {
-    return colorette[colors[args.event]](args.action);
+    return colorette[styling.colors[args.event]](args.action);
   }
 
-  return colorette[colors[args.event]](args.action);
+  return colorette[styling.colors[args.event]](args.action);
 };

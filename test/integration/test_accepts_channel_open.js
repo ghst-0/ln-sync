@@ -1,25 +1,23 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual } from 'node:assert/strict';
 
-const {addPeer} = require('ln-service');
-const asyncRetry = require('async/retry');
-const {openChannels} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
-const {subscribeToOpenRequests} = require('ln-service');
+import { addPeer } from 'ln-service';
+import asyncRetry from 'async/retry.js';
+import { spawnLightningCluster } from 'ln-docker-daemons';
+import { subscribeToOpenRequests } from 'ln-service';
 
-const {acceptsChannelOpen} = require('./../../');
+import { acceptsChannelOpen } from './../../index.js';
 
 const capacity = 1e6;
-const feeTokensPerVbyte = 3;
 const interval = 10;
 const maturityBlocks = 100;
 const size = 2;
 const times = 2000;
 
-return test('Check if peer accepts open', async () => {
+test('Check if peer accepts open', async () => {
   const {kill, nodes} = await spawnLightningCluster({size});
 
-  const [{generate, id, lnd}, target] = nodes;
+  const [{generate, lnd}, target] = nodes;
 
   try {
     // Make some coins
@@ -77,6 +75,4 @@ return test('Check if peer accepts open', async () => {
   }
 
   await kill({});
-
-  return;
 });

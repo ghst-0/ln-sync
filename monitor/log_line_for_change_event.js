@@ -1,7 +1,6 @@
-const {emojis} = require('./log_line_styling');
-
-const styledAction = require('./styled_action');
-const styledSubject = require('./styled_subject');
+import styling from './log_line_styling.json' with { type: 'json' };
+import styledAction from './styled_action.js';
+import styledSubject from './styled_subject.js';
 
 /** Get a log line for a change event
 
@@ -22,7 +21,7 @@ const styledSubject = require('./styled_subject');
     [line]: <Log Line String>
   }
 */
-module.exports = ({description, event, mode}) => {
+export default ({description, event, mode}) => {
   if (!description) {
     return {};
   }
@@ -31,7 +30,7 @@ module.exports = ({description, event, mode}) => {
     return {};
   }
 
-  const emoji = emojis[event];
+  const emoji = styling.emojis[event];
   const date = new Date().toISOString();
   const detail = description.detail || String();
 

@@ -28,7 +28,7 @@ const emptyId = Buffer.alloc(32).toString('hex');
     }
   }
 */
-module.exports = ({channel}) => {
+export default ({channel}) => {
   if (!channel) {
     throw new Error('ExpectedChannelToDeriveChannelRecord');
   }

@@ -1,9 +1,8 @@
-const asyncAuto = require('async/auto');
-const asyncMap = require('async/map');
-const asyncRetry = require('async/retry');
-const {getChannels} = require('lightning/lnd_methods');
-const {getNode} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import asyncMap from 'async/map.js';
+import asyncRetry from 'async/retry.js';
+import { getChannels, getNode } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
 const {isArray} = Array;
 const isPublicKey = n => /^[0-9A-F]{66}$/i.test(n);
@@ -24,7 +23,7 @@ const uniq = arr => Array.from(new Set(arr));
     [public_key]: <Public Key Hex String>
   }
 */
-module.exports = ({channels, lnd, query}, cbk) => {
+export default ({channels, lnd, query}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

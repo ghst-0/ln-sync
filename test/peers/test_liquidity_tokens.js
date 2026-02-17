@@ -1,8 +1,7 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
+import test from 'node:test';
+import { deepEqual, throws } from 'node:assert/strict';
 
-const liquidityTokens = require('./../../peers/liquidity_tokens');
+import liquidityTokens from './../../peers/liquidity_tokens.js';
 
 const tests = [
   {
@@ -74,7 +73,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
+  test(description, (t, end) => {
     if (!!error) {
       throws(() => liquidityTokens(args), new Error(error), 'Got error');
     } else {

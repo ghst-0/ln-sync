@@ -1,4 +1,4 @@
-const {Transaction} = require('bitcoinjs-lib');
+import { Transaction } from 'bitcoinjs-lib';
 
 const inputAsOutpoint = (txId, outputIndex) => `${txId}:${outputIndex}`;
 const {fromHex} = Transaction;
@@ -27,7 +27,7 @@ const uniq = arr => Array.from(new Set(arr));
     invalid_pending_balance: <Invalid Pending Balance Tokens Number>
   }
 */
-module.exports = ({transactions, utxos}) => {
+export default ({transactions, utxos}) => {
   const conflictingUtxos = [];
   const invalidUtxos = [];
   const spends = {}

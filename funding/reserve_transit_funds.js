@@ -1,15 +1,11 @@
-const {address} = require('bitcoinjs-lib');
-const asyncAuto = require('async/auto');
-const {createChainAddress} = require('ln-service');
-const {getPublicKey} = require('ln-service');
-const {networks} = require('bitcoinjs-lib');
-const {payments} = require('bitcoinjs-lib');
-const {returnResult} = require('asyncjs-util');
-const {Transaction} = require('bitcoinjs-lib');
+import { address, networks, payments, Transaction } from 'bitcoinjs-lib';
+import asyncAuto from 'async/auto.js';
+import { createChainAddress, getPublicKey } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
-const getFundedTransaction = require('./get_funded_transaction');
-const {getNetwork} = require('./../chain');
-const getTransitRefund = require('./get_transit_refund');
+import getFundedTransaction from './get_funded_transaction.js';
+import { getNetwork } from './../chain/index.js';
+import getTransitRefund from './get_transit_refund.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const familyTemporary = 805;
@@ -52,7 +48,7 @@ const {toOutputScript} = address;
     vout: <Funds Reserved At Output Index Number>
   }
 */
-module.exports = ({ask, lnd, logger, rate, tokens}, cbk) => {
+export default ({ask, lnd, logger, rate, tokens}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

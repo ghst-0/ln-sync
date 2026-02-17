@@ -1,8 +1,8 @@
-const asyncAuto = require('async/auto');
-const {getWalletInfo} = require('lightning/lnd_methods');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { getWalletInfo } from 'lightning';
+import { returnResult } from 'asyncjs-util';
 
-const {chains} = require('./networks');
+import networks from './networks.json' with { type: 'json' };
 
 const bjNames = {btc: 'bitcoin', btcregtest: 'regtest', btcsignet: 'signet', btctestnet: 'testnet', btctestnet4: 'testnet4'};
 const {keys} = Object;
@@ -20,7 +20,7 @@ const reversedBytes = hex => Buffer.from(hex, 'hex').reverse().toString('hex');
     network: <Network Name String>
   }
 */
-module.exports = ({lnd}, cbk) => {
+export default ({lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments
@@ -43,8 +43,8 @@ module.exports = ({lnd}, cbk) => {
           return cbk([400, 'CannotDetermineChainFromNode']);
         }
 
-        const network = keys(chains).find(network => {
-          return chain === reversedBytes(chains[network]);
+        const network = keys(networks.chains).find(network => {
+          return chain === reversedBytes(networks.chains[network]);
         });
 
         if (!network) {

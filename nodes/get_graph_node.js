@@ -1,7 +1,7 @@
-const asyncAuto = require('async/auto');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { returnResult } from 'asyncjs-util';
 
-const {keyForRecord} = require('./../sync');
+import { keyForRecord } from './../sync/index.js';
 
 const defaultColor = '#000000';
 const table = 'nodes';
@@ -23,7 +23,7 @@ const type = 'node';
     sockets: [<Host and Port String>]
   }
 */
-module.exports = ({db, id}, cbk) => {
+export default ({db, id}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

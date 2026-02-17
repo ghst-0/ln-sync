@@ -1,4 +1,4 @@
-const changesToRecord = require('./changes_to_record');
+import changesToRecord from './changes_to_record.js';
 
 const {isArray} = Array;
 
@@ -62,7 +62,7 @@ const {isArray} = Array;
     }
   }
 */
-module.exports = ({peer, record}) => {
+export default ({peer, record}) => {
   if (!peer) {
     throw new Error('ExpectedPeerToDeriveNodeUpdate');
   }

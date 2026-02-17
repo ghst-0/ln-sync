@@ -1,14 +1,13 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual, throws } from 'node:assert/strict';
 
-const asyncRetry = require('async/retry');
-const {createChainAddress} = require('ln-service');
-const {getChainBalance} = require('ln-service');
-const {getLockedUtxos} = require('ln-service');
-const {getUtxos} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
+import asyncRetry from 'async/retry.js';
+import { createChainAddress } from 'ln-service';
+import { getLockedUtxos } from 'ln-service';
+import { getUtxos } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
 
-const {getMaxFundAmount} = require('./../../');
+import { getMaxFundAmount } from './../../index.js';
 
 const feeTokensPerVbyte = 3;
 const interval = 10;
@@ -24,10 +23,10 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     const {nodes} = await spawnLightningCluster({});
 
-    const [{generate, id, kill, lnd}] = nodes;
+    const [{generate, kill, lnd}] = nodes;
 
     try {
       // Get a funding address
@@ -79,7 +78,5 @@ tests.forEach(({args, description, error, expected}) => {
     }
 
     await kill({});
-
-    return;
   });
 });

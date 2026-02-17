@@ -1,5 +1,5 @@
-const asyncAuto = require('async/auto');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { returnResult } from 'asyncjs-util';
 
 const api = 'https://yalls.org/v0/graph/list/';
 const {isArray} = Array;
@@ -19,7 +19,7 @@ const networkNames = {btc: 'mainnet', btctestnet: 'testnet'};
     }]
   }
 */
-module.exports = ({network, request}, cbk) => {
+export default ({network, request}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

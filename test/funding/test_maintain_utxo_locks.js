@@ -1,9 +1,9 @@
-const {makeLnd} = require('mock-lnd');
-const {deepEqual} = require('node:assert').strict;
-const {rejects} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual, rejects } from 'node:assert/strict';
 
-const {maintainUtxoLocks} = require('./../../');
+import { makeLnd } from 'mock-lnd';
+
+import { maintainUtxoLocks } from './../../index.js';
 
 const method = maintainUtxoLocks;
 
@@ -92,7 +92,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, async () => {
+  test(description, async () => {
     if (!!error) {
       await rejects(method(args), error, 'Got expected error');
     } else {
@@ -100,7 +100,5 @@ tests.forEach(({args, description, error, expected}) => {
 
       deepEqual(got, expected, 'Got expected result');
     }
-
-    return;
   });
 });

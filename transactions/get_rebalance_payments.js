@@ -1,10 +1,10 @@
-const asyncAuto = require('async/auto');
-const asyncMap = require('async/map');
-const asyncMapLimit = require('async/mapLimit');
-const {getPayment} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import asyncMap from 'async/map.js';
+import asyncMapLimit from 'async/mapLimit.js';
+import { getPayment } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
 
-const getAllInvoices = require('./get_all_invoices');
+import getAllInvoices from './get_all_invoices.js';
 
 const flatten = arr => [].concat(...arr);
 const {isArray} = Array;
@@ -93,7 +93,7 @@ const notFound = 404;
     }]
   }
 */
-module.exports = ({after, lnds}, cbk) => {
+export default ({after, lnds}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

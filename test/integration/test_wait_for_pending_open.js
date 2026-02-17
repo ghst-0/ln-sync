@@ -1,25 +1,24 @@
-const {deepEqual} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual } from 'node:assert/strict';
 
-const {addPeer} = require('ln-service');
-const asyncRetry = require('async/retry');
-const {fundPendingChannels} = require('ln-service');
-const {fundPsbt} = require('ln-service');
-const {getPendingChannels} = require('ln-service');
-const {openChannels} = require('ln-service');
-const {signPsbt} = require('ln-service');
-const {spawnLightningCluster} = require('ln-docker-daemons');
+import { addPeer } from 'ln-service';
+import asyncRetry from 'async/retry.js';
+import { fundPendingChannels } from 'ln-service';
+import { fundPsbt } from 'ln-service';
+import { getPendingChannels } from 'ln-service';
+import { openChannels } from 'ln-service';
+import { signPsbt } from 'ln-service';
+import { spawnLightningCluster } from 'ln-docker-daemons';
 
-const {waitForPendingOpen} = require('./../../');
+import { waitForPendingOpen } from './../../index.js';
 
 const capacity = 1e6;
-const feeTokensPerVbyte = 3;
 const interval = 10;
 const maturityBlocks = 100;
 const size = 2;
 const times = 2000;
 
-return test('Wait for a pending open', async () => {
+test('Wait for a pending open', async () => {
   const {kill, nodes} = await spawnLightningCluster({size});
 
   const [{generate, id, lnd}, target] = nodes;
@@ -86,6 +85,4 @@ return test('Wait for a pending open', async () => {
   }
 
   await kill({});
-
-  return;
 });

@@ -35,7 +35,7 @@ const recordIncrement = 1;
     }
   }
 */
-module.exports = ({channel, record}) => {
+export default ({channel, record}) => {
   if (!channel) {
     throw new Error('ExpectedChannelToDeriveChannelUpdate');
   }

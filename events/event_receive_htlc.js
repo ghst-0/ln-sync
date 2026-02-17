@@ -1,7 +1,6 @@
-const asyncRetry = require('async/retry');
+import asyncRetry from 'async/retry.js';
 
-const emitError = require('./emit_error');
-const {updateReceiveHtlc} = require('./../sync');
+import { updateReceiveHtlc } from './../sync/index.js';
 
 const interval = 1e3;
 const times = 1e3;
@@ -21,7 +20,7 @@ const times = 1e3;
     public_key: <Received On Node With Public Key Hex String>
   }
 */
-module.exports = async args => {
+export default async args => {
   return await asyncRetry({interval, times}, async () => {
     const synced = await updateReceiveHtlc({
       at: args.at,

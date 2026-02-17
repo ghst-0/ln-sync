@@ -1,5 +1,4 @@
-const {extractTransaction} = require('psbt');
-const {finalizePsbt} = require('psbt');
+import { extractTransaction, finalizePsbt } from 'psbt';
 
 /** Extract a transaction from a PSBT if it can be extracted
 
@@ -13,7 +12,7 @@ const {finalizePsbt} = require('psbt');
     transaction: <Raw Trarnsaction Hex String>
   }
 */
-module.exports = ({ecp, psbt}) => {
+export default ({ecp, psbt}) => {
   // Attempt extracting a transaction from a finalized PSBT
   try {
     const {transaction} = extractTransaction({ecp, psbt});

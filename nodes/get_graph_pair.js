@@ -1,9 +1,9 @@
-const asyncAuto = require('async/auto');
-const asyncMap = require('async/map');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import asyncMap from 'async/map.js';
+import { returnResult } from 'asyncjs-util';
 
-const getGraphNode = require('./get_graph_node');
-const {keyForRecord} = require('./../sync');
+import getGraphNode from './get_graph_node.js';
+import { keyForRecord } from './../sync/index.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const {isArray} = Array;
@@ -32,7 +32,7 @@ const type = 'channel';
     }
   }
 */
-module.exports = ({db, id}, cbk) => {
+export default ({db, id}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

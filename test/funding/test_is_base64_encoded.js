@@ -1,8 +1,7 @@
-const {deepEqual} = require('node:assert').strict;
-const {throws} = require('node:assert').strict;
-const test = require('node:test');
+import test from 'node:test';
+import { deepEqual, throws } from 'node:assert/strict';
 
-const method = require('./../../funding/is_base64_encoded');
+import method from './../../funding/is_base64_encoded.js';
 
 const tests = [
   {
@@ -23,7 +22,7 @@ const tests = [
 ];
 
 tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
+  test(description, (t, end) => {
     if (!!error) {
       throws(() => method(args), new Error(error), 'Error returned');
     } else {

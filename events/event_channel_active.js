@@ -1,6 +1,6 @@
-const asyncRetry = require('async/retry');
+import asyncRetry from 'async/retry.js';
 
-const {syncLocalChannel} = require('./../sync');
+import { syncLocalChannel } from './../sync/index.js';
 
 const interval = () => Math.round(Math.random() * 1e5);
 const times = 20;
@@ -28,7 +28,7 @@ const times = 20;
     public_key: <Node Public Key Hex String>
   }
 */
-module.exports = async args => {
+export default async args => {
   return await asyncRetry({interval, times}, async () => {
     const synced = await syncLocalChannel({
       db: args.db,

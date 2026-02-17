@@ -1,6 +1,6 @@
-const {script} = require('bitcoinjs-lib');
+import { script } from 'bitcoinjs-lib';
 
-const addressDatafromBech32 = require('./address_data_from_bech32');
+import addressDataFromBech32 from './address_data_from_bech32.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const {compile} = script;
@@ -17,8 +17,8 @@ const encodeVersion = version => 80 + version;
     script: <Output Script Hex String>
   }
 */
-module.exports = ({address}) => {
-  const decoded = addressDatafromBech32({address});
+export default ({address}) => {
+  const decoded = addressDataFromBech32({address});
 
   // Encode the version as a script number
   const version = !decoded.version ? Number() : encodeVersion(decoded.version);

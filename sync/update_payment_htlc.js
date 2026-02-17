@@ -1,8 +1,8 @@
-const asyncAuto = require('async/auto');
-const {returnResult} = require('asyncjs-util');
+import asyncAuto from 'async/auto.js';
+import { returnResult } from 'asyncjs-util';
 
-const changesToRecord = require('./changes_to_record');
-const keyForRecord = require('./key_for_record');
+import changesToRecord from './changes_to_record.js';
+import keyForRecord from './key_for_record.js';
 
 const createRecordRev = 0;
 const fresh = ['out_payment'];
@@ -65,7 +65,7 @@ const type = 'payment_htlc';
     }
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments

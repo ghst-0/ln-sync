@@ -1,3 +1,3 @@
-const shuffle = require('./shuffle');
+import shuffle from './shuffle.js';
 
-module.exports = {shuffle};
+export { shuffle };

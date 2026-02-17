@@ -1,10 +1,7 @@
-const asyncAuto = require('async/auto');
-const {broadcastChainTransaction} = require('ln-service');
-const {getHeight} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
-const {subscribeToBlocks} = require('ln-service');
-const {subscribeToChainAddress} = require('ln-service');
-const {Transaction} = require('bitcoinjs-lib');
+import asyncAuto from 'async/auto.js';
+import { broadcastChainTransaction, getHeight, subscribeToBlocks, subscribeToChainAddress } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
+import { Transaction } from 'bitcoinjs-lib';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const {fromHex} = Transaction;
@@ -27,7 +24,7 @@ const maxSequence = 0xFFFFFFFF;
     transaction_confirmed_in_block: <Block Height Number>
   }
 */
-module.exports = ({description, lnd, logger, transaction}, cbk) => {
+export default ({description, lnd, logger, transaction}, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Check arguments
@@ -145,8 +142,6 @@ module.exports = ({description, lnd, logger, transaction}, cbk) => {
 
           return cbk(null, {transaction_confirmed_in_block: height});
         });
-
-        return;
       }],
     },
     returnResult({reject, resolve, of: 'broadcast'}, cbk));

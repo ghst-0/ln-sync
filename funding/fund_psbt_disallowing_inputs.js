@@ -1,13 +1,11 @@
-const asyncAuto = require('async/auto');
-const asyncEach = require('async/each');
-const asyncMap = require('async/map');
-const asyncReflect = require('async/reflect');
-const {decodePsbt} = require('psbt');
-const {fundPsbt} = require('ln-service');
-const {lockUtxo} = require('ln-service');
-const {returnResult} = require('asyncjs-util');
-const tinysecp = require('tiny-secp256k1');
-const {unlockUtxo} = require('ln-service');
+import asyncAuto from 'async/auto.js';
+import asyncEach from 'async/each.js';
+import asyncMap from 'async/map.js';
+import asyncReflect from 'async/reflect.js';
+import { decodePsbt } from 'psbt';
+import { fundPsbt, lockUtxo, unlockUtxo } from 'ln-service';
+import { returnResult } from 'asyncjs-util';
+import * as tinysecp from 'tiny-secp256k1';
 
 const {isArray} = Array;
 
@@ -52,7 +50,7 @@ const {isArray} = Array;
     psbt: <Unsigned PSBT Hex String>
   }
 */
-module.exports = (args, cbk) => {
+export default (args, cbk) => {
   return new Promise((resolve, reject) => {
     return asyncAuto({
       // Import ECPair library
