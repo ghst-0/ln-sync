@@ -12,7 +12,7 @@
     "bolt07": "1.9.4",
     "colorette": "2.0.20",
     "ecpair": "3.0.1",
-    "ln-service": "../ln-service",
+    "ln-service": "workspace:*",
     "psbt": "4.0.0",
     "tiny-secp256k1": "2.2.4"
   },
@@ -38,29 +38,7 @@
   },
   "scripts": {
     "integration-tests": "node test/integration",
-    "test": "npx nyc@17.1.0 node --experimental-test-coverage --test test/chain/*.js test/display/*.js test/funding/*.js test/graph/*.js test/nodes/*.js test/peers/*.js"
+    "test": "node --experimental-test-coverage --test test/chain/*.js test/display/*.js test/funding/*.js test/graph/*.js test/nodes/*.js test/peers/*.js"
   },
-  "version": "6.5.2",
-  "pnpm": {
-    "overrides": {
-      "@oxlint/binding-android-arm-eabi": "-",
-      "@oxlint/binding-linux-arm-gnueabihf": "-",
-      "@oxlint/binding-linux-arm64-musl": "-",
-      "@oxlint/binding-linux-arm64-gnu": "-",
-      "@oxlint/binding-win32-arm64-msvc": "-",
-      "@oxlint/binding-darwin-arm64": "-",
-      "@oxlint/binding-android-arm64": "-",
-      "@oxlint/binding-openharmony-arm64": "-",
-      "@oxlint/binding-linux-riscv64-musl": "-",
-      "@oxlint/binding-linux-ppc64-gnu": "-",
-      "@oxlint/binding-win32-ia32-msvc": "-",
-      "@oxlint/binding-win32-x64-msvc": "-",
-      "@oxlint/binding-linux-arm-musleabihf": "-",
-      "@oxlint/binding-linux-x64-musl": "-",
-      "@oxlint/binding-linux-riscv64-gnu": "-",
-      "@oxlint/binding-darwin-x64": "-",
-      "@oxlint/binding-linux-s390x-gnu": "-",
-      "@oxlint/binding-freebsd-x64": "-"
-    }
-  }
+  "version": "6.5.2"
 }
