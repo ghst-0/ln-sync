@@ -7,7 +7,7 @@ import * as tinysecp from 'tiny-secp256k1';
 
 import getMaxFundAmount from './get_max_fund_amount.js';
 
-const allowedAttributes = ['non_witness_utxo', 'witness_utxo'];
+const allowedAttributes = new Set(['non_witness_utxo', 'witness_utxo']);
 const bufferAsHex = buffer => buffer.toString('hex');
 const {concat} = Buffer;
 const defaultBlocksBuffer = 18;
@@ -122,10 +122,10 @@ export default ({lnd, psbt, utxos}, cbk) => {
 
         // Look to see if there is an input with an unexpected attribute
         const invalidInput = funding.inputs.find(input => {
-          return keys(input).find(key => !allowedAttributes.includes(key));
+          return keys(input).find(key => !allowedAttributes.has(key));
         });
 
-        if (!!invalidInput) {
+        if (invalidInput) {
           return cbk([
             400,
             'UnexpectedInputElementAttributeInFundingPsbt',
@@ -143,7 +143,7 @@ export default ({lnd, psbt, utxos}, cbk) => {
           return {
             bip32_derivations: utxo.bip32_derivations,
             non_witness_utxo: input.non_witness_utxo,
-            sighash_type: !!input.non_witness_utxo ? hashAll : hashDefault,
+            sighash_type: input.non_witness_utxo ? hashAll : hashDefault,
             witness_utxo: input.witness_utxo,
           };
         });
@@ -218,7 +218,7 @@ export default ({lnd, psbt, utxos}, cbk) => {
           return {
             bip32_derivations: utxo.bip32_derivations,
             non_witness_utxo: utxo.non_witness_utxo,
-            sighash_type: !!utxo.non_witness_utxo ? hashAll : hashDefault,
+            sighash_type: utxo.non_witness_utxo ? hashAll : hashDefault,
             witness_utxo: utxo.witness_utxo,
           };
         });
@@ -243,25 +243,26 @@ export default ({lnd, psbt, utxos}, cbk) => {
 
         // Select the transaction inputs that have a signature
         const inputsWithSignatures = signatures.inputs.filter(input => {
-          return !!input.partial_sig || !!input.taproot_key_spend_sig;
+          return input.partial_sig || input.taproot_key_spend_sig;
         });
 
         // Exit early with error when there are no signatures
-        if (!inputsWithSignatures.length) {
+        if (inputsWithSignatures.length === 0) {
           return cbk([503, 'UnexpectedFailureToPartiallySignBasePsbt']);
         }
 
         // Create a template transaction to use for the finalized PSBT
         const tx = fromHex(signatures.unsigned_transaction);
 
-        const finalized = signatures.inputs.map((input, vin) => {
+        // finalize
+        signatures.inputs.map((input, vin) => {
           // Exit early when there is no local signature present
           if (!input.partial_sig && !input.taproot_key_spend_sig) {
             return tx.setWitness(vin, [dummySignature]);
           }
 
           // Exit early when setting the signature for v1 Taproot
-          if (!!input.taproot_key_spend_sig) {
+          if (input.taproot_key_spend_sig) {
             return tx.setWitness(vin, [hexAsBuf(input.taproot_key_spend_sig)]);
           }
 

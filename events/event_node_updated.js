@@ -20,7 +20,7 @@ export default async ({db, emitter, id, lnd}) => {
   return await asyncRetry({interval, times}, async () => {
     const synced = await syncNode({db, id, lnd});
 
-    if (!!synced.created) {
+    if (synced.created) {
       return emitter.emit('node_added', {public_key: id});
     }
 
@@ -60,7 +60,5 @@ export default async ({db, emitter, id, lnd}) => {
         updated: synced.updates.sockets,
       });
     }
-
-    return;
   });
 };

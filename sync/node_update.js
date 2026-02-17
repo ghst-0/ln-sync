@@ -80,7 +80,7 @@ export default ({node, record}) => {
     updated: {
       alias: node.alias,
       color: node.color,
-      features: !!node.features.length ? node.features : record.features,
+      features: node.features.length > 0 ? node.features : record.features,
       sockets: node.sockets,
       updated_at: node.updated_at || record.updated_at,
     },

@@ -125,7 +125,7 @@ export default (args, cbk) => {
         ({createMaximumNormal, createTemplate}, cbk) =>
       {
         // Exit early when creating a maximum spend worked as is
-        if (!!createMaximumNormal.value) {
+        if (createMaximumNormal.value) {
           return cbk(null, createMaximumNormal.value);
         }
 

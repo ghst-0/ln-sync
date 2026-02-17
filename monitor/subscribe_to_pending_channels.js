@@ -50,7 +50,7 @@ export default ({delay, lnd}) => {
 
   asyncForever(cbk => {
     return getPendingChannels({lnd}, (err, res) => {
-      if (!!err) {
+      if (err) {
         return cbk(err);
       }
 
@@ -65,7 +65,7 @@ export default ({delay, lnd}) => {
         .filter(channel => {
           const point = asOutpoint(channel);
 
-          return !state.pending.closing.find(n => asOutpoint(n) === point);
+          return !state.pending.closing.some(n => asOutpoint(n) === point);
         });
 
       // Find new outpoints that are opening
@@ -75,7 +75,7 @@ export default ({delay, lnd}) => {
           const outpoint = asOutpoint(channel);
 
           // Cannot find this channel in opening
-          return !state.pending.opening.find(n => asOutpoint(n) === outpoint);
+          return !state.pending.opening.some(n => asOutpoint(n) === outpoint);
         });
 
       // Remember pending closes
@@ -85,7 +85,7 @@ export default ({delay, lnd}) => {
       state.pending.opening = pending.filter(n => n.is_opening);
 
       // When initializing the pending channels, ignore all the present ones
-      if (!!isFirstRun) {
+      if (isFirstRun) {
         return setTimeout(cbk, delay || defaultPollingDelay);
       }
 
@@ -94,11 +94,11 @@ export default ({delay, lnd}) => {
         return cbk(false);
       }
 
-      if (!!newlyClosing.length) {
+      if (newlyClosing.length > 0) {
         emitter.emit('closing', {channels: newlyClosing});
       }
 
-      if (!!newlyOpening.length) {
+      if (newlyOpening.length > 0) {
         emitter.emit('opening', {channels: newlyOpening});
       }
 

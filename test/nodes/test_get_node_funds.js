@@ -48,9 +48,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, async () => {
-    if (!!error) {
+    if (error) {
       await rejects(method(args), error, 'Got expected error');
     } else {
       const res = await method(args);
@@ -58,4 +58,4 @@ tests.forEach(({args, description, error, expected}) => {
       deepEqual(res, expected, 'Got expected result');
     }
   });
-});
+}

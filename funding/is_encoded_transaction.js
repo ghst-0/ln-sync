@@ -16,7 +16,7 @@ const {fromHex} = Transaction;
 export default ({input}) => {
   try {
     return {is_transaction: !!fromHex(input)};
-  } catch (e) {
+  } catch {
     return {is_transaction: false};
   }
 };

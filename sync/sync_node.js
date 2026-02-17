@@ -84,11 +84,11 @@ export default ({db, id, lnd}, cbk) => {
           public_key: id,
         },
         (err, res) => {
-          if (!!isArray(err) && err.slice().shift() === 404) {
+          if (isArray(err) && err.slice().shift() === 404) {
             return cbk();
           }
 
-          if (!!err) {
+          if (err) {
             return cbk(err);
           }
 
@@ -99,7 +99,7 @@ export default ({db, id, lnd}, cbk) => {
       // Determine creation of the record
       create: ['getFresh', 'getStored', ({getFresh, getStored}, cbk) => {
         // Exit early when the record is already present
-        if (!getFresh || !!getStored.record) {
+        if (!getFresh || getStored.record) {
           return cbk();
         }
 
@@ -186,7 +186,7 @@ export default ({db, id, lnd}, cbk) => {
 
       // Result of update
       updates: ['create', 'update', ({create, update}, cbk) => {
-        if (!!update && !!update.changes) {
+        if (update && update.changes) {
           return cbk(null, {
             previous: {
               alias: update.previous.alias,
@@ -205,7 +205,7 @@ export default ({db, id, lnd}, cbk) => {
           });
         }
 
-        if (!!create) {
+        if (create) {
           return cbk(null, {
             created: {
               alias: create.alias,

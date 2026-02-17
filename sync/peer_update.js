@@ -71,7 +71,7 @@ export default ({peer, record}) => {
     throw new Error('ExpectedPeerRecordToDerivePeerUpdate');
   }
 
-  const hasFeatures = isArray(peer.features) && !!peer.features.length;
+  const hasFeatures = isArray(peer.features) && peer.features.length > 0;
 
   return changesToRecord({
     record: {
@@ -82,7 +82,7 @@ export default ({peer, record}) => {
       socket: record.socket,
     },
     updated: {
-      features: !hasFeatures ? record.features : peer.features,
+      features: hasFeatures ? peer.features : record.features,
       is_connected: peer.is_connected,
       is_inbound: peer.is_inbound,
       is_sync_peer: peer.is_sync_peer,

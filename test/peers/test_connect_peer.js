@@ -109,12 +109,12 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error } of tests) {
   test(description, async () => {
-    if (!!error) {
+    if (error) {
       await rejects(connectPeer(args), error, 'Got expected error');
     } else {
       await connectPeer(args);
     }
   });
-});
+}

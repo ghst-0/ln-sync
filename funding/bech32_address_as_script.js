@@ -21,7 +21,7 @@ export default ({address}) => {
   const decoded = addressDataFromBech32({address});
 
   // Encode the version as a script number
-  const version = !decoded.version ? Number() : encodeVersion(decoded.version);
+  const version = decoded.version ? encodeVersion(decoded.version) : Number();
 
   // Bech32 addresses are a version number plus a data push
   return {script: bufferAsHex(compile([version, decoded.data]))};

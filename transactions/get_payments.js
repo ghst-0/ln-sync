@@ -108,17 +108,17 @@ export default ({after, lnd}, cbk) => {
             return getPayments({
               lnd,
               token,
-              limit: !token ? defaultLimit : undefined,
+              limit: token ? undefined : defaultLimit,
             },
             (err, res) => {
-              if (!!err) {
+              if (err) {
                 return cbk(err);
               }
 
               token = res.next || false;
 
               // When there is a too-old payment returned, stop paging
-              if (!!after && !!res.payments.find(n => n.created_at < after)) {
+              if (after && res.payments.some(n => n.created_at < after)) {
                 token = false;
               }
 
@@ -130,7 +130,7 @@ export default ({after, lnd}, cbk) => {
             });
           },
           err => {
-            if (!!err) {
+            if (err) {
               return cbk(err);
             }
 

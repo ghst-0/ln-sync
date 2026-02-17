@@ -81,7 +81,7 @@ export default ({ecp, input, outputs}) => {
 
   // Look through the transaction to find any required outputs that are missing
   const missingOutput = outputsWithScripts.findIndex(({script, tokens}) => {
-    return !outs.find(n => hasValue(n, tokens) && hasScript(n, script));
+    return !outs.some(n => hasValue(n, tokens) && hasScript(n, script));
   });
 
   const missing = outputs[missingOutput];

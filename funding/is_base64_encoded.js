@@ -15,7 +15,7 @@ const bufferFromBase64 = base64 => Buffer.from(base64, 'base64');
 export default ({input}) => {
   try {
     bufferFromBase64(input)
-  } catch (e) {
+  } catch {
     return {is_base64: false};
   }
 

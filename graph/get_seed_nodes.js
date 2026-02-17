@@ -40,7 +40,7 @@ export default ({network, request}, cbk) => {
         const url = `${api}${networkNames[network]}`;
 
         return request({url, json: true}, (err, r, res) => {
-          if (!!err) {
+          if (err) {
             return cbk([503, 'UnexpectedErrorGettingSeedNodes', {err}]);
           }
 
@@ -48,7 +48,7 @@ export default ({network, request}, cbk) => {
             return cbk([503, 'UnexpectedResultFromSeedNodesResponse']);
           }
 
-          if (!!res.nodes.filter(n => !n.public_key).length) {
+          if (res.nodes.some(n => !n.public_key)) {
             return cbk([503, 'ExpectedPublicKeyInSeedNodesResult']);
           }
 

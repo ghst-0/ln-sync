@@ -2,15 +2,13 @@ import test from 'node:test';
 import { deepEqual, fail } from 'node:assert/strict';
 
 import asyncRetry from 'async/retry.js';
-import { createChainAddress } from 'ln-service';
-import { getUtxos } from 'ln-service';
-import { sendToChainAddress } from 'ln-service';
+import { createChainAddress, getUtxos, sendToChainAddress } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
 import { findConfirmedOutput } from './../../index.js';
 
 const count = 200;
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const delay = ms => new Promise(resolve => {setTimeout(resolve, ms)});
 const interval = 10;
 const times = 2000;
 const tokens = 1e5;
@@ -34,7 +32,7 @@ test('Find confirmed output', async () => {
 
     // Find a coinbase output
     const confirmed = await asyncRetry({interval, times}, async () => {
-      return await findConfirmedOutput({
+      await findConfirmedOutput({
         lnd,
         min_confirmations: 1,
         output_script: utxo.output_script,
@@ -55,7 +53,7 @@ test('Find confirmed output', async () => {
     // Wait for confirmation to be picked up
     await delay(wait);
 
-    const sent = (await getUtxos({lnd})).utxos.find(n => n.tokens == tokens);
+    const sent = (await getUtxos({lnd})).utxos.find(n => n.tokens === tokens);
 
     // Try a very short delay
     try {

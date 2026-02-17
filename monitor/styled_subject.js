@@ -15,11 +15,11 @@ import styling from './log_line_styling.json' with { type: 'json' };
   <Subject String>
 */
 export default args => {
-  if (!!args.is_local && !!args.is_major) {
+  if (args.is_local && args.is_major) {
     return colorette.bold(colorette[styling.colors[args.event]](args.subject));
   }
 
-  if (!!args.is_local) {
+  if (args.is_local) {
     return colorette[styling.colors[args.event]](args.subject);
   }
 

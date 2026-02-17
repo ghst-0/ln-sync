@@ -1,24 +1,26 @@
 import test from 'node:test';
 import { deepEqual } from 'node:assert/strict';
 
-import { addPeer } from 'ln-service';
 import asyncRetry from 'async/retry.js';
-import { createChainAddress } from 'ln-service';
-import { createHodlInvoice } from 'ln-service';
-import { createInvoice } from 'ln-service';
-import { deleteForwardingReputations } from 'ln-service';
-import { getChannels } from 'ln-service';
-import { openChannel } from 'ln-service';
-import { pay } from 'ln-service';
-import { sendToChainAddress } from 'ln-service';
-import { settleHodlInvoice } from 'ln-service';
+import {
+  addPeer,
+  createChainAddress,
+  createHodlInvoice,
+  createInvoice,
+  deleteForwardingReputations,
+  getChannels,
+  openChannel,
+  pay,
+  sendToChainAddress,
+  settleHodlInvoice,
+  subscribeToInvoice
+} from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
-import { subscribeToInvoice } from 'ln-service';
+
 import { enforceForwardRequestRules } from './../../index.js';
-import lnService from 'ln-service';
 
 const capacity = 1e6;
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const delay = ms => new Promise(resolve => {setTimeout(resolve, ms)});
 const give = 1e5;
 const interval = 10;
 const maturityBlocks = 100;

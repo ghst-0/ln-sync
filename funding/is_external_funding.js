@@ -97,7 +97,7 @@ export default ({ask, lnd, outputs}, cbk) => {
       // Undo the test funding lock
       unlockFunding: ['attemptFunding', ({attemptFunding}, cbk) => {
         // Exit early when there are no locks to unlock
-        if (!attemptFunding.value || !!attemptFunding.error) {
+        if (!attemptFunding.value || attemptFunding.error) {
           return cbk();
         }
 

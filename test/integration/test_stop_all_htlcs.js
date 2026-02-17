@@ -4,15 +4,17 @@ import { deepEqual } from 'node:assert/strict';
 import asyncAuto from 'async/auto.js';
 import asyncMap from 'async/map.js';
 import asyncRetry from 'async/retry.js';
-import { closeChannel } from 'ln-service';
-import { createChainAddress } from 'ln-service';
-import { createInvoice } from 'ln-service';
-import { deleteForwardingReputations } from 'ln-service';
-import { getChannels } from 'ln-service';
-import { getHeight } from 'ln-service';
-import { openChannel } from 'ln-service';
-import { pay } from 'ln-service';
-import { sendToChainAddress } from 'ln-service';
+import {
+  closeChannel,
+  createChainAddress,
+  createInvoice,
+  deleteForwardingReputations,
+  getChannels,
+  getHeight,
+  openChannel,
+  pay,
+  sendToChainAddress
+} from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
 import { stopAllHtlcs } from './../../index.js';
@@ -43,7 +45,7 @@ test('Stop all HTLCs', async () => {
 
     const [other] = uniq(hashes);
 
-    if (!!other) {
+    if (other) {
       throw new Error('ExpectedNoOtherHash');
     }
   });

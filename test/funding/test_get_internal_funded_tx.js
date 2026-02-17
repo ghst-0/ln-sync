@@ -14,7 +14,9 @@ const makeArgs = overrides => {
     outputs: [],
   };
 
-  Object.keys(overrides).forEach(k => args[k] = overrides[k]);
+  for (const k of Object.keys(overrides)) {
+    args[k] = overrides[k]
+  }
 
   return args;
 };
@@ -86,9 +88,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, async () => {
-    if (!!error) {
+    if (error) {
       await rejects(method(args), error, 'Got expected error');
     } else {
       const got = await method(args);
@@ -96,4 +98,4 @@ tests.forEach(({args, description, error, expected}) => {
       deepEqual(got, expected, 'Got expected result');
     }
   });
-});
+}

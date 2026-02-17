@@ -38,7 +38,7 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, expected}) => {
+for (const { args, description, expected } of tests) {
   test(description, (t, end) => {
     const {display} = formatTokens(args);
 
@@ -46,4 +46,4 @@ tests.forEach(({args, description, expected}) => {
 
     return end();
   });
-});
+}

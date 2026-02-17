@@ -13,7 +13,7 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, expected } of tests) {
   test(description, async () => {
     const [{id, kill, lnd}] = (await spawnLightningCluster({})).nodes;
 
@@ -27,4 +27,4 @@ tests.forEach(({args, description, error, expected}) => {
 
     await kill({});
   });
-});
+}

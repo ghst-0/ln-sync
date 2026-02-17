@@ -92,7 +92,7 @@ export default ({db, id, lnd}, cbk) => {
       getFresh: ['getStored', ({getStored}, cbk) => {
         // There is no peer lookup method, so get all peers
         return getPeers({lnd}, (err, res) => {
-          if (!!err) {
+          if (err) {
             return cbk(err);
           }
 
@@ -108,7 +108,7 @@ export default ({db, id, lnd}, cbk) => {
         ({getFresh, getPublicKey, getStored}, cbk) =>
       {
         // Exit early when the record is already present or there is no fresh
-        if (!getFresh || !!getStored.record) {
+        if (!getFresh || getStored.record) {
           return cbk();
         }
 
@@ -206,7 +206,7 @@ export default ({db, id, lnd}, cbk) => {
 
       // Result of update
       updates: ['create', 'update', ({create, update}, cbk) => {
-        if (!!update && !!update.changes) {
+        if (update && update.changes) {
           return cbk(null, {
             previous: {
               features: update.previous.features,
@@ -227,7 +227,7 @@ export default ({db, id, lnd}, cbk) => {
           });
         }
 
-        if (!!create) {
+        if (create) {
           return cbk(null, {
             created: {
               features: create.features,

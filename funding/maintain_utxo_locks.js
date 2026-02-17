@@ -61,13 +61,13 @@ export default ({id, inputs, interval, lnd}, cbk) => {
           // Stop when the transaction is confirmed
           cbk => {
             return getChainTransactions({after, lnd}, (err, res) => {
-              if (!!err) {
+              if (err) {
                 return cbk();
               }
 
               const tx = res.transactions.find(n => n.id === id);
 
-              return cbk(null, !!tx && tx.is_confirmed);
+              return cbk(null, tx && tx.is_confirmed);
             });
           },
           // Lock all the inputs to extend their lock timers
@@ -89,7 +89,7 @@ export default ({id, inputs, interval, lnd}, cbk) => {
                 },
                 (err, res) => {
                   // Exit early and ignore errors on lock attempt
-                  if (!!err) {
+                  if (err) {
                     return cbk();
                   }
 

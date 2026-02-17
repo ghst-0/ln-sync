@@ -120,7 +120,9 @@ export default ({ask, logger, outputs}, cbk) => {
 
           // The funding is a PSBT
           return cbk(null, {id, transaction, psbt: fundingHex});
-        } catch (err) {}
+        } catch {
+          /**/
+        }
 
         // A raw TX is expected
         try {
@@ -130,7 +132,7 @@ export default ({ask, logger, outputs}, cbk) => {
 
           // The funding is a raw transaction
           return cbk(null, {id, transaction: fundingHex});
-        } catch (err) {
+        } catch {
           return cbk([400, 'ExpectedValidTransactionInput']);
         }
       }],

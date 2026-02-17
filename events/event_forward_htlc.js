@@ -42,7 +42,7 @@ export default async (args) => {
   const isInFlight = !args.is_confirmed && !args.is_failed;
 
   // New forward in flight
-  if (!!synced.created && !!isInFlight) {
+  if (synced.created && isInFlight) {
     return args.emitter.emit('forwarding', {
       cltv_delta: args.cltv_delta,
       external_failure: args.external_failure,
@@ -62,7 +62,7 @@ export default async (args) => {
   }
 
   // Forward succeeded
-  if (!!synced.updates && !!synced.updates.is_confirmed) {
+  if (synced.updates && synced.updates.is_confirmed) {
     return args.emitter.emit('forwarded_payment', {
       fee_mtokens: synced.original.fee_mtokens,
       in_channel: args.in_channel,
@@ -73,7 +73,7 @@ export default async (args) => {
   }
 
   // Forward failed
-  if (!!synced.updates && !!synced.updates.is_failed) {
+  if (synced.updates && synced.updates.is_failed) {
     return args.emitter.emit('failed_forward', {
       external_failure: args.external_failure,
       in_channel: args.in_channel,
@@ -83,6 +83,4 @@ export default async (args) => {
       public_key: args.public_key,
     });
   }
-
-  return;
 };

@@ -53,9 +53,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, async () => {
-    if (!!error) {
+    if (error) {
       await rejects(getNetwork(args), error, 'Got expected error');
     } else {
       const {network} = await getNetwork(args);
@@ -63,4 +63,4 @@ tests.forEach(({args, description, error, expected}) => {
       equal(network, expected.network, 'Got expected network');
     }
   });
-});
+}

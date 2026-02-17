@@ -33,52 +33,55 @@ export default ({transactions, utxos}) => {
   const spends = {}
 
   // Look at unconfirmed UTXOs and collect spends of outpoints
-  utxos.filter(n => !n.confirmation_count).forEach((utxo, i) => {
+  for (let i = 0; i < utxos.filter(n => !n.confirmation_count).length; i++){
+    const utxo = utxos.filter(n => !n.confirmation_count)[i]
     const tx = transactions.find(n => n.id === utxo.transaction_id);
 
     // Exit early when the raw transaction is not known
     if (!tx || !tx.transaction) {
-      return;
+      continue
     }
 
     // Register all the inputs into the spends map
-    return fromHex(tx.transaction).ins.forEach(input => {
+    for (const input of fromHex(tx.transaction).ins) {
       const outpoint = inputAsOutpoint(txIdFromHash(input.hash), input.index);
 
       const existing = spends[outpoint];
 
       // When existing UTXO spends the same input this is a conflict
-      if (!!existing) {
+      if (existing) {
         conflictingUtxos.push(i);
       }
 
       // Collect spends of the outpoint
-      const spending = !existing ? [i] : [].concat(existing).concat(i);
+      const spending = existing ? [].concat(existing).concat(i) : [i];
 
-      return spends[outpoint] = spending;
-    });
-  });
+      spends[outpoint] = spending
+    }
+  }
 
   // Look at confirmed txs and see if any unspents spend a confirmed outpoint
-  transactions.forEach(tx => {
+  for (const tx of transactions) {
     // Exit early when there is no confirmed tx
     if (!tx.transaction || !tx.is_confirmed) {
-      return;
+      continue
     }
 
     // Look for pending inputs that are conflicted with a confirmed tx
-    return fromHex(tx.transaction).ins.forEach(input => {
+    for (const input of fromHex(tx.transaction).ins) {
       const outpoint = inputAsOutpoint(txIdFromHash(input.hash), input.index);
 
       // Exit early when nothing pending spends this outpoint
       if (!spends[outpoint]) {
-        return;
+        continue
       }
 
       // Pending things that spend a confirmed input are invalid
-      return spends[outpoint].forEach(n => invalidUtxos.push(n));
-    });
-  });
+      for (const n of spends[outpoint]) {
+        invalidUtxos.push(n)
+      }
+    }
+  }
 
   const conflictingTokens = uniq(conflictingUtxos)
     .filter(utxoIndex => !invalidUtxos.includes(utxoIndex))

@@ -1,11 +1,13 @@
 import test from 'node:test';
 import { deepEqual, rejects } from 'node:assert/strict';
 
-import { chanInfoResponse } from './../fixtures/index.js';
-import { liquidityChannelsResponse as channels } from './../fixtures/index.js';
-import { getInfoResponse } from './../fixtures/index.js';
+import {
+  chanInfoResponse,
+  liquidityChannelsResponse as channels,
+  getInfoResponse,
+  getNodeInfoResponse
+} from './../fixtures/index.js';
 import { getLiquidity } from './../../index.js';
-import { getNodeInfoResponse } from './../fixtures/index.js';
 
 const makeLnd = () => {
   return {
@@ -51,9 +53,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, async () => {
-    if (!!error) {
+    if (error) {
       await rejects(getLiquidity(args), error, 'Got expected error');
     } else {
       const res = await getLiquidity(args);
@@ -61,4 +63,4 @@ tests.forEach(({args, description, error, expected}) => {
       deepEqual(res, expected, 'Balance is calculated');
     }
   });
-});
+}

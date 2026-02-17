@@ -61,7 +61,7 @@ export default (args, cbk) => {
         const channel = args.transaction_id;
         const pending = getPending.pending_channels.filter(n => n.is_opening);
 
-        if (!!pending.find(n => asOut(n) === asOut(args))) {
+        if (pending.some(n => asOut(n) === asOut(args))) {
           return cbk([503, 'ChannelToSetFeeRateForIsStillPending', {channel}]);
         }
 

@@ -56,14 +56,14 @@ export default ({db, height, id}, cbk) => {
       // Create the record
       create: ['getStored', 'key', ({getStored, key}, cbk) => {
         // Exit early when there is already a stored record
-        if (!!getStored.record) {
+        if (getStored.record) {
           return cbk(null, {});
         }
 
         const record = {height, id: hexAsBuffer(id)};
 
         return db.putItem({fresh, key, record, table}, err => {
-          if (!!err) {
+          if (err) {
             return cbk(err);
           }
 

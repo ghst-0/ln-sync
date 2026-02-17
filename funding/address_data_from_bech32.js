@@ -21,7 +21,7 @@ export default ({address}) => {
     const [version, ...data] = bech32.decode(address).words;
 
     return {version, data: Buffer.from(bech32.fromWords(data))};
-  } catch (err) {
+  } catch {
     // Ignore errors since this might be a bech32m address
   }
 

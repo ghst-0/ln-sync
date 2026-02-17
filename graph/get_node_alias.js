@@ -2,7 +2,7 @@ import asyncAuto from 'async/auto.js';
 import { getNode } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-const isPublicKey = n => !!n && /^[0-9A-F]{66}$/i.test(n);
+const isPublicKey = n => n && /^[0-9A-F]{66}$/i.test(n);
 
 /** Get the alias of a node, ignoring errors
 
@@ -41,7 +41,7 @@ export default ({id, lnd}, cbk) => {
           public_key: id,
         },
         (err, res) => {
-          if (!!err || !res || !res.alias) {
+          if (err || !res || !res.alias) {
             return cbk(null, {id, alias: String()});
           }
 

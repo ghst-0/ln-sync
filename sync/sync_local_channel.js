@@ -122,7 +122,7 @@ export default (args, cbk) => {
       getFresh: ['getStored', ({getStored}, cbk) => {
         // There is no local channel lookup method, so get all
         return getChannels({lnd: args.lnd}, (err, res) => {
-          if (!!err) {
+          if (err) {
             return cbk(err);
           }
 
@@ -137,7 +137,7 @@ export default (args, cbk) => {
       // Determine creation of the record
       create: ['getFresh', 'getStored', ({getFresh, getStored}, cbk) => {
         // Exit early when the record is already present or there is no fresh
-        if (!getFresh || !!getStored.record) {
+        if (!getFresh || getStored.record) {
           return cbk();
         }
 
@@ -243,7 +243,7 @@ export default (args, cbk) => {
         'update',
         ({create, getStored, update}, cbk) =>
       {
-        if (!!update && !!update.changes) {
+        if (update && update.changes) {
           const {previous} = update;
           const {updates} = update;
 
@@ -274,7 +274,7 @@ export default (args, cbk) => {
           });
         }
 
-        if (!!create) {
+        if (create) {
           return cbk(null, {
             created: {
               capacity: create.capacity,

@@ -5,7 +5,7 @@ import { getGraphNode, getGraphPair } from './../nodes/index.js';
 
 const defaultFailureCode = 'DOWNSTREAM_FAILURE';
 const mtokensAsBig = mtokens => (Number(mtokens) / 1e11).toFixed(11);
-const shortKey = key => key.substring(0, 16);
+const shortKey = key => key.slice(0, 16);
 
 /** Describe a failed forward
 

@@ -19,7 +19,7 @@ const topOfRange = 1;
 */
 export default ({above, tokens}) => {
   // Exit early when asking for a percentile on no values
-  if (!tokens.length) {
+  if (tokens.length === 0) {
     return {top: defaultValue};
   }
 

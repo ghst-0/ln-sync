@@ -17,6 +17,4 @@ export default ({emitter, err}) => {
   }
 
   emitter.emit('error', err);
-
-  return;
 };

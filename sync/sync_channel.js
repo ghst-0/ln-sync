@@ -70,7 +70,7 @@ export default ({db, id, lnd}, cbk) => {
             return cbk();
           }
 
-          if (!!err) {
+          if (err) {
             return cbk([503, 'UnexpectedErrorGettingChannelToSync', {err}]);
           }
 
@@ -100,7 +100,7 @@ export default ({db, id, lnd}, cbk) => {
         ({getFresh, getStored}, cbk) =>
       {
         // Exit early when the record is already present
-        if (!getFresh || !!getStored.record) {
+        if (!getFresh || getStored.record) {
           return cbk();
         }
 
@@ -169,7 +169,7 @@ export default ({db, id, lnd}, cbk) => {
 
       // Result of update
       updates: ['create', ({create}, cbk) => {
-        if (!!create) {
+        if (create) {
           return cbk(null, {
             created: {
               capacity: create.capacity,

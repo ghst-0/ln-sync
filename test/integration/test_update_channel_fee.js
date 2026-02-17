@@ -2,9 +2,7 @@ import test from 'node:test';
 import { deepEqual } from 'node:assert/strict';
 
 import asyncRetry from 'async/retry.js';
-import { getChannel } from 'ln-service';
-import { getChannels } from 'ln-service';
-import { openChannel } from 'ln-service';
+import { getChannel, getChannels, openChannel } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
 import { updateChannelFee } from './../../index.js';

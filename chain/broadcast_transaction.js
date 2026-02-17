@@ -6,7 +6,7 @@ import { Transaction } from 'bitcoinjs-lib';
 const bufferAsHex = buffer => buffer.toString('hex');
 const {fromHex} = Transaction;
 const fuzzBlocks = 10;
-const isHex = n => !!n && !(n.length % 2) && /^[0-9A-F]*$/i.test(n);
+const isHex = n => n && !(n.length % 2) && /^[0-9A-F]*$/i.test(n);
 const maxLockTime = 500000000;
 const maxSequence = 0xFFFFFFFF;
 
@@ -58,7 +58,7 @@ export default ({description, lnd, logger, transaction}, cbk) => {
         const {ins, locktime} = fromHex(transaction);
 
         // Exit early when all inputs have max sequence and timelock is ignored
-        if (!ins.filter(n => n.sequence !== maxSequence).length) {
+        if (ins.filter(n => n.sequence !== maxSequence).length === 0) {
           return cbk();
         }
 
@@ -111,7 +111,9 @@ export default ({description, lnd, logger, transaction}, cbk) => {
         });
 
         const returnError = err => {
-          [blocksSub, confirmationSub].forEach(n => n.removeAllListeners());
+          for (const n of [blocksSub, confirmationSub]) {
+            n.removeAllListeners()
+          }
 
           return cbk([503, 'UnexpectedErrorBroadcastingTransaction', {err}]);
         };
@@ -127,7 +129,7 @@ export default ({description, lnd, logger, transaction}, cbk) => {
             return returnError(err);
           }
 
-          if (!!isConfirmed) {
+          if (isConfirmed) {
             return;
           }
 
@@ -138,7 +140,9 @@ export default ({description, lnd, logger, transaction}, cbk) => {
         confirmationSub.on('confirmation', ({height, transaction}) => {
           isConfirmed = true;
 
-          [blocksSub, confirmationSub].forEach(n => n.removeAllListeners());
+          for (const n of [blocksSub, confirmationSub]) {
+            n.removeAllListeners()
+          }
 
           return cbk(null, {transaction_confirmed_in_block: height});
         });

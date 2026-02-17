@@ -44,23 +44,23 @@ const secondsPerHour = 60 * 60;
   <Forward Request Enforcement EventEmitter Object>
 */
 export default args => {
-  if (!!args.only_allow && !!args.only_disallow) {
+  if (args.only_allow && args.only_disallow) {
     throw new Error('ExpectedEitherAllowOrDisallowPairsToEnforceForwardRules');
   }
 
-  if (!!args.only_allow && !isArray(args.only_allow)) {
+  if (args.only_allow && !isArray(args.only_allow)) {
     throw new Error('ExpectedArrayOfOnlyAllowPairs');
   }
 
-  if (!!args.only_disallow && !isArray(args.only_disallow)) {
+  if (args.only_disallow && !isArray(args.only_disallow)) {
     throw new Error('ExpectedArrayOfOnlyDisallowPairs');
   }
 
-  if (!!args.only_allow && !args.only_allow.length) {
+  if (args.only_allow && args.only_allow.length === 0) {
     throw new Error('ExpectedOnlyAllowPairsToEnforceForwardRequestRules');
   }
 
-  if (!!args.only_disallow && !args.only_disallow.length) {
+  if (args.only_disallow && args.only_disallow.length === 0) {
     throw new Error('ExpectedOnlyDisallowPairsToEnforceForwardRequestRules');
   }
 
@@ -83,19 +83,23 @@ export default args => {
     }
 
     // Remove all attached subscriptions
-    return subs.forEach(n => n.removeAllListeners());
+    for (const n of subs) {
+      n.removeAllListeners()
+    }
   });
 
   // Stop everything if there is an error
   const emitError = err => {
     // Remove all attached subscriptions
-    subs.forEach(n => n.removeAllListeners());
+    for (const n of subs) {
+      n.removeAllListeners()
+    }
 
     return emitter.emit('error', err);
   };
 
   // Keep track of blocks when there is a blockchain constraint
-  if (!!isChain) {
+  if (isChain) {
     const subBlocks = subscribeToBlocks({lnd: args.lnd});
 
     // Update the latest block time every block
@@ -124,7 +128,7 @@ export default args => {
   }
 
   // Keep track of HTLCs when there is an HTLC rate constraint
-  if (!!args.max_new_pending_per_hour) {
+  if (args.max_new_pending_per_hour) {
     const subForwards = subscribeToForwards({lnd: args.lnd});
 
     subForwards.on('error', err => emitError(err));
@@ -175,13 +179,13 @@ export default args => {
     };
 
     // When enforcing chain based rules make sure chain info is present
-    if (!!isChain && !chain.latest_block_at) {
+    if (isChain && !chain.latest_block_at) {
       try {
         const walletInfo = await getWalletInfo({lnd: args.lnd});
 
         chain.current_block_height = walletInfo.current_block_height;
         chain.latest_block_at = walletInfo.latest_block_at;
-      } catch (err) {
+      } catch {
         // Make sure to resolve the HTLC before quitting
         reject('FailedToGetWalletInfoForChainConstraints');
 
@@ -190,7 +194,7 @@ export default args => {
     }
 
     // Make sure no stop channel list violations
-    if (!!isArray(args.stop_channels)) {
+    if (isArray(args.stop_channels)) {
       // Exit early when the inbound channel is on the stop channels list
       if (args.stop_channels.includes(request.in_channel)) {
         return reject('InboundChannelDeniedDueToStopList');
@@ -210,7 +214,7 @@ export default args => {
         // Map channels to stop into public key id pairs
         const stopPairs = await asyncMap(args.stop_channels, async id => {
           // Exit early when the channel keys are cached
-          if (!!channelKeys[id]) {
+          if (channelKeys[id]) {
             return channelKeys[id];
           }
 
@@ -230,13 +234,13 @@ export default args => {
         if (stopPairs.map(n => n.join()).includes(stopOut)) {
           return reject('OutboundChannelDeniedDueToStopList');
         }
-      } catch (err) {
+      } catch {
         return reject('FailedToFindChannelDetailsForReferencedStopChannel');
       }
     }
 
     // Make sure that only explicitly specified edges allow routing
-    if (!!isArray(args.only_allow) || !!isArray(args.only_disallow)) {
+    if (isArray(args.only_allow) || isArray(args.only_disallow)) {
       const edges = [request.in_channel, request.out_channel];
       const hasAllowList = !!args.only_allow;
       const hasDenyList = !!args.only_disallow;
@@ -245,7 +249,7 @@ export default args => {
       try {
         const [inKeys, outKeys] = await asyncMap(edges, async (id) => {
           // Exit early when the channel keys are cached
-          if (!!channelKeys[id]) {
+          if (channelKeys[id]) {
             return channelKeys[id];
           }
 
@@ -262,11 +266,11 @@ export default args => {
         const [inKey1, inKey2] = inKeys;
         const [outKey1, outKey2] = outKeys;
 
-        const inKey = !outKeys.includes(inKey1) ? inKey1 : inKey2;
+        const inKey = outKeys.includes(inKey1) ? inKey2 : inKey1;
         const outKey = inKeys.includes(outKey1) ? outKey2 : outKey1;
 
         // Look for this pairing in the allow/disallow list
-        const isListed = !!list.find(rule => {
+        const isListed = !!list.some(rule => {
           return rule.inbound_peer === inKey && rule.outbound_peer === outKey;
         });
 
@@ -281,13 +285,13 @@ export default args => {
         if (hasDenyList && !isAllowed) {
           return reject('RoutingPairSpecifiedInDenyForwardsList');
         }
-      } catch (err) {
+      } catch {
         return reject('FailedToFindChannelDetailsForReferencedChannel');
       }
     }
 
     // Enforce a rule that we must have a recent block
-    if (!!args.max_seconds_since_last_block) {
+    if (args.max_seconds_since_last_block) {
       const oldest = secondsAgoDate(args.max_seconds_since_last_block);
 
       if (chain.latest_block_at < oldest) {
@@ -301,7 +305,7 @@ export default args => {
     }
 
     // Enforce maximum new pending forwards per hour rule
-    if (!!args.max_new_pending_per_hour) {
+    if (args.max_new_pending_per_hour) {
       const after = secondsAgoDate(secondsPerHour);
 
       // Look for HTLCs that were last updated in the time frame
@@ -313,7 +317,7 @@ export default args => {
     }
 
     // Enforce minimum activation blocks constraint
-    if (!!args.min_activation_age) {
+    if (args.min_activation_age) {
       // Forwards must be confirmed before at least this block to be accepted
       const maxHeight = chain.current_block_height - args.min_activation_age;
 

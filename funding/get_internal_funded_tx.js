@@ -56,7 +56,7 @@ export default (args, cbk) => {
       // Ask for fee rate to use for internal funding
       askForFeeRate: ['validate', ({}, cbk) => {
         // Exit early when the fee rate was already set
-        if (!!args.chain_fee_tokens_per_vbyte) {
+        if (args.chain_fee_tokens_per_vbyte) {
           return cbk(null, {
             tokens_per_vbyte: args.chain_fee_tokens_per_vbyte,
           });

@@ -114,7 +114,7 @@ export default (args, cbk) => {
       // Determine creation of the record
       create: ['getStored', ({getStored}, cbk) => {
         // Exit early when the record is already present
-        if (!!getStored.record) {
+        if (getStored.record) {
           return cbk();
         }
 
@@ -206,7 +206,7 @@ export default (args, cbk) => {
         'update',
         ({create, getStored, update}, cbk) =>
       {
-        if (!!update && !!update.changes) {
+        if (update && update.changes) {
           return cbk(null, {
             original: {
               is_confirmed: getStored.record.is_confirmed,

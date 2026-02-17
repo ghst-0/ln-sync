@@ -36,7 +36,7 @@ export default async args => {
       timeout: args.timeout,
     });
 
-    if (!!synced.created && !!args.mtokens) {
+    if (synced.created && args.mtokens) {
       return args.emitter.emit('attempting_payment', {
         out_channel: args.out_channel,
         mtokens: args.mtokens,
@@ -44,7 +44,7 @@ export default async args => {
       });
     }
 
-    if (!!synced.updates && !!synced.updates.is_confirmed) {
+    if (synced.updates && synced.updates.is_confirmed) {
       return args.emitter.emit('attempt_payment_sent', {
         out_channel: args.out_channel,
         mtokens: synced.original.mtokens,
@@ -52,14 +52,12 @@ export default async args => {
       });
     }
 
-    if (!!synced.updates && !!synced.updates.is_failed) {
+    if (synced.updates && synced.updates.is_failed) {
       return args.emitter.emit('attempt_payment_failed', {
         out_channel: args.out_channel,
         mtokens: synced.original.mtokens,
         public_key: args.public_key,
       });
     }
-
-    return;
   });
 };

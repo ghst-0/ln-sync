@@ -45,7 +45,7 @@ export default ({channels, opening, settled}) => {
     // Settled payment is known so it can be considered part of local balance
     const settledBalance = channel.pending_payments
       .filter(n => n.id === settled)
-      .map(n => !n.is_outgoing ? n.tokens : Number())
+      .map(n => n.is_outgoing ? Number() : n.tokens)
       .reduce((sum, n) => sum + n, Number());
 
     return sum + channel.local_balance + settledBalance;
@@ -55,7 +55,7 @@ export default ({channels, opening, settled}) => {
   // Pending inbound is potential remote balance amount assuming HTLCs succeed
   const pendingInbound = channels.reduce((allPending, channel) => {
     return allPending + channel.pending_payments
-      .filter(n => n.id !== settled && !!n.is_outgoing)
+      .filter(n => n.id !== settled && n.is_outgoing)
       .reduce((sum, n) => sum + n.tokens, Number());
   },
   Number());

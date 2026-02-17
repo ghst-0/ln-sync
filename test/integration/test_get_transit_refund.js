@@ -2,18 +2,18 @@ import test from 'node:test';
 import { deepEqual } from 'node:assert/strict';
 
 import asyncRetry from 'async/retry.js';
-import { broadcastChainTransaction } from 'ln-service';
-import { createChainAddress } from 'ln-service';
-import { getChainTransactions } from 'ln-service';
-import { getPublicKey } from 'ln-service';
-import { networks } from 'bitcoinjs-lib';
-import { payments } from 'bitcoinjs-lib';
-import { sendToChainAddress } from 'ln-service';
+import {
+  broadcastChainTransaction,
+  createChainAddress,
+  getChainTransactions,
+  getPublicKey,
+  sendToChainAddress
+} from 'ln-service';
+import { networks, payments, Transaction } from 'bitcoinjs-lib';
 import { spawnLightningCluster } from 'ln-docker-daemons';
-import { Transaction } from 'bitcoinjs-lib';
 
-import { getNetwork } from './../../index.js';
-import { getTransitRefund } from './../../index.js';
+import { getNetwork } from './../../chain/index.js';
+import { getTransitRefund } from './../../funding/index.js';
 
 const {fromHex} = Transaction;
 const hexAsBuffer = hex => Buffer.from(hex, 'hex');
@@ -73,7 +73,7 @@ test('Get a refund transaction', async () => {
         return tx.id === fromHex(refund).getId();
       });
 
-      if (!!got.is_confirmed) {
+      if (got.is_confirmed) {
         return;
       }
 

@@ -1,8 +1,7 @@
-import 'node:assert';
+import test from 'node:test';
 import { deepEqual, rejects } from 'node:assert/strict';
 
 import { makeLnd } from 'mock-lnd';
-import test from 'node:test';
 import { Transaction } from 'bitcoinjs-lib';
 
 import { getFundedTransaction } from './../../index.js';
@@ -23,7 +22,9 @@ const makeArgs = overrides => {
     }],
   };
 
-  Object.keys(overrides).forEach(k => args[k] = overrides[k]);
+  for (const k of Object.keys(overrides)) {
+    args[k] = overrides[k]
+  }
 
   return args;
 };
@@ -82,9 +83,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, async () => {
-    if (!!error) {
+    if (error) {
       await rejects(method(args), error, 'Got expected error');
     } else {
       const got = await method(args);
@@ -92,4 +93,4 @@ tests.forEach(({args, description, error, expected}) => {
       deepEqual(got, expected, 'Got expected result');
     }
   });
-});
+}

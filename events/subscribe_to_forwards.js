@@ -15,7 +15,7 @@ import { subscribeToForwards } from 'lightning';
 export default ({lnd}) => {
   try {
     return {forwards: subscribeToForwards({lnd})};
-  } catch (err) {
+  } catch {
     // Return a dummy eventEmitter when subscribeToForwards is not supported
     return {forwards: new EventEmitter()};
   }

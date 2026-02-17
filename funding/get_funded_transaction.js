@@ -91,7 +91,7 @@ export default (args, cbk) => {
       // Create a funded PSBT
       getInternal: ['isExternal', ({isExternal}, cbk) => {
         // Exit early when the funding is from internal funds
-        if (!!isExternal.is_external) {
+        if (isExternal.is_external) {
           return cbk();
         }
 

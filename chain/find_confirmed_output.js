@@ -103,8 +103,6 @@ export default (args, cbk) => {
         });
 
         sub.on('error', err => done(err));
-
-        return;
       }],
     },
     returnResult({reject, resolve, of: 'findDeposit'}, cbk));

@@ -15,7 +15,7 @@ const {isArray} = Array;
 const isP2tr = n => n.startsWith('5120') && n.length === 68;
 const isP2wpkh = n => n.startsWith('0014') && n.length === 44;
 const notEmpty = arr => arr.filter(n => !!n);
-const pairSize = (fund, count) => (!fund ? 43 : 0) - (count === 2 ? 43/2 : 0);
+const pairSize = (fund, count) => (fund ? 0 : 43) - (count === 2 ? 43/2 : 0);
 const {random} = Math;
 const sumOf = arr => arr.reduce((sum, n) => sum + n, 0);
 
@@ -87,15 +87,17 @@ export default ({capacity, proposed, rate}, cbk) => {
           const totalOut = capacity * (member.funding || [capacity]).length;
 
           // Setup the individual member outputs
-          outs.forEach(out => tx.addOutput(hexAsBuffer(out), capacity));
+          for (const out of outs) {
+            tx.addOutput(hexAsBuffer(out), capacity)
+          }
 
           // Setup the individual member inputs
-          member.utxos.forEach(utxo => {
-            return tx.addInput(
+          for (const utxo of member.utxos) {
+            tx.addInput(
               hexAsBuffer(utxo.transaction_id),
               utxo.transaction_vout
-            );
-          });
+            )
+          }
 
           // Setup dummy signatures on the tx to calculate fee requirement
           member.utxos.forEach((utxo, i) => {

@@ -1,13 +1,15 @@
 import test from 'node:test';
 import { deepEqual } from 'node:assert/strict';
 
-import { addPeer } from 'ln-service';
 import asyncRetry from 'async/retry.js';
-import { fundPendingChannels } from 'ln-service';
-import { fundPsbt } from 'ln-service';
-import { getPendingChannels } from 'ln-service';
-import { openChannels } from 'ln-service';
-import { signPsbt } from 'ln-service';
+import {
+  addPeer,
+  fundPendingChannels,
+  fundPsbt,
+  getPendingChannels,
+  openChannels,
+  signPsbt
+} from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
 import { waitForPendingOpen } from './../../index.js';

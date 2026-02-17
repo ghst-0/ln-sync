@@ -5,8 +5,8 @@ import { getGraphPair } from './../nodes/index.js';
 
 const asDisplay = rate => `${(rate / 1e4).toFixed(2)}% (${rate})`;
 const {isArray} = Array;
-const isIntersecting = (arr1, arr2) => !!arr1.find(n => arr2.includes(n));
-const shortKey = key => key.substring(0, 16);
+const isIntersecting = (arr1, arr2) => !!arr1.some(n => arr2.includes(n));
+const shortKey = key => key.slice(0, 16);
 
 /** Describe a channel fee rate being changed
 

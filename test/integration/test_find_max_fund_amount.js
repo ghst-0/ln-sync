@@ -1,10 +1,8 @@
 import test from 'node:test';
-import { deepEqual, throws } from 'node:assert/strict';
+import { deepEqual } from 'node:assert/strict';
 
 import asyncRetry from 'async/retry.js';
-import { createChainAddress } from 'ln-service';
-import { getLockedUtxos } from 'ln-service';
-import { getUtxos } from 'ln-service';
+import { createChainAddress, getLockedUtxos, getUtxos } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
 import { getMaxFundAmount } from './../../index.js';
@@ -22,7 +20,7 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { description} of tests) {
   test(description, async () => {
     const {nodes} = await spawnLightningCluster({});
 
@@ -79,4 +77,4 @@ tests.forEach(({args, description, error, expected}) => {
 
     await kill({});
   });
-});
+}

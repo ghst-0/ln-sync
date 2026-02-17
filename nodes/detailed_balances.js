@@ -6,7 +6,7 @@ const {ceil} = Math;
 const flatten = arr => [].concat(...arr);
 const inputsCounterVBytesLength = 3;
 const inputSequenceVByteLength = 4;
-const isAnchor = n => !!n && n.startsWith('anchor');
+const isAnchor = n => n && n.startsWith('anchor');
 const nestedPublicKeyAddressType = 'np2wpkh';
 const nestedPublicKeyVByteLength = 22;
 const outputCounterVBytesLength = 1;
@@ -182,7 +182,7 @@ export default ({channels, locked, pending, transactions, utxos}) => {
   ));
 
   // Estimate the virtual bytes size of a tx that spends all inputs
-  const vbyteComponents = !inputElements.length ? [] : flatten([]
+  const vbyteComponents = inputElements.length === 0 ? [] : flatten([]
     .concat(transactionVersionVBytesLength)
     .concat(inputsCounterVBytesLength)
     .concat(outputCounterVBytesLength)

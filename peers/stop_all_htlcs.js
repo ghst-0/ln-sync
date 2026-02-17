@@ -47,7 +47,9 @@ export default ({id, ids, lnd, peer}, cbk) => {
         const state = {has_channel: true};
         const sub = subscribeToForwardRequests({lnd});
 
-        ids.forEach(id => block.push(id));
+        for (const id1 of ids) {
+          block.push(id1)
+        }
 
         sub.on('forward_request', request => {
           // Do not allow forwards inbound from the peer
@@ -68,26 +70,26 @@ export default ({id, ids, lnd, peer}, cbk) => {
           cbk => cbk(null, !state.has_channel),
           cbk => {
             return getChannels({lnd, partner_public_key: peer}, (err, res) => {
-              if (!!err) {
+              if (err) {
                 return cbk(err);
               }
 
               // Add new channels to the block list
-              res.channels.forEach(channel => {
+              for (const channel of res.channels) {
                 // Exit early when the channel is already blocked
                 if (block.includes(channel.id)) {
-                  return;
+                  continue
                 }
 
-                return block.push(channel.id);
-              });
+                block.push(channel.id)
+              }
 
               const channels = res.channels.map(n => n.id);
 
               state.has_channel = channels.includes(id);
 
               // Exit early when the channel is still there
-              if (!!state.has_channel) {
+              if (state.has_channel) {
                 return setTimeout(cbk, stopHtlcsIntervalMs);
               }
 

@@ -1,8 +1,7 @@
 import test from 'node:test';
 import { rejects } from 'node:assert/strict';
 
-import { chanInfoResponse } from './../fixtures/index.js';
-import { pendingChannelsResponse } from './../fixtures/index.js';
+import { chanInfoResponse, pendingChannelsResponse } from './../fixtures/index.js';
 import updateChannelFee from './../../peers/update_channel_fee.js';
 
 const makeLnd = overrides => {
@@ -86,7 +85,9 @@ const makeArgs = overrides => {
     transaction_vout: 0,
   };
 
-  Object.keys(overrides).forEach(key => args[key] = overrides[key]);
+  for (const key of Object.keys(overrides)) {
+    args[key] = overrides[key]
+  }
 
   return args;
 };
@@ -177,12 +178,12 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error } of tests) {
   test(description, async () => {
-    if (!!error) {
+    if (error) {
       await rejects(updateChannelFee(args), error, 'Got expected error');
     } else {
       await updateChannelFee(args);
     }
   });
-});
+}

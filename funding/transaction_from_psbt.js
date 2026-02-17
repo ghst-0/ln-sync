@@ -18,7 +18,7 @@ export default ({ecp, psbt}) => {
     const {transaction} = extractTransaction({ecp, psbt});
 
     return {transaction};
-  } catch (err) {
+  } catch {
     // Ignore errors when transaction extraction fails
   }
 
@@ -29,7 +29,7 @@ export default ({ecp, psbt}) => {
     const {transaction} = extractTransaction({ecp, psbt: finalized.psbt});
 
     return {transaction};
-  } catch (err) {
+  } catch {
     // Ignore errors when the transaction cannot be extracted
   }
 

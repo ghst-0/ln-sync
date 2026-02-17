@@ -39,7 +39,7 @@ export default args => {
     }
 
     // Exit early when there is an existing higher fee rate
-    if (!!sum[peer.public_key] && peer.fee_rate > sum[peer.public_key]) {
+    if (sum[peer.public_key] && peer.fee_rate > sum[peer.public_key]) {
       return sum;
     }
 
@@ -61,7 +61,7 @@ export default args => {
     })
     .filter(n => {
       // Exit early when considering outbound liquidity
-      if (!!args.is_outbound) {
+      if (args.is_outbound) {
         return true;
       }
 
@@ -72,14 +72,14 @@ export default args => {
 
       const feeRate = inboundFeeRates[n.partner_public_key];
 
-      return !!feeRate && feeRate <= args.max_fee_rate;
+      return feeRate && feeRate <= args.max_fee_rate;
     });
 
-  const balanceType = !!args.is_outbound ? 'local' : 'remote';
+  const balanceType = args.is_outbound ? 'local' : 'remote';
 
   const tokens = activeChannels.map(n => n[`${balanceType}_balance`]);
 
-  if (!!args.is_top) {
+  if (args.is_top) {
     return {tokens: [round(percentile({above, tokens}).top)]};
   }
 

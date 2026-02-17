@@ -6,8 +6,8 @@ import asyncRetry from 'async/retry.js';
 import { getChainTransactions } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { broadcastTransaction } from './../../index.js';
-import { reserveTransitFunds } from './../../index.js';
+import { broadcastTransaction } from './../../chain/index.js';
+import { reserveTransitFunds } from './../../funding/index.js';
 
 const interval = 10;
 const logger = {info: () => {}, error: () => {}};

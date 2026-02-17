@@ -3,7 +3,7 @@ import { getPeers, subscribeToPeers } from 'ln-service';
 import { returnResult } from 'asyncjs-util';
 
 const defaultTimeoutMs = 1000 * 60 * 3;
-const isPublicKey = n => !!n && /^[0-9A-F]{66}$/i.test(n);
+const isPublicKey = n => n && /^[0-9A-F]{66}$/i.test(n);
 
 /** Wait for a peer to connect
 
@@ -37,7 +37,7 @@ export default ({id, lnd, timeout}, cbk) => {
       // Subscribe to peers
       subscribe: ['getPeers', ({getPeers}, cbk) => {
         // Exit early when peer is already connected
-        if (getPeers.peers.find(n => n.public_key === id)) {
+        if (getPeers.peers.some(n => n.public_key === id)) {
           return cbk();
         }
 
@@ -74,8 +74,6 @@ export default ({id, lnd, timeout}, cbk) => {
         sub.on('error', err => {
           return done([503, 'UnexpectedErrorWaitingForPeer', {err}]);
         });
-
-        return;
       }],
 
       // Get updated peers list

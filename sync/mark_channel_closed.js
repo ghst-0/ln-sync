@@ -53,7 +53,7 @@ export default ({db, height, id}, cbk) => {
       // Update the record
       update: ['getStored', 'key', ({getStored, key}, cbk) => {
         // Exit early when there is no stored record or it's already closed
-        if (!getStored.record || !!getStored.record.close_height) {
+        if (!getStored.record || getStored.record.close_height) {
           return cbk();
         }
 
@@ -69,7 +69,7 @@ export default ({db, height, id}, cbk) => {
       // Channel marked as closed
       updated: ['getStored', 'update', ({getStored}, cbk) => {
         // Exit early when there is no stored record or it's already closed
-        if (!getStored.record || !!getStored.record.close_height) {
+        if (!getStored.record || getStored.record.close_height) {
           return cbk(null, {});
         }
 

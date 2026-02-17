@@ -39,7 +39,7 @@ export default ({lnd}, cbk) => {
       network: ['getInfo', ({getInfo}, cbk) => {
         const [chain, otherChain] = getInfo.chains;
 
-        if (!!otherChain) {
+        if (otherChain) {
           return cbk([400, 'CannotDetermineChainFromNode']);
         }
 

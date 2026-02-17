@@ -3,8 +3,8 @@ import { returnResult } from 'asyncjs-util';
 
 import { getGraphPair } from './../nodes/index.js';
 
-const bigUnits = tokens => !tokens ? String() : (tokens / 1e8).toFixed(8);
-const short = key => key.substring(0, 16);
+const bigUnits = tokens => tokens ? (tokens / 1e8).toFixed(8) : String();
+const short = key => key.slice(0, 16);
 
 /** Describe a channel being added
 

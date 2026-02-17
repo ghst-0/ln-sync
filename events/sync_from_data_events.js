@@ -12,7 +12,7 @@ import eventPaymentHtlc from './event_payment_htlc.js';
 import eventPolicyUpdated from './event_policy_updated.js';
 import eventReceiveHtlc from './event_receive_htlc.js';
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const delay = ms => new Promise(resolve => {setTimeout(resolve, ms)});
 const flutterDelayMs = 1000 * 90;
 
 /** Keep the local db using data event streams
@@ -63,7 +63,7 @@ export default (args, cbk) => {
       // Get public key
       getPublicKey: ['validate', ({}, cbk) => {
         return getWalletInfo({lnd: args.lnd}, (err, res) => {
-          if (!!err) {
+          if (err) {
             return cbk(err);
           }
 
@@ -177,7 +177,7 @@ export default (args, cbk) => {
       syncPaymentHtlcs: ['getPublicKey', ({getPublicKey}, cbk) => {
         args.forwards.on('forward', async htlc => {
           // Payment HTLCs have no in channel
-          if (!htlc.is_send || !!htlc.in_channel) {
+          if (!htlc.is_send || htlc.in_channel) {
             return;
           }
 
@@ -222,7 +222,7 @@ export default (args, cbk) => {
       syncReceiveHtlcs: ['getPublicKey', ({getPublicKey}, cbk) => {
         args.forwards.on('forward', async htlc => {
           // Receive HTLCs only have an in channel
-          if (!htlc.is_receive || !!htlc.out_channel) {
+          if (!htlc.is_receive || htlc.out_channel) {
             return;
           }
 

@@ -14,7 +14,7 @@ import addressDataFromBech32 from './address_data_from_bech32.js';
 export default ({input}) => {
   try {
     return {is_bech32: !!addressDataFromBech32({address: input})};
-  } catch (e) {
+  } catch {
     return {is_bech32: false};
   }
 };

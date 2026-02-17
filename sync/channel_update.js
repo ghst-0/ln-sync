@@ -44,7 +44,7 @@ export default ({channel, record}) => {
     throw new Error('ExpectedRecordToDeriveChannelUpdate');
   }
 
-  if (!channel.capacity || !!record.capacity) {
+  if (!channel.capacity || record.capacity) {
     return {};
   }
 

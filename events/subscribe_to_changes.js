@@ -46,15 +46,17 @@ export default ({db, lnd}) => {
 
       const subs = [channels, forwards, graph];
 
-      subs.forEach(sub => {
+      for (const sub of subs) {
         sub.on('error', () => {
           // Eliminate other listeners to prevent duplicate events
-          subs.forEach(n => n.removeAllListeners());
+          for (const n of subs) {
+            n.removeAllListeners()
+          }
 
           // Restart the subscription
           return setTimeout(cbk, subRestartDelayMs);
         });
-      });
+      }
 
       syncFromDataEvents({
         channels,
@@ -65,7 +67,7 @@ export default ({db, lnd}) => {
         lnd,
       },
       err => {
-        if (!!err) {
+        if (err) {
           emitError({emitter, err: [503, 'UnexpectedSyncError', {err}]});
         }
 
@@ -75,11 +77,9 @@ export default ({db, lnd}) => {
     },
     cbk => cbk(null, !emitter.listenerCount('error')),
     err => {
-      if (!!err) {
+      if (err) {
         return emitError({emitter, err: [503, 'UnexpectedChangesErr', {err}]});
       }
-
-      return;
     }
   );
 

@@ -124,9 +124,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, (t, end) => {
-    if (!!error) {
+    if (error) {
       throws(() => detailedBalances(args), new Error(error));
     } else {
       const balances = detailedBalances(args);
@@ -136,4 +136,4 @@ tests.forEach(({args, description, error, expected}) => {
 
     return end();
   });
-});
+}

@@ -82,7 +82,7 @@ export default (args, cbk) => {
             transaction_vout: input.transaction_vout,
           },
           (err, res) => {
-            if (!!err) {
+            if (err) {
               return cbk(err);
             }
 
@@ -122,7 +122,7 @@ export default (args, cbk) => {
 
       // Final funded PSBT
       funded: ['ecp', 'fundPsbt', 'unlock', ({ecp, fundPsbt}, cbk) => {
-        if (!!fundPsbt.error) {
+        if (fundPsbt.error) {
           return cbk(fundPsbt.error);
         }
 

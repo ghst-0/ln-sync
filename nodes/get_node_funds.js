@@ -48,7 +48,7 @@ export default (args, cbk) => {
       getLocked: ['validate', ({}, cbk) => {
         return getLockedUtxos({lnd: args.lnd}, (err, res) => {
           // Ignore errors
-          if (!!err) {
+          if (err) {
             return cbk(null, []);
           }
 
@@ -127,7 +127,7 @@ export default (args, cbk) => {
           utxos: getUtxos.utxos,
         });
 
-        const balances = !!args.is_confirmed ? confirmed : unconfirmed;
+        const balances = args.is_confirmed ? confirmed : unconfirmed;
         const limbo = unconfirmed.onchain_balance - confirmed.onchain_balance;
 
         return cbk(null, {

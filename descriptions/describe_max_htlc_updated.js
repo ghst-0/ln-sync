@@ -2,9 +2,9 @@ import asyncAuto from 'async/auto.js';
 import { returnResult, getGraphPair } from 'asyncjs-util';
 
 const {isArray} = Array;
-const isIntersecting = (arr1, arr2) => !!arr1.find(n => arr2.includes(n));
+const isIntersecting = (arr1, arr2) => !!arr1.some(n => arr2.includes(n));
 const mtokensAsBig = mtokens => (Number(mtokens) / 1e11).toFixed(11);
-const shortKey = key => key.substring(0, 16);
+const shortKey = key => key.slice(0, 16);
 
 /** Describe a channel max htlc being changed
 

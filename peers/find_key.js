@@ -37,7 +37,7 @@ export default ({channels, lnd, query}, cbk) => {
 
       // Get channels if necessary
       getChannels: ['validate', ({}, cbk) => {
-        if (!!channels) {
+        if (channels) {
           return cbk(null, {channels});
         }
 
@@ -66,7 +66,7 @@ export default ({channels, lnd, query}, cbk) => {
         ({getChannels, publicKey}, cbk) =>
       {
         // Exit early when there is no query or the query is a public key
-        if (!query || !!publicKey) {
+        if (!query || publicKey) {
           return cbk();
         }
 
@@ -90,7 +90,7 @@ export default ({channels, lnd, query}, cbk) => {
                 return cbk();
               }
 
-              if (!!err) {
+              if (err) {
                 return cbk(err);
               }
 
@@ -121,13 +121,13 @@ export default ({channels, lnd, query}, cbk) => {
 
         const matching = getNodes.filter(n => !!n);
 
-        if (!matching.length) {
+        if (matching.length === 0) {
           return cbk([400, 'FailedToFindPeerAliasMatch', {not_found: query}]);
         }
 
         const [match, secondMatch] = matching;
 
-        if (!!secondMatch) {
+        if (secondMatch) {
           return cbk([400, 'AmbiguousAliasSpecified', {matching}]);
         }
 

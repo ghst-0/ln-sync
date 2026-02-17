@@ -35,7 +35,7 @@ export default async args => {
     });
 
     // New successful HTLC receive
-    if (!!synced.created && !!synced.created.is_confirmed) {
+    if (synced.created && synced.created.is_confirmed) {
       return args.emitter.emit('received_htlc', {
         in_channel: args.in_channel,
         internal_failure: args.internal_failure,
@@ -44,14 +44,12 @@ export default async args => {
     }
 
     // New failed HTLC receive
-    if (!!synced.created && !!synced.created.is_failed) {
+    if (synced.created && synced.created.is_failed) {
       return args.emitter.emit('rejected_payment', {
         in_channel: args.in_channel,
         internal_failure: args.internal_failure,
         public_key: args.public_key,
       });
     }
-
-    return;
   });
 };

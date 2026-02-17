@@ -25,7 +25,7 @@ export default async (args) => {
 
   return await asyncRetry({interval, times}, async () => {
     await asyncEach(args.public_keys, async node => {
-      return await syncNode({db: args.db, id: node, lnd: args.lnd});
+      await syncNode({db: args.db, id: node, lnd: args.lnd});
     });
 
     const synced = await syncChannelPolicy({
@@ -56,7 +56,7 @@ export default async (args) => {
       });
     }
 
-    if (!!synced.updates.base_fee_mtokens) {
+    if (synced.updates.base_fee_mtokens) {
       args.emitter.emit('policy_base_fee_updated', {
         id,
         previous: synced.previous.base_fee_mtokens,
@@ -66,7 +66,7 @@ export default async (args) => {
       });
     }
 
-    if (!!synced.updates.cltv_delta) {
+    if (synced.updates.cltv_delta) {
       args.emitter.emit('policy_cltv_delta_updated', {
         id,
         previous: synced.previous.cltv_delta,
@@ -86,7 +86,7 @@ export default async (args) => {
       });
     }
 
-    if (!!synced.updates.max_htlc_mtokens) {
+    if (synced.updates.max_htlc_mtokens) {
       args.emitter.emit('policy_max_htlc_mtokens_updated', {
         id,
         previous: synced.previous.max_htlc_mtokens,
@@ -96,7 +96,7 @@ export default async (args) => {
       });
     }
 
-    if (!!synced.updates.min_htlc_mtokens) {
+    if (synced.updates.min_htlc_mtokens) {
       args.emitter.emit('policy_min_htlc_mtokens_updated', {
         id,
         previous: synced.previous.min_htlc_mtokens,
@@ -106,10 +106,8 @@ export default async (args) => {
       });
     }
 
-    if (!!synced.created) {
+    if (synced.created) {
       args.emitter.emit('policy_added', synced.created);
     }
-
-    return;
   });
 };

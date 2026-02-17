@@ -5,7 +5,7 @@ import { returnResult } from 'asyncjs-util';
 
 const defaultRetryDelayMs = 1;
 const {isArray} = Array;
-const isPublicKey = n => !!n && /^[0-9A-F]{66}$/i.test(n);
+const isPublicKey = n => n && /^[0-9A-F]{66}$/i.test(n);
 
 /** Connect a peer
 
@@ -30,7 +30,7 @@ export default ({id, lnd, sockets}, cbk) => {
           return cbk([400, 'ExpectedAuthenticatedLndToConnectPeer']);
         }
 
-        if (!!sockets && (!isArray(sockets) || !sockets.length)) {
+        if (sockets && (!isArray(sockets) || sockets.length === 0)) {
           return cbk([400, 'ExpectedNonEmptyArrayOfSocketsToConnectAsPeer']);
         }
 
@@ -48,12 +48,12 @@ export default ({id, lnd, sockets}, cbk) => {
       // Get the sockets to connect to the node
       getSockets: ['isConnected', ({isConnected}, cbk) => {
         // Exit early when node is already connected as a peer
-        if (!!isConnected) {
+        if (isConnected) {
           return cbk();
         }
 
         // Exit early when sockets are already specified
-        if (!!sockets) {
+        if (sockets) {
           return cbk(null, {sockets: sockets.map(socket => ({socket}))});
         }
 
@@ -72,7 +72,7 @@ export default ({id, lnd, sockets}, cbk) => {
           return cbk();
         }
 
-        if (!getSockets.sockets.length) {
+        if (getSockets.sockets.length === 0) {
           return cbk([404, 'NoKnownSocketsForNodeToConnectTo']);
         }
 

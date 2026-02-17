@@ -27,7 +27,7 @@ export default (args, cbk) => {
     asyncAuto({
       // Check arguments
       validate: cbk => {
-        if (!!args.is_outbound && args.max_fee_rate !== undefined) {
+        if (args.is_outbound && args.max_fee_rate !== undefined) {
           return cbk([400, 'MaxLiquidityFeeRateNotSupportedForOutbound']);
         }
 
@@ -35,7 +35,7 @@ export default (args, cbk) => {
           return cbk([400, 'ExpectedLndToGetLiquidity']);
         }
 
-        if (!!args.with && !isArray(args.with)) {
+        if (args.with && !isArray(args.with)) {
           return cbk([400, 'ExpectedArrayOfPublicKeysToGetLiquidity']);
         }
 

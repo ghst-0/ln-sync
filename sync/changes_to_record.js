@@ -42,7 +42,7 @@ export default ({record, updated}) => {
   });
 
   // Exit early when nothing changed
-  if (!changed.length) {
+  if (changed.length === 0) {
     return {};
   }
 

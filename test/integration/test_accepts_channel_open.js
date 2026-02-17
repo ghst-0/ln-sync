@@ -1,10 +1,9 @@
 import test from 'node:test';
 import { deepEqual } from 'node:assert/strict';
 
-import { addPeer } from 'ln-service';
+import { addPeer, subscribeToOpenRequests } from 'ln-service';
 import asyncRetry from 'async/retry.js';
 import { spawnLightningCluster } from 'ln-docker-daemons';
-import { subscribeToOpenRequests } from 'ln-service';
 
 import { acceptsChannelOpen } from './../../index.js';
 
@@ -28,7 +27,7 @@ test('Check if peer accepts open', async () => {
 
     // Propose a channel to target
     const shouldAccept = await asyncRetry({interval, times}, async () => {
-      return await acceptsChannelOpen({
+      await acceptsChannelOpen({
         capacity,
         lnd,
         give_tokens: capacity / [lnd, target].length,

@@ -115,7 +115,7 @@ export default ({after, lnds}, cbk) => {
           return getAllInvoices({lnd, created_after: after}, cbk);
         },
         (err, res) => {
-          if (!!err) {
+          if (err) {
             return cbk(err);
           }
 
@@ -133,7 +133,7 @@ export default ({after, lnds}, cbk) => {
                 return cbk();
               }
 
-              if (!!err) {
+              if (err) {
                 return cbk(err);
               }
 
@@ -141,7 +141,7 @@ export default ({after, lnds}, cbk) => {
             });
           },
           (err, payments) => {
-            if (!!err) {
+            if (err) {
               return cbk(err);
             }
 
@@ -149,7 +149,7 @@ export default ({after, lnds}, cbk) => {
           });
         },
         (err, res) => {
-          if (!!err) {
+          if (err) {
             return cbk(err);
           }
 

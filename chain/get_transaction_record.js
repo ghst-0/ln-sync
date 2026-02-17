@@ -27,7 +27,7 @@ const uniq = arr => Array.from(new Set(arr));
       [transaction]: <Raw Transaction Hex String>
     }]
     [channels]: [{
-      capacity: <Capacity Tokens Numberr>
+      capacity: <Capacity Tokens Number>
       id: <Standard Format Short Channel Id Hex String>
       partner_public_key: <Peer Public Key Hex String>
       transaction_id: <Channel Transaction Id Hex String>
@@ -125,14 +125,12 @@ export default (args, cbk) => {
         if (!args.lnd) {
           throw [400, 'ExpectedLndToFindChainTransactionRecordData'];
         }
-
-        return;
       },
 
       // Get channels
       getChannels: ['validate', ({}, cbk) => {
         // Exit early when channels were provided
-        if (!!args.channels) {
+        if (args.channels) {
           return cbk(null, {channels: args.channels});
         }
 
@@ -142,7 +140,7 @@ export default (args, cbk) => {
       // Get closed channels
       getClosed: ['validate', ({}, cbk) => {
         // Exit early when closed channels were provided
-        if (!!args.closed_channels) {
+        if (args.closed_channels) {
           return cbk(null, {channels: args.closed_channels});
         }
 
@@ -151,7 +149,7 @@ export default (args, cbk) => {
 
       // Get pending transactions
       getPending: ['validate', ({}, cbk) => {
-        if (!!args.pending_channels) {
+        if (args.pending_channels) {
           return cbk(null, {pending_channels: args.pending_channels});
         }
 
@@ -160,7 +158,7 @@ export default (args, cbk) => {
 
       // Get transactions
       getTx: ['validate', ({}, cbk) => {
-        if (!!args.chain_transactions) {
+        if (args.chain_transactions) {
           return cbk(null, {transactions: args.chain_transactions});
         }
 
@@ -204,7 +202,7 @@ export default (args, cbk) => {
             .forEach(payment => {
               const direction = payment.is_outgoing ? 'outgoing' : 'incoming';
 
-              if (!!payment.is_pending) {
+              if (payment.is_pending) {
                 return records.push({
                   action: 'payment_pending',
                   channel: channel.id,
@@ -231,7 +229,7 @@ export default (args, cbk) => {
           });
         });
 
-        if (!!closingChans.length) {
+        if (closingChans.length > 0) {
           closingChans.forEach(channel => {
             return records.push({
               action: 'opened_channel',
@@ -244,7 +242,7 @@ export default (args, cbk) => {
           });
         }
 
-        if (!!chans.length) {
+        if (chans.length > 0) {
           chans.forEach(channel => {
             return records.push({
               action: 'opened_channel',
@@ -256,7 +254,7 @@ export default (args, cbk) => {
           });
         }
 
-        if (!!chanClosing) {
+        if (chanClosing) {
           if (chanClosing.is_cooperative_close) {
             records.push({
               action: 'cooperatively_closed_channel',
@@ -269,7 +267,7 @@ export default (args, cbk) => {
             });
           }
 
-          if (!!chanClosing.is_local_force_close) {
+          if (chanClosing.is_local_force_close) {
             records.push({
               action: 'force_closed_channel',
               balance: chanClosing.final_local_balance,
@@ -281,7 +279,7 @@ export default (args, cbk) => {
             });
           }
 
-          if (!!chanClosing.is_remote_force_close) {
+          if (chanClosing.is_remote_force_close) {
             records.push({
               action: 'peer_force_closed_channel',
               balance: chanClosing.final_local_balance,
@@ -294,9 +292,9 @@ export default (args, cbk) => {
           }
         }
 
-        if (!!closingChans.length) {
+        if (closingChans.length > 0) {
           closingChans.forEach(closing => {
-            if (!!closing.is_remote_force_close) {
+            if (closing.is_remote_force_close) {
               records.push({
                 action: 'peer_force_closed_channel',
                 balance: closing.final_local_balance,
@@ -310,7 +308,7 @@ export default (args, cbk) => {
           });
         }
 
-        if (!!tx && !!tx.transaction) {
+        if (tx && tx.transaction) {
           fromHex(tx.transaction).ins.forEach(({hash, index}) => {
             const txRecords = transactionRecords({
               ended: getClosed.channels,
@@ -334,7 +332,7 @@ export default (args, cbk) => {
             .find(n => n.action === action && n.channel === channel);
 
           // Exit early when this related channel action already exists
-          if (!!existing) {
+          if (existing) {
             return;
           }
 
@@ -350,16 +348,16 @@ export default (args, cbk) => {
           });
         });
 
-        const hasFee = !!tx && !!tx.fee;
-        const isIncoming = !!tx && !tx.is_outgoing && !!tx.tokens;
+        const hasFee = tx && tx.fee;
+        const isIncoming = tx && !tx.is_outgoing && tx.tokens;
 
         return {
           chain_fee: hasFee ? tx.fee : undefined,
           received: isIncoming ? tx.tokens : undefined,
           related_channels: relatedChannels,
-          sent: !records.length && !!tx ? tx.tokens : undefined,
-          sent_to: !records.length && !!tx ? tx.output_addresses : undefined,
-          tx: !!tx ? tx.id : undefined,
+          sent: records.length === 0 && tx ? tx.tokens : undefined,
+          sent_to: records.length === 0 && tx ? tx.output_addresses : undefined,
+          tx: tx ? tx.id : undefined,
         };
       }],
 
@@ -375,7 +373,7 @@ export default (args, cbk) => {
           },
           (err, res) => {
             // Ignore errors
-            if (!!err || !res.alias) {
+            if (err || !res.alias) {
               return cbk();
             }
 
@@ -383,14 +381,14 @@ export default (args, cbk) => {
           });
         },
         (err, nodes) => {
-          if (!!err) {
+          if (err) {
             return cbk(err);
           }
 
           const relatedWithAlias = record.related_channels.map(related => {
-            const node = nodes.find(n => !!n && n.public_key === related.with);
+            const node = nodes.find(n => n && n.public_key === related.with);
 
-            related.node = !!node && !!node.alias ? node.alias : undefined;
+            related.node = node && node.alias ? node.alias : undefined;
 
             return related;
           });

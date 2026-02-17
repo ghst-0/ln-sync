@@ -74,7 +74,7 @@ export default ({ended, id, original, pending, txs, vout}) => {
     return chan.transaction_id === id && chan.transaction_vout === vout;
   });
 
-  if (!!spendPending.length) {
+  if (spendPending.length > 0) {
     spendPending
       .filter(pending => !!pending.is_closing)
       .forEach(pending => {
@@ -87,7 +87,7 @@ export default ({ended, id, original, pending, txs, vout}) => {
       });
   }
 
-  if (!!spendClosing && spendClosing.is_partner_initiated) {
+  if (spendClosing && spendClosing.is_partner_initiated) {
     records.push({
       action: 'peer_force_closing_channel',
       balance: spendClosing.pending_balance,
@@ -96,29 +96,27 @@ export default ({ended, id, original, pending, txs, vout}) => {
     });
   }
 
-  if (!!spendTx) {
-    fromHex(spendTx.transaction).ins.forEach(input => {
+  if (spendTx) {
+    for (const input of fromHex(spendTx.transaction).ins) {
       const grandParentTx = txs.find(n => n.id === original);
 
       if (!grandParentTx) {
-        return;
+        continue
       }
 
-      return fromHex(grandParentTx.transaction).ins.forEach(grandIn => {
+      for (const grandIn of fromHex(grandParentTx.transaction).ins) {
         const grandTx = txs.find(n => n.id === idFromHash(grandIn.hash));
 
         if (!grandTx) {
-          return;
+          continue
         }
 
-        return fromHex(grandTx.transaction).ins.forEach(greatIn => {
-          const greatTx = txs.find(n => n.id === idFromHash(greatIn.hash));
-
+        for (const greatIn of fromHex(grandTx.transaction).ins) {
           const closingTime = ended.find(chan => {
             return chan.close_transaction_id === idFromHash(greatIn.hash);
           });
 
-          if (!!closingTime && closingTime.is_local_force_close) {
+          if (closingTime && closingTime.is_local_force_close) {
             records.push({
               action: 'force_closed_channel',
               balance: closingTime.final_time_locked_balance,
@@ -129,9 +127,9 @@ export default ({ended, id, original, pending, txs, vout}) => {
               with: closingTime.partner_public_key,
             });
           }
-        });
-      });
-    });
+        }
+      }
+    }
   }
 
   const spendClose = ended.find(n => n.close_transaction_id === id);
@@ -141,7 +139,7 @@ export default ({ended, id, original, pending, txs, vout}) => {
     return {records};
   }
 
-  if (!!spendClose.is_cooperative_close) {
+  if (spendClose.is_cooperative_close) {
     records.push({
       action: 'cooperatively_closed_channel',
       balance: spendClose.final_local_balance,
@@ -153,7 +151,7 @@ export default ({ended, id, original, pending, txs, vout}) => {
     });
   }
 
-  if (!!spendClose.is_local_force_close) {
+  if (spendClose.is_local_force_close) {
     const balance = spendClose.final_time_locked_balance;
 
     records.push({
@@ -167,7 +165,7 @@ export default ({ended, id, original, pending, txs, vout}) => {
     });
   }
 
-  if (!!spendClose.is_remote_force_close) {
+  if (spendClose.is_remote_force_close) {
     records.push({
       action: 'peer_force_closed_channel',
       balance: spendClose.final_local_balance,

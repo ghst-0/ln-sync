@@ -50,13 +50,13 @@ export default (args, cbk) => {
         },
         cbk => {
           return getPendingChannels({lnd: args.lnd}, (err, res) => {
-            if (!!err) {
+            if (err) {
               return cbk(err);
             }
 
             // Look for the incoming channel proposal
             const pending = res.pending_channels.find(channel => {
-              if (!!args.capacity && channel.capacity !== args.capacity) {
+              if (args.capacity && channel.capacity !== args.capacity) {
                 return false;
               }
 

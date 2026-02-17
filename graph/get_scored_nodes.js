@@ -25,7 +25,7 @@ export default ({network, request}, cbk) => {
     asyncAuto({
       // Check arguments
       validate: cbk => {
-        if (!knownNetworks.find(n => n === network)) {
+        if (!knownNetworks.some(n => n === network)) {
           return cbk([400, 'ExpectedNetworkToGetScoredNodes']);
         }
 
@@ -41,7 +41,7 @@ export default ({network, request}, cbk) => {
         const url = `${api}${network}.json`;
 
         return request({url, json: true}, (err, r, res) => {
-          if (!!err) {
+          if (err) {
             return cbk([503, 'UnexpectedErrorGettingNodeScores', {err}]);
           }
 
@@ -49,11 +49,11 @@ export default ({network, request}, cbk) => {
             return cbk([503, 'UnexpectedResultFromNodeScores']);
           }
 
-          if (!!res.scores.find(n => !n.public_key)) {
+          if (res.scores.some(n => !n.public_key)) {
             return cbk([503, 'ExpectedPublicKeyInNodeScoresResult']);
           }
 
-          if (!!res.scores.find(({score}) => score === undefined)) {
+          if (res.scores.some(({score}) => score === undefined)) {
             return cbk([503, 'ExpectedScoreInNodeScoresResult']);
           }
 

@@ -3,7 +3,7 @@ import { returnResult } from 'asyncjs-util';
 
 import { getGraphNode } from './../nodes/index.js';
 
-const shortKey = key => key.substring(0, 16);
+const shortKey = key => key.slice(0, 16);
 
 /** Describe a peer being connected
 

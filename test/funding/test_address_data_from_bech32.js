@@ -16,20 +16,19 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, (t, end) => {
-    if (!!error) {
+    if (error) {
       throws(() => method(args), new Error(error), 'Error returned');
 
       return end();
-    } else {
-      const got = method(args);
-
-      got.data = got.data.toString('hex');
-
-      deepEqual(got, expected, 'Got expected result');
     }
+    const got = method(args);
+
+    got.data = got.data.toString('hex');
+
+    deepEqual(got, expected, 'Got expected result');
 
     return end();
   });
-});
+}

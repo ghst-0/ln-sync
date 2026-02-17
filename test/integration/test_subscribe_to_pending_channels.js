@@ -2,8 +2,7 @@ import test from 'node:test';
 import { deepEqual } from 'node:assert/strict';
 
 import asyncRetry from 'async/retry.js';
-import { closeChannel } from 'ln-service';
-import { openChannel } from 'ln-service';
+import { closeChannel, openChannel } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
 import { subscribeToPendingChannels } from './../../index.js';
@@ -41,7 +40,7 @@ test('Subscribe to pending chans', async () => {
     });
 
     await asyncRetry({interval, times}, async () => {
-      if (!opening.length) {
+      if (opening.length === 0) {
         throw new Error('ExpectedChannelOpening');
       }
     });
@@ -54,7 +53,7 @@ test('Subscribe to pending chans', async () => {
     });
 
     await asyncRetry({interval, times}, async () => {
-      if (!closing.length) {
+      if (closing.length === 0) {
         throw new Error('ExpectedChannelClosing');
       }
     });

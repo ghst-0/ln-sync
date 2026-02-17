@@ -2,9 +2,7 @@ import test from 'node:test';
 import { deepEqual, rejects } from 'node:assert/strict';
 
 import asyncRetry from 'async/retry.js';
-import { createChainAddress } from 'ln-service';
-import { getUtxos } from 'ln-service';
-import { sendToChainAddress } from 'ln-service';
+import { createChainAddress, getUtxos, sendToChainAddress } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
 import { fundPsbtDisallowingInputs } from './../../index.js';
@@ -44,7 +42,7 @@ test('Fund disallowing inputs', async () => {
 
       const {utxos} = await getUtxos({lnd: target.lnd});
 
-      if (!utxos.length || !!utxos.find(n => !n.confirmation_count)) {
+      if (utxos.length === 0 || utxos.some(n => !n.confirmation_count)) {
         throw new Error('ExpectedConfirmedUtxos');
       }
 

@@ -4,7 +4,7 @@ import { returnResult } from 'asyncjs-util';
 import { getGraphNode, getGraphPair } from './../graph/index.js';
 
 const mtokensAsBig = mtokens => (Number(mtokens) / 1e11).toFixed(11);
-const shortKey = key => key.substring(0, 16);
+const shortKey = key => key.slice(0, 16);
 
 /** Describe a payment attempt being sent
 

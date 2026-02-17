@@ -72,9 +72,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, (t, end) => {
-    if (!!error) {
+    if (error) {
       throws(() => liquidityTokens(args), new Error(error), 'Got error');
     } else {
       const tokens = liquidityTokens(args);
@@ -84,4 +84,4 @@ tests.forEach(({args, description, error, expected}) => {
 
     return end();
   });
-});
+}

@@ -25,7 +25,7 @@ export default args => {
   }
 
   // Exit early and avoid styles when in monochrome mode
-  if (!!args.is_monochrome) {
+  if (args.is_monochrome) {
     return {display: tokensAsBigTokens(args.tokens)};
   }
 

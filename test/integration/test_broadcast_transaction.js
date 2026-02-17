@@ -3,11 +3,8 @@ import { deepEqual } from 'node:assert/strict';
 
 import asyncAuto from 'async/auto.js';
 import asyncRetry from 'async/retry.js';
-import { createChainAddress } from 'ln-service';
+import { createChainAddress, getChainTransactions, fundPsbt, signPsbt } from 'ln-service';
 import { extractTransaction } from 'psbt';
-import { getChainTransactions } from 'ln-service';
-import { fundPsbt } from 'ln-service';
-import { signPsbt } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 import * as tinysecp from 'tiny-secp256k1';
 import { broadcastTransaction } from './../../index.js';
@@ -41,7 +38,7 @@ test('Transaction is broadcast', async () => {
       // Try publishing the tx
       broadcast: async () => {
         return await asyncRetry({interval, times}, async () => {
-          return await broadcastTransaction({
+          await broadcastTransaction({
             lnd,
             description,
             transaction,

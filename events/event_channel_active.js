@@ -38,20 +38,18 @@ export default async args => {
       transaction_vout: args.transaction_vout,
     });
 
-    if (!!synced.updates && synced.updates.is_active === false) {
+    if (synced.updates && synced.updates.is_active === false) {
       return args.emitter.emit('channel_disabled', {
         id: synced.original.id,
         public_key: args.public_key,
       });
     }
 
-    if (!!synced.updates && synced.updates.is_active === true) {
+    if (synced.updates && synced.updates.is_active === true) {
       return args.emitter.emit('channel_enabled', {
         id: synced.original.id,
         public_key: args.public_key,
       });
     }
-
-    return;
   });
 };

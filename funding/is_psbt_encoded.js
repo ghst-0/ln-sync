@@ -15,7 +15,7 @@ import { decodePsbt } from 'psbt';
 export default ({ecp, input}) => {
   try {
     return {is_psbt: !!decodePsbt({ecp, psbt: input})};
-  } catch (e) {
+  } catch {
     return {is_psbt: false};
   }
 };

@@ -23,18 +23,16 @@ export default async ({db, emitter, id, lnd, node}) => {
 
     const synced = await syncPeer({db, id, lnd});
 
-    if (!!synced.updates && !!synced.previous.is_connected) {
+    if (synced.updates && synced.previous.is_connected) {
       emitter.emit('disconnected', {node, from: id});
     }
 
-    if (!!synced.updates && !!synced.updates.is_connected) {
+    if (synced.updates && synced.updates.is_connected) {
       emitter.emit('reconnected', {node, to: id});
     }
 
-    if (!!synced.updates && !!synced.created) {
+    if (synced.updates && synced.created) {
       emitter.emit('new_peer', {node, public_key: id});
     }
-
-    return;
   });
 };

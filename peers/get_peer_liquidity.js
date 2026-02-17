@@ -50,7 +50,7 @@ export default (args, cbk) => {
           public_key: args.public_key,
         },
         (err, res) => {
-          if (!!err) {
+          if (err) {
             return cbk(null, {alias: String(), public_key: args.public_key});
           }
 
@@ -75,7 +75,7 @@ export default (args, cbk) => {
         });
 
         const opening = getPendingChannels.pending_channels.filter(chan => {
-          return chan.is_opening && chan.partner_public_key == args.public_key;
+          return chan.is_opening && chan.partner_public_key === args.public_key;
         });
 
         const liquidity = peerLiquidity({

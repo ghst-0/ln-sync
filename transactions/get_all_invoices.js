@@ -84,11 +84,11 @@ export default (args, cbk) => {
           cbk => {
             return getInvoices({
               token,
-              limit: !token ? defaultInvoicesLimit : undefined,
+              limit: token ? undefined : defaultInvoicesLimit,
               lnd: args.lnd,
             },
             (err, res) => {
-              if (!!err) {
+              if (err) {
                 return cbk(err);
               }
 
@@ -102,7 +102,7 @@ export default (args, cbk) => {
               const createdAt = res.invoices.map(n => n.created_at);
 
               // Stop paging when created after is set
-              if (!!createdAfter && createdAt.find(n => n < createdAfter)) {
+              if (createdAfter && createdAt.some(n => n < createdAfter)) {
                 token = false;
               }
 
@@ -110,7 +110,7 @@ export default (args, cbk) => {
             });
           },
           err => {
-            if (!!err) {
+            if (err) {
               return cbk(err);
             }
 

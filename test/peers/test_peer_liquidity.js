@@ -52,9 +52,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, (t, end) => {
-    if (!!error) {
+    if (error) {
       throws(() => peerLiquidity(args), new Error(error));
     } else {
       const liquidity = peerLiquidity(args);
@@ -64,4 +64,4 @@ tests.forEach(({args, description, error, expected}) => {
 
     return end();
   });
-});
+}

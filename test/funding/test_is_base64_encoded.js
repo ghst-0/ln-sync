@@ -21,9 +21,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, (t, end) => {
-    if (!!error) {
+    if (error) {
       throws(() => method(args), new Error(error), 'Error returned');
     } else {
       const got = method(args);
@@ -33,4 +33,4 @@ tests.forEach(({args, description, error, expected}) => {
 
     return end();
   });
-});
+}

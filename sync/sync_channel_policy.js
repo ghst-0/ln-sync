@@ -103,7 +103,7 @@ export default (args, cbk) => {
             return cbk();
           }
 
-          if (!!err) {
+          if (err) {
             return cbk([503, 'UnexpectedErrGettingChanToSyncPolicy', {err}]);
           }
 
@@ -114,7 +114,7 @@ export default (args, cbk) => {
       // Determine creation of the policy
       create: ['getFresh', 'getStored', ({getFresh, getStored}, cbk) => {
         // Exit early when the record is already present
-        if (!getFresh || !!getStored.record) {
+        if (!getFresh || getStored.record) {
           return cbk();
         }
 
@@ -192,7 +192,7 @@ export default (args, cbk) => {
 
       // Result of update
       updates: ['create', 'update', ({create, update}, cbk) => {
-        if (!!update && !!update.changes) {
+        if (update && update.changes) {
           return cbk(null, {
             previous: {
               base_fee_mtokens: update.previous.base_fee_mtokens,
@@ -215,7 +215,7 @@ export default (args, cbk) => {
           });
         }
 
-        if (!!create) {
+        if (create) {
           return cbk(null, {
             created: {
               base_fee_mtokens: create.base_fee_mtokens,

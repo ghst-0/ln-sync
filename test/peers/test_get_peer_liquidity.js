@@ -1,11 +1,13 @@
 import test from 'node:test';
 import { equal, rejects } from 'node:assert/strict';
 
-import { chanInfoResponse } from './../fixtures/index.js';
-import { listChannelsResponse } from './../fixtures/index.js';
-import { getNodeInfoResponse } from './../fixtures/index.js';
+import {
+  chanInfoResponse,
+  listChannelsResponse,
+  getNodeInfoResponse,
+  pendingChannelsResponse
+} from './../fixtures/index.js';
 import { getPeerLiquidity } from './../../index.js';
-import { pendingChannelsResponse } from './../fixtures/index.js';
 
 const tests = [
   {
@@ -50,9 +52,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
+for (const { args, description, error, expected } of tests) {
   test(description, async () => {
-    if (!!error) {
+    if (error) {
       await rejects(getPeerLiquidity(args), error, 'Got expected error');
     } else {
       const peer = await getPeerLiquidity(args);
@@ -62,4 +64,4 @@ tests.forEach(({args, description, error, expected}) => {
       equal(peer.outbound, expected.outbound, 'Total outbound is returned');
     }
   });
-});
+}
