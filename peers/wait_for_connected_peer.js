@@ -17,7 +17,7 @@ const isPublicKey = n => !!n && /^[0-9A-F]{66}$/i.test(n);
 */
 export default ({id, lnd, timeout}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!isPublicKey(id)) {

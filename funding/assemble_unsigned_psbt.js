@@ -46,7 +46,7 @@ const sumOf = arr => arr.reduce((sum, n) => sum + n, 0);
 */
 export default ({capacity, proposed, rate}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Import ECPair library
       ecp: async () => (await import('ecpair')).ECPairFactory(tinysecp),
 

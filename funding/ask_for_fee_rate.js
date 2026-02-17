@@ -21,7 +21,7 @@ const slowConfirmationTarget = 1e3;
 */
 export default ({ask, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!ask) {

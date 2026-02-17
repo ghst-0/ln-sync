@@ -26,7 +26,7 @@ const maxSequence = 0xFFFFFFFF;
 */
 export default ({description, lnd, logger, transaction}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!lnd) {

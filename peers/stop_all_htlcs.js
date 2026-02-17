@@ -19,7 +19,7 @@ const stopHtlcsIntervalMs = 3000;
 */
 export default ({id, ids, lnd, peer}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!id) {

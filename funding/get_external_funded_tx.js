@@ -38,7 +38,7 @@ const tokAsBigUnit = tokens => (tokens / 1e8).toFixed(8);
 */
 export default ({ask, logger, outputs}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Import ECPair library
       ecp: async () => (await import('ecpair')).ECPairFactory(tinysecp),
 

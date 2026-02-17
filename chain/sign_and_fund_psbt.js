@@ -63,7 +63,7 @@ const spendAsOutpoint = n => `${n.hash.reverse().toString('hex')}:${n.index}`;
 */
 export default ({lnd, psbt, utxos}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Import ECPair library
       ecp: async () => (await import('ecpair')).ECPairFactory(tinysecp),
 

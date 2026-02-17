@@ -22,7 +22,7 @@ const knownNetworks = ['btc', 'btctestnet', 'ltc'];
 */
 export default ({network, request}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!knownNetworks.find(n => n === network)) {

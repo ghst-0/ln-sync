@@ -56,7 +56,7 @@ const type = 'peer';
 */
 export default ({db, id, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!db) {

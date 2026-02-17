@@ -21,7 +21,7 @@ const networkNames = {btc: 'mainnet', btctestnet: 'testnet'};
 */
 export default ({network, request}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!networkNames[network]) {

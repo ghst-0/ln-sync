@@ -95,7 +95,7 @@ const notFound = 404;
 */
 export default ({after, lnds}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!after) {

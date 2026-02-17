@@ -22,7 +22,7 @@ const reversedBytes = hex => Buffer.from(hex, 'hex').reverse().toString('hex');
 */
 export default ({lnd}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!lnd) {

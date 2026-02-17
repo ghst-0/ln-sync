@@ -23,7 +23,7 @@ const times = 1e3;
 */
 export default ({db, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!db) {

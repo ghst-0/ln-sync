@@ -27,7 +27,7 @@ const {max} = Math;
 */
 export default ({id, inputs, interval, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!id) {

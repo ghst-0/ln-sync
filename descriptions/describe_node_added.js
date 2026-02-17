@@ -23,7 +23,7 @@ const shortKey = key => key.substring(0, 16);
 */
 export default ({db, id}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!db) {

@@ -25,7 +25,7 @@ const type = 'node';
 */
 export default ({db, id}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!db) {

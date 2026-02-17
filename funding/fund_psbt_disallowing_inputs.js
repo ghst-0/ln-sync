@@ -52,7 +52,7 @@ const {isArray} = Array;
 */
 export default (args, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Import ECPair library
       ecp: async () => (await import('ecpair')).ECPairFactory(tinysecp),
 

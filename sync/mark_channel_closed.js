@@ -26,7 +26,7 @@ const type = 'channel';
 */
 export default ({db, height, id}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!db) {

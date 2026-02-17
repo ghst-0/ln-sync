@@ -50,7 +50,7 @@ const {toOutputScript} = address;
 */
 export default ({ask, lnd, logger, rate, tokens}, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!ask) {

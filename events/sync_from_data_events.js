@@ -30,7 +30,7 @@ const flutterDelayMs = 1000 * 90;
 */
 export default (args, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!args.channels) {

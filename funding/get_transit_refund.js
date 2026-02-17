@@ -37,7 +37,7 @@ const transitKeyFamily = 805;
 */
 export default (args, cbk) => {
   return new Promise((resolve, reject) => {
-    return asyncAuto({
+    asyncAuto({
       // Accepted networks are ones known to BitcoinJS
       nets: cbk => {
         const nets = {
