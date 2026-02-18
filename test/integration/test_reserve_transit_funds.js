@@ -10,7 +10,6 @@ import { broadcastTransaction } from './../../chain/index.js';
 import { reserveTransitFunds } from './../../funding/index.js';
 
 const interval = 10;
-const logger = {info: () => {}, error: () => {}};
 const maturity = 100;
 const times = 20000;
 const tokens = 1e6;
@@ -27,7 +26,6 @@ test(`Reserve transit funds`, async () => {
 
     const transit = await reserveTransitFunds({
       lnd,
-      logger,
       tokens,
       ask: (args, cbk) => {
         // Use external funding
@@ -51,7 +49,6 @@ test(`Reserve transit funds`, async () => {
           // Confirm the transit transaction
           return await broadcastTransaction({
             lnd,
-            logger,
             description: 'Transit funding',
             transaction: transit.transaction,
           });
@@ -83,7 +80,6 @@ test(`Reserve transit funds`, async () => {
           // Confirm the transit transaction
           return await broadcastTransaction({
             lnd,
-            logger,
             description: 'Transit refund',
             transaction: transit.refund,
           });

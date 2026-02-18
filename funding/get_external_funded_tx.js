@@ -22,7 +22,6 @@ const tokAsBigUnit = tokens => (tokens / 1e8).toFixed(8);
 
   {
     ask: <Inquirer Ask Function>
-    logger: <Winston Logger Object>
     outputs: [{
       address: <Bech32 Chain Address String>
       tokens: <Send Tokens Tokens Number>
@@ -36,7 +35,7 @@ const tokAsBigUnit = tokens => (tokens / 1e8).toFixed(8);
     transaction: <Signed Raw Transaction Hex String>
   }
 */
-export default ({ask, logger, outputs}, cbk) => {
+export default ({ask, outputs}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Import ECPair library
@@ -46,10 +45,6 @@ export default ({ask, logger, outputs}, cbk) => {
       validate: cbk => {
         if (!ask) {
           return cbk([400, 'ExpectedAskFunctionToGetExternallyFundedTx']);
-        }
-
-        if (!logger) {
-          return cbk([400, 'ExpectedWinstonLoggerToGetExternallyFundedTx']);
         }
 
         if (!isArray(outputs)) {
@@ -67,13 +62,13 @@ export default ({ask, logger, outputs}, cbk) => {
       getFunding: ['ecp', ({ecp}, cbk) => {
         const fundSends = outputs.map(n => `${n.address} ${n.tokens}`);
 
-        logger.info({fund: `fund ${fundSends.join(' ')}`});
+        console.info({fund: `fund ${fundSends.join(' ')}`});
 
         const commaSends = outputs.map(({address, tokens}) => {
           return `${address}, ${tokAsBigUnit(tokens)}`;
         });
 
-        logger.info(`\n${commaSends.join('\n')}\n`);
+        console.info(`\n${commaSends.join('\n')}\n`);
 
         const payTo = outputs
           .map(n => `${tokAsBigUnit(n.tokens)} to ${n.address}`)

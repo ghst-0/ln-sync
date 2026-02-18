@@ -15,7 +15,6 @@ const makeArgs = overrides => {
       fund: new Transaction().toHex(),
     }),
     lnd: makeLnd({}),
-    logger: {info: () => {}},
     outputs: [{
       address: 'tb1qzmswhxxwxvhat6ke3wu27gqqxn4qxqn6qwarwkz6lmky3l3jqjfqy5wl9x',
       tokens: 1,
@@ -39,11 +38,6 @@ const tests = [
     args: makeArgs({lnd: undefined}),
     description: 'An LND connection is required.',
     error: [400, 'ExpectedAuthenticatedLndApiToGetFundedTx'],
-  },
-  {
-    args: makeArgs({logger: undefined}),
-    description: 'A logger object is required.',
-    error: [400, 'ExpectedWinstonLoggerToGetFundedTransaction'],
   },
   {
     args: makeArgs({outputs: undefined}),

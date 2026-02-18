@@ -14,7 +14,6 @@ const {isArray} = Array;
     [chain_fee_tokens_per_vbyte]: <Internal Funding Uses Tokens/Vbyte Number>
     [is_external]: <Transaction Uses External Funds Bool>
     lnd: Authenticated LND API Object>
-    logger: <Winston Logger Object>
     outputs: [{
       address: <Chain Address String>
       tokens: <Tokens To Send To Output Number>
@@ -47,10 +46,6 @@ export default (args, cbk) => {
           return cbk([400, 'ExpectedAuthenticatedLndApiToGetFundedTx']);
         }
 
-        if (!args.logger) {
-          return cbk([400, 'ExpectedWinstonLoggerToGetFundedTransaction']);
-        }
-
         if (!isArray(args.outputs)) {
           return cbk([400, 'ExpectedArrayOfOutputsToGetFundedTransaction']);
         }
@@ -67,7 +62,6 @@ export default (args, cbk) => {
         return isExternalFunding({
           ask: args.ask,
           lnd: args.lnd,
-          logger: args.logger,
           outputs: args.outputs,
         },
         cbk);
@@ -82,7 +76,6 @@ export default (args, cbk) => {
 
         return getExternalFundedTransaction({
           ask: args.ask,
-          logger: args.logger,
           outputs: args.outputs,
         },
         cbk);

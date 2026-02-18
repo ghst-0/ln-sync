@@ -7,7 +7,6 @@ import method from './../../funding/get_external_funded_tx.js';
 const makeArgs = overrides => {
   const args = {
     ask: ({}, cbk) => cbk({fund: new Transaction().toHex()}),
-    logger: {info: () => {}},
     outputs: [{
       address: 'tb1qzmswhxxwxvhat6ke3wu27gqqxn4qxqn6qwarwkz6lmky3l3jqjfqy5wl9x',
       tokens: 1,
@@ -26,11 +25,6 @@ const tests = [
     args: makeArgs({ask: undefined}),
     description: 'An ask function is required.',
     error: [400, 'ExpectedAskFunctionToGetExternallyFundedTx'],
-  },
-  {
-    args: makeArgs({logger: undefined}),
-    description: 'A winston logger is required.',
-    error: [400, 'ExpectedWinstonLoggerToGetExternallyFundedTx'],
   },
   {
     args: makeArgs({outputs: undefined}),

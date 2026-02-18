@@ -15,7 +15,6 @@ const maxSequence = 0xFFFFFFFF;
   {
     [description]: <Transaction Description String>
     lnd: <Authenticated LND API Object>
-    logger: <Winston Logger Object>
     transaction: <Transaction String>
   }
 
@@ -24,17 +23,13 @@ const maxSequence = 0xFFFFFFFF;
     transaction_confirmed_in_block: <Block Height Number>
   }
 */
-export default ({description, lnd, logger, transaction}, cbk) => {
+export default ({description, lnd, transaction}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
       validate: cbk => {
         if (!lnd) {
           return cbk([400, 'ExpectedLndToBroadcastTransaction']);
-        }
-
-        if (!logger) {
-          return cbk([400, 'ExpectedLoggerToBroadcastTransaction']);
         }
 
         if (!isHex(transaction)) {
@@ -82,7 +77,7 @@ export default ({description, lnd, logger, transaction}, cbk) => {
             return cbk();
           }
 
-          return logger.info({timelocked_until: locktime, current: height});
+          console.info({timelocked_until: locktime, current: height});
         });
 
         sub.on('error', err => {
@@ -100,7 +95,7 @@ export default ({description, lnd, logger, transaction}, cbk) => {
         // Subscribe to blocks
         const blocksSub = subscribeToBlocks({lnd});
 
-        logger.info({transaction_id: fromHex(transaction).getId()});
+        console.info({transaction_id: fromHex(transaction).getId()});
 
         // Subscribe to confirmations of the first output script
         const confirmationSub = subscribeToChainAddress({
@@ -133,7 +128,7 @@ export default ({description, lnd, logger, transaction}, cbk) => {
             return;
           }
 
-          return logger.info({broadcast_transaction_at_height: height});
+          console.info({broadcast_transaction_at_height: height});
         });
 
         // Wait for confirmation to continue

@@ -23,7 +23,6 @@ const {toOutputScript} = address;
   {
     ask: <Ask Function>
     lnd: <Authenticated LND API Object>
-    logger: <Winston Logger Object>
     [rate]: <Chain Fee Rate Tokens Per VByte Number>
     tokens: <Fund Tokens Number>
   }
@@ -48,7 +47,7 @@ const {toOutputScript} = address;
     vout: <Funds Reserved At Output Index Number>
   }
 */
-export default ({ask, lnd, logger, rate, tokens}, cbk) => {
+export default ({ask, lnd, rate, tokens}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -59,10 +58,6 @@ export default ({ask, lnd, logger, rate, tokens}, cbk) => {
 
         if (!lnd) {
           return cbk([400, 'ExpectedAuthenticatedLndToReserveTransitFunds']);
-        }
-
-        if (!logger) {
-          return cbk([400, 'ExpectedWinstonLoggerToReserveTransitFunds']);
         }
 
         if (!tokens) {
@@ -105,7 +100,6 @@ export default ({ask, lnd, logger, rate, tokens}, cbk) => {
         return getFundedTransaction({
           ask,
           lnd,
-          logger,
           chain_fee_tokens_per_vbyte: rate || undefined,
           outputs: [{tokens, address: transit.address}],
         },

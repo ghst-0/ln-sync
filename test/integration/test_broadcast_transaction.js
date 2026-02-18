@@ -41,8 +41,7 @@ test('Transaction is broadcast', async () => {
           await broadcastTransaction({
             lnd,
             description,
-            transaction,
-            logger: {info: () => {}},
+            transaction
           });
         });
       },

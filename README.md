@@ -73,7 +73,6 @@ Broadcast a chain transaction until it gets confirmed in a block
     {
       [description]: <Transaction Description String>
       lnd: <Authenticated LND API Object>
-      logger: <Winston Logger Object>
       transaction: <Transaction String>
     }
 
@@ -212,7 +211,6 @@ Get a funded transaction
       [chain_fee_tokens_per_vbyte]: <Internal Funding Uses Tokens/Vbyte Number>
       [is_external]: <Transaction Uses External Funds Bool>
       lnd: Authenticated LND API Object>
-      logger: <Winston Logger Object>
       outputs: [{
         address: <Chain Address String>
         tokens: <Tokens To Send To Output Number>
@@ -661,7 +659,6 @@ Get on-chain funding and a refund
     {
       ask: <Ask Function>
       lnd: <Authenticated LND API Object>
-      logger: <Winston Logger Object>
       [rate]: <Chain Fee Rate Tokens Per VByte Number>
       tokens: <Fund Tokens Number>
     }
