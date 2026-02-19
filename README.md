@@ -66,21 +66,6 @@ Assemble an unsigned PSBT with funding from multiple parties
       psbt: <Unsigned Funding Transaction PSBT Hex String>
     }
 
-### `broadcastTransaction`
-
-Broadcast a chain transaction until it gets confirmed in a block
-
-    {
-      [description]: <Transaction Description String>
-      lnd: <Authenticated LND API Object>
-      transaction: <Transaction String>
-    }
-
-    @returns via cbk or Promise
-    {
-      transaction_confirmed_in_block: <Block Height Number>
-    }
-
 ### `connectPeer`
 
 Connect a peer

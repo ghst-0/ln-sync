@@ -24,7 +24,6 @@ import {
   waitForPendingOpen
 } from './peers/index.js';
 import {
-  broadcastTransaction,
   findConfirmedOutput,
   getMaxFundAmount,
   getNetwork,
@@ -36,7 +35,6 @@ export {
   acceptsChannelOpen,
   askForFeeRate,
   assembleUnsignedPsbt,
-  broadcastTransaction,
   connectPeer,
   enforceForwardRequestRules,
   findConfirmedOutput,
