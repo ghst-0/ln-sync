@@ -1,4 +1,4 @@
-import { enforceForwardRequestRules, subscribeToPendingChannels } from './monitor/index.js';
+import { subscribeToPendingChannels } from './monitor/index.js';
 import { getAllInvoices, getPayments, getRebalancePayments } from './transactions/index.js';
 import { getNodeAlias, getScoredNodes, getSeedNodes } from './graph/index.js';
 import { formatTokens } from './display/index.js';
@@ -36,7 +36,6 @@ export {
   askForFeeRate,
   assembleUnsignedPsbt,
   connectPeer,
-  enforceForwardRequestRules,
   findConfirmedOutput,
   findKey,
   formatTokens,
