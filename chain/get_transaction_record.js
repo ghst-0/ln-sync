@@ -196,62 +196,61 @@ export default (args, cbk) => {
           return transaction.id === args.id;
         });
 
-        getClosed.channels.forEach(channel => {
-          return channel.close_payments
-            .filter(n => n.spent_by === args.id)
-            .forEach(payment => {
+        for (const channel of getClosed.channels) {
+          for (const payment of channel.close_payments
+            .filter(n => n.spent_by === args.id)) {
               const direction = payment.is_outgoing ? 'outgoing' : 'incoming';
 
               if (payment.is_pending) {
-                return records.push({
+                records.push({
                   action: 'payment_pending',
                   channel: channel.id,
                   with: channel.partner_public_key,
-                });
+                })
               }
 
               const resolution = payment.is_paid ? 'paid' : 'refunded';
 
-              return records.push({
-                action: `${direction}_payment_${resolution}`,
+              records.push({
+                action: `${ direction }_payment_${ resolution }`,
                 channel: channel.id,
                 with: channel.partner_public_key,
-              });
-            });
-        });
+              })
+            }
+        }
 
-        openingChans.forEach(channel => {
-          return records.push({
+        for (const channel of openingChans) {
+          records.push({
             action: 'opening_channel',
             balance: channel.local_balance,
             open_tx: channel.transaction_id,
             with: channel.partner_public_key,
-          });
-        });
+          })
+        }
 
         if (closingChans.length > 0) {
-          closingChans.forEach(channel => {
-            return records.push({
+          for (const channel of closingChans) {
+            records.push({
               action: 'opened_channel',
               capacity: channel.capacity,
               channel: channel.id,
               close_tx: channel.close_transaction_id,
               open_tx: channel.transaction_id,
               with: channel.partner_public_key,
-            });
-          });
+            })
+          }
         }
 
         if (chans.length > 0) {
-          chans.forEach(channel => {
-            return records.push({
+          for (const channel of chans) {
+            records.push({
               action: 'opened_channel',
               capacity: channel.capacity,
               channel: channel.id,
               open_tx: channel.transaction_id,
               with: channel.partner_public_key,
-            });
-          });
+            })
+          }
         }
 
         if (chanClosing) {
@@ -293,7 +292,7 @@ export default (args, cbk) => {
         }
 
         if (closingChans.length > 0) {
-          closingChans.forEach(closing => {
+          for (const closing of closingChans) {
             if (closing.is_remote_force_close) {
               records.push({
                 action: 'peer_force_closed_channel',
@@ -305,11 +304,11 @@ export default (args, cbk) => {
                 with: closing.partner_public_key,
               });
             }
-          });
+          }
         }
 
         if (tx && tx.transaction) {
-          fromHex(tx.transaction).ins.forEach(({hash, index}) => {
+          for (const { hash, index } of fromHex(tx.transaction).ins) {
             const txRecords = transactionRecords({
               ended: getClosed.channels,
               id: hash.reverse().toString('hex'),
@@ -319,11 +318,11 @@ export default (args, cbk) => {
               vout: index,
             });
 
-            txRecords.records.forEach(record => records.push(record));
-          });
+            txRecords.records.forEach(record => {records.push(record)});
+          }
         }
 
-        records.forEach(record => {
+        for (const record of records) {
           const {action} = record;
           const {channel} = record;
 
@@ -333,10 +332,10 @@ export default (args, cbk) => {
 
           // Exit early when this related channel action already exists
           if (existing) {
-            return;
+            continue
           }
 
-          return relatedChannels.push({
+          relatedChannels.push({
             action,
             balance: record.balance || undefined,
             capacity: record.capacity || undefined,
@@ -345,8 +344,8 @@ export default (args, cbk) => {
             open_tx: record.open_tx || undefined,
             timelock: record.timelock || undefined,
             with: record.with,
-          });
-        });
+          })
+        }
 
         const hasFee = tx && tx.fee;
         const isIncoming = tx && !tx.is_outgoing && tx.tokens;

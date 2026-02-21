@@ -94,10 +94,11 @@ export default (args, cbk) => {
 
               token = res.next || false;
 
-              res.invoices
+              for (const n1 of res.invoices
                 .filter(n => !confAfter || n.confirmed_at >= confAfter)
-                .filter(n => !createdAfter || n.created_at >= createdAfter)
-                .forEach(n => invoices.push(n));
+                .filter(n => !createdAfter || n.created_at >= createdAfter)) {
+                invoices.push(n1)
+              }
 
               const createdAt = res.invoices.map(n => n.created_at);
 

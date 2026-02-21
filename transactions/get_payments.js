@@ -122,9 +122,10 @@ export default ({after, lnd}, cbk) => {
                 token = false;
               }
 
-              res.payments
-                .filter(n => !after || n.created_at >= after)
-                .forEach(n => payments.push(n));
+              for (const n1 of res.payments
+                .filter(n => !after || n.created_at >= after)) {
+                payments.push(n1)
+              }
 
               return cbk();
             });

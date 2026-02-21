@@ -75,16 +75,15 @@ export default ({ended, id, original, pending, txs, vout}) => {
   });
 
   if (spendPending.length > 0) {
-    spendPending
-      .filter(pending => !!pending.is_closing)
-      .forEach(pending => {
-        return records.push({
+    for (const pending1 of spendPending
+      .filter(pending => !!pending.is_closing)) {
+        records.push({
           action: 'channel_closing',
-          balance: pending.pending_balance,
-          timelock: pending.timelock_expiration,
-          with: pending.partner_public_key,
-        });
-      });
+          balance: pending1.pending_balance,
+          timelock: pending1.timelock_expiration,
+          with: pending1.partner_public_key,
+        })
+      }
   }
 
   if (spendClosing && spendClosing.is_partner_initiated) {
