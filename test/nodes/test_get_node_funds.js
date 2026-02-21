@@ -3,7 +3,7 @@ import { deepEqual, rejects } from 'node:assert/strict';
 
 import { makeLnd } from 'mock-lnd';
 
-import method from './../../nodes/get_node_funds.js';
+import method from '../../nodes/get_node_funds.js';
 
 const tests = [
   {

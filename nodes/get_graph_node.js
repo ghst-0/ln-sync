@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import { keyForRecord } from './../sync/index.js';
+import { keyForRecord } from '../sync/index.js';
 
 const defaultColor = '#000000';
 const table = 'nodes';

@@ -1,7 +1,7 @@
 import asyncEach from 'async/each.js';
 import asyncRetry from 'async/retry.js';
 
-import { syncChannelPolicy, syncNode } from './../sync/index.js';
+import { syncChannelPolicy, syncNode } from '../sync/index.js';
 
 const interval = () => Math.round(Math.random() * 1e5);
 const times = 1e3;

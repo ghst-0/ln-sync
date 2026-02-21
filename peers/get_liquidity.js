@@ -3,7 +3,7 @@ import { getChannels, getNode, getWalletInfo } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
 import liquidityTokens from './liquidity_tokens.js';
-import { getNetwork } from './../chain/index.js';
+import { getNetwork } from '../chain/index.js';
 
 const {isArray} = Array;
 

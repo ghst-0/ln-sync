@@ -1,6 +1,6 @@
 import asyncRetry from 'async/retry.js';
 
-import { updateReceiveHtlc } from './../sync/index.js';
+import { updateReceiveHtlc } from '../sync/index.js';
 
 const interval = 1e3;
 const times = 1e3;

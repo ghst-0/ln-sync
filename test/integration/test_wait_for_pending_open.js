@@ -12,7 +12,7 @@ import {
 } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { waitForPendingOpen } from './../../index.js';
+import { waitForPendingOpen } from '../../index.js';
 
 const capacity = 1e6;
 const interval = 10;

@@ -12,8 +12,8 @@ import {
 import { networks, payments, Transaction } from 'bitcoinjs-lib';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { getNetwork } from './../../chain/index.js';
-import { getTransitRefund } from './../../funding/index.js';
+import { getNetwork } from '../../chain/index.js';
+import { getTransitRefund } from '../../funding/index.js';
 
 const {fromHex} = Transaction;
 const hexAsBuffer = hex => Buffer.from(hex, 'hex');

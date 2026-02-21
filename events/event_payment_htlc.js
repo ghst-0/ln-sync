@@ -1,6 +1,6 @@
 import asyncRetry from 'async/retry.js';
 
-import { updatePaymentHtlc } from './../sync/index.js';
+import { updatePaymentHtlc } from '../sync/index.js';
 
 const interval = 200;
 const times = 1e3;

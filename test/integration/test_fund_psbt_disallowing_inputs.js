@@ -5,7 +5,7 @@ import asyncRetry from 'async/retry.js';
 import { createChainAddress, getUtxos, sendToChainAddress } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { fundPsbtDisallowingInputs } from './../../index.js';
+import { fundPsbtDisallowingInputs } from '../../index.js';
 
 const format = 'np2wpkh';
 const interval = 10;

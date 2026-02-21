@@ -3,7 +3,7 @@ import { deepEqual, rejects } from 'node:assert/strict';
 
 import { makeLnd } from 'mock-lnd';
 
-import method from './../../funding/get_internal_funded_tx.js';
+import method from '../../funding/get_internal_funded_tx.js';
 
 const makeArgs = overrides => {
   const args = {

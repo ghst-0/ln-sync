@@ -1,4 +1,4 @@
-import { syncBlock } from './../sync/index.js';
+import { syncBlock } from '../sync/index.js';
 
 /** Handle a block mined event
 

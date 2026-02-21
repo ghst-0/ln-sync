@@ -3,7 +3,7 @@ import { deepEqual, throws } from 'node:assert/strict';
 
 import { Transaction } from 'bitcoinjs-lib';
 
-import method from './../../funding/is_encoded_transaction.js';
+import method from '../../funding/is_encoded_transaction.js';
 
 const tests = [
   {

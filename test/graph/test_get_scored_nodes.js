@@ -1,7 +1,7 @@
 import test from 'node:test';
 import { deepEqual, rejects } from 'node:assert/strict';
 
-import { getScoredNodes } from './../../index.js';
+import { getScoredNodes } from '../../index.js';
 
 const tests = [
   {

@@ -17,7 +17,7 @@ import {
 } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { stopAllHtlcs } from './../../index.js';
+import { stopAllHtlcs } from '../../index.js';
 
 const capacity = 1e6;
 const interval = 100;

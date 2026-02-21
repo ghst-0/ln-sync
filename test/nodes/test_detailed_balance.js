@@ -1,7 +1,7 @@
 import test from 'node:test';
 import { deepEqual, throws } from 'node:assert/strict';
 
-import detailedBalances from './../../nodes/detailed_balances.js';
+import detailedBalances from '../../nodes/detailed_balances.js';
 
 const tests = [
   {

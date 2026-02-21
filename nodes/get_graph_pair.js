@@ -3,7 +3,7 @@ import asyncMap from 'async/map.js';
 import { returnResult } from 'asyncjs-util';
 
 import getGraphNode from './get_graph_node.js';
-import { keyForRecord } from './../sync/index.js';
+import { keyForRecord } from '../sync/index.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const {isArray} = Array;

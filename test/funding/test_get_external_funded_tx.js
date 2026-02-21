@@ -2,7 +2,7 @@ import test from 'node:test';
 import { deepEqual, rejects } from 'node:assert/strict';
 
 import { Transaction } from 'bitcoinjs-lib';
-import method from './../../funding/get_external_funded_tx.js';
+import method from '../../funding/get_external_funded_tx.js';
 
 const makeArgs = overrides => {
   const args = {

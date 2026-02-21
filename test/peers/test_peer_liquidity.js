@@ -1,7 +1,7 @@
 import test from 'node:test';
 import { deepEqual, throws } from 'node:assert/strict';
 
-import peerLiquidity from './../../peers/peer_liquidity.js';
+import peerLiquidity from '../../peers/peer_liquidity.js';
 
 const tests = [
   {

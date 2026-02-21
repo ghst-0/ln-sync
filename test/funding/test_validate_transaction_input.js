@@ -3,7 +3,7 @@ import { deepEqual, throws } from 'node:assert/strict';
 
 import * as tinysecp from 'tiny-secp256k1';
 
-import method from './../../funding/validate_transaction_input.js';
+import method from '../../funding/validate_transaction_input.js';
 
 const tests = [
   {

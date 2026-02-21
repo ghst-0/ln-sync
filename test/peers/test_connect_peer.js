@@ -2,7 +2,7 @@ import test from 'node:test';
 import { rejects } from 'node:assert/strict';
 
 import { randomBytes } from 'node:crypto';
-import { connectPeer } from './../../index.js';
+import { connectPeer } from '../../index.js';
 
 const makePublicKey = () => `03${randomBytes(32).toString('hex')}`;
 

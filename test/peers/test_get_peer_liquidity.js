@@ -6,8 +6,8 @@ import {
   listChannelsResponse,
   getNodeInfoResponse,
   pendingChannelsResponse
-} from './../fixtures/index.js';
-import { getPeerLiquidity } from './../../index.js';
+} from '../fixtures/index.js';
+import { getPeerLiquidity } from '../../index.js';
 
 const tests = [
   {

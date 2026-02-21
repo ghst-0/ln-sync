@@ -2,7 +2,7 @@ import test from 'node:test';
 import { deepEqual, rejects } from 'node:assert/strict';
 
 import { makeWalletVersionResponse, makeLnd } from 'mock-lnd';
-import method from './../../funding/is_external_funding.js';
+import method from '../../funding/is_external_funding.js';
 
 const makeArgs = overrides => {
   const args = {

@@ -4,7 +4,7 @@ import { deepEqual, rejects } from 'node:assert/strict';
 import { addPeer } from 'ln-service';
 import asyncRetry from 'async/retry.js';
 import { spawnLightningCluster } from 'ln-docker-daemons';
-import { waitForConnectedPeer } from './../../index.js';
+import { waitForConnectedPeer } from '../../index.js';
 
 const size = 2;
 

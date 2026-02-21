@@ -4,7 +4,7 @@ import { createChainAddress, getPublicKey } from 'ln-service';
 import { returnResult } from 'asyncjs-util';
 
 import getFundedTransaction from './get_funded_transaction.js';
-import { getNetwork } from './../chain/index.js';
+import { getNetwork } from '../chain/index.js';
 import getTransitRefund from './get_transit_refund.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');

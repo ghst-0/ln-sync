@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import { getGraphPair } from './../nodes/index.js';
+import { getGraphPair } from '../nodes/index.js';
 
 const {isArray} = Array;
 const isIntersecting = (arr1, arr2) => !!arr1.some(n => arr2.includes(n));

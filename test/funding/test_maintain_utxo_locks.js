@@ -3,7 +3,7 @@ import { deepEqual, rejects } from 'node:assert/strict';
 
 import { makeLnd } from 'mock-lnd';
 
-import { maintainUtxoLocks } from './../../index.js';
+import { maintainUtxoLocks } from '../../index.js';
 
 const method = maintainUtxoLocks;
 

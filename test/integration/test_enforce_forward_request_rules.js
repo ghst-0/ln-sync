@@ -17,7 +17,7 @@ import {
 } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { enforceForwardRequestRules } from './../../index.js';
+import { enforceForwardRequestRules } from '../../index.js';
 
 const capacity = 1e6;
 const delay = ms => new Promise(resolve => {setTimeout(resolve, ms)});

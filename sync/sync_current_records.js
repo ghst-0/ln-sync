@@ -4,7 +4,7 @@ import asyncRetry from 'async/retry.js';
 import { getNetworkGraph, getPeers } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-import { shuffle } from './../arrays/index.js';
+import { shuffle } from '../arrays/index.js';
 import syncChannel from './sync_channel.js';
 import syncChannelPolicy from './sync_channel_policy.js';
 import syncNode from './sync_node.js';

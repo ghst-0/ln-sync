@@ -2,7 +2,7 @@ import test from 'node:test';
 import { deepEqual } from 'node:assert/strict';
 
 import { Transaction } from 'bitcoinjs-lib';
-import transactionRecords from './../../chain/transaction_records.js';
+import transactionRecords from '../../chain/transaction_records.js';
 
 const tests = [
   {

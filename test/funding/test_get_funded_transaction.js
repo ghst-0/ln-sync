@@ -4,7 +4,7 @@ import { deepEqual, rejects } from 'node:assert/strict';
 import { makeLnd } from 'mock-lnd';
 import { Transaction } from 'bitcoinjs-lib';
 
-import { getFundedTransaction } from './../../index.js';
+import { getFundedTransaction } from '../../index.js';
 
 const method = getFundedTransaction;
 

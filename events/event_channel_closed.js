@@ -1,4 +1,4 @@
-import { markChannelClosed } from './../sync/index.js';
+import { markChannelClosed } from '../sync/index.js';
 
 /** Channel closed event
 

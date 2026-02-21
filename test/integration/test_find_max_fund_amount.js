@@ -5,7 +5,7 @@ import asyncRetry from 'async/retry.js';
 import { createChainAddress, getLockedUtxos, getUtxos } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { getMaxFundAmount } from './../../index.js';
+import { getMaxFundAmount } from '../../index.js';
 
 const feeTokensPerVbyte = 3;
 const interval = 10;

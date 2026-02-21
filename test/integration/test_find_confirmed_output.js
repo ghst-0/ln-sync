@@ -5,7 +5,7 @@ import asyncRetry from 'async/retry.js';
 import { createChainAddress, getUtxos, sendToChainAddress } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { findConfirmedOutput } from './../../index.js';
+import { findConfirmedOutput } from '../../index.js';
 
 const count = 200;
 const delay = ms => new Promise(resolve => {setTimeout(resolve, ms)});

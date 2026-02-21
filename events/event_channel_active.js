@@ -1,6 +1,6 @@
 import asyncRetry from 'async/retry.js';
 
-import { syncLocalChannel } from './../sync/index.js';
+import { syncLocalChannel } from '../sync/index.js';
 
 const interval = () => Math.round(Math.random() * 1e5);
 const times = 20;

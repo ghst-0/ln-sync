@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import { getGraphNode } from './../nodes/index.js';
+import { getGraphNode } from '../nodes/index.js';
 
 const shortKey = key => key.slice(0, 16);
 

@@ -5,7 +5,7 @@ import { addPeer, subscribeToOpenRequests } from 'ln-service';
 import asyncRetry from 'async/retry.js';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { acceptsChannelOpen } from './../../index.js';
+import { acceptsChannelOpen } from '../../index.js';
 
 const capacity = 1e6;
 const interval = 10;

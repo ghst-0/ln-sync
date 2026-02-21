@@ -3,7 +3,7 @@ import { deepEqual, fail } from 'node:assert/strict';
 
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { getNetwork } from './../../index.js';
+import { getNetwork } from '../../index.js';
 
 const tests = [
   {

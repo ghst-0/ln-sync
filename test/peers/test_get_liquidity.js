@@ -6,8 +6,8 @@ import {
   liquidityChannelsResponse as channels,
   getInfoResponse,
   getNodeInfoResponse
-} from './../fixtures/index.js';
-import { getLiquidity } from './../../index.js';
+} from '../fixtures/index.js';
+import { getLiquidity } from '../../index.js';
 
 const makeLnd = () => {
   return {

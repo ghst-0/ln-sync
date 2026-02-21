@@ -5,7 +5,7 @@ import asyncRetry from 'async/retry.js';
 import { closeChannel, openChannel } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { subscribeToPendingChannels } from './../../index.js';
+import { subscribeToPendingChannels } from '../../index.js';
 
 const capacity = 1e6;
 const count = 100;

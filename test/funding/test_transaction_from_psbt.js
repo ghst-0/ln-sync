@@ -2,7 +2,7 @@ import test from 'node:test';
 import { deepEqual, throws } from 'node:assert/strict';
 
 import * as tinysecp from 'tiny-secp256k1';
-import method from './../../funding/transaction_from_psbt.js';
+import method from '../../funding/transaction_from_psbt.js';
 
 const tests = [
   {

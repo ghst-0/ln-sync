@@ -1,7 +1,7 @@
 import test from 'node:test';
 import { deepEqual, throws } from 'node:assert/strict';
 
-import method from './../../funding/bech32_address_as_script.js';
+import method from '../../funding/bech32_address_as_script.js';
 
 const tests = [
   {

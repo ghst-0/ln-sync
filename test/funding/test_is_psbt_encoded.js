@@ -3,7 +3,7 @@ import { deepEqual, throws } from 'node:assert/strict';
 
 import * as tinysecp from 'tiny-secp256k1';
 
-import method from './../../funding/is_psbt_encoded.js';
+import method from '../../funding/is_psbt_encoded.js';
 
 const tests = [
   {

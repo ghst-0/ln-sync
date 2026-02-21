@@ -2,7 +2,7 @@ import test from 'node:test';
 import { deepEqual, rejects } from 'node:assert/strict';
 import { makeLnd } from 'mock-lnd';
 
-import { askForFeeRate } from './../../index.js';
+import { askForFeeRate } from '../../index.js';
 
 const method = askForFeeRate;
 

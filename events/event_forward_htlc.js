@@ -1,4 +1,4 @@
-import { updateForwardHtlc } from './../sync/index.js';
+import { updateForwardHtlc } from '../sync/index.js';
 
 /** Event forward HTLC
 

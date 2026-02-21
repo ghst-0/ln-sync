@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import { getGraphPair } from './../nodes/index.js';
+import { getGraphPair } from '../nodes/index.js';
 
 const asDisplay = rate => `${(rate / 1e4).toFixed(2)}% (${rate})`;
 const {isArray} = Array;
