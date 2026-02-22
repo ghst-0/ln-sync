@@ -11,7 +11,7 @@ const size = 2;
 test('Peer is connected', async () => {
   const {kill, nodes} = (await spawnLightningCluster({size}));
 
-  const [{lnd}, target] = nodes;
+  const [{generate, lnd}, target] = nodes;
 
   try {
     await rejects(
@@ -21,6 +21,7 @@ test('Peer is connected', async () => {
     );
 
     await asyncRetry({}, async () => {
+      await generate({});
       await addPeer({lnd, public_key: target.id, socket: target.socket});
     });
 
