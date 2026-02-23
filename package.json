@@ -7,20 +7,20 @@
   "type": "module",
   "dependencies": {
     "async": "3.2.6",
-    "asyncjs-util": "workspace*",
+    "asyncjs-util": "workspace:asyncjs-util",
     "bech32": "2.0.0",
     "bitcoinjs-lib": "6.1.7",
-    "bolt07": "workspace:*",
+    "bolt07": "workspace:bolt07",
     "colorette": "2.0.20",
     "ecpair": "3.0.1",
-    "lightning": "workspace:*",
-    "ln-service": "workspace:*",
+    "lightning": "workspace:lightning",
+    "ln-service": "workspace:ln-service",
     "psbt": "5.0.0",
     "tiny-secp256k1": "2.2.4"
   },
   "devDependencies": {
-    "ln-docker-daemons": "workspace:*",
-    "mock-lnd": "workspace:*",
+    "ln-docker-daemons": "workspace:ln-docker-daemons",
+    "mock-lnd": "workspace:mock-lnd",
     "oxlint": "^1.50.0"
   },
   "engines": {
