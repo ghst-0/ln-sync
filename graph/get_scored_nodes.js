@@ -3,7 +3,7 @@ import { returnResult } from 'asyncjs-util';
 
 const api = 'https://nodes.lightning.computer/availability/v1/';
 const {isArray} = Array;
-const knownNetworks = ['btc', 'btctestnet', 'ltc'];
+const knownNetworks = ['btc', 'btctestnet'];
 
 /** Get scored nodes
 

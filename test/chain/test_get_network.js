@@ -19,7 +19,7 @@ const tests = [
           getInfo: ({}, cbk) => {
             const res = getInfoRes();
 
-            res.chains.push({chain: 'litecoin', network: 'mainnet'});
+            res.chains.push({chain: 'btc', network: 'mainnet'});
 
             return cbk(null, res);
           },
