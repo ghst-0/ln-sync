@@ -2,7 +2,7 @@ import asyncAuto from 'async/auto.js';
 import { getChannels, getNode, getPendingChannels } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-import peerLiquidity from './peer_liquidity.js';
+import { peerLiquidity } from './peer_liquidity.js';
 
 /** Get the rundown on liquidity with a specific peer
 
@@ -21,7 +21,7 @@ import peerLiquidity from './peer_liquidity.js';
     outbound_pending: <Pending Outbound Liquidity Tokens Number>
   }
 */
-export default (args, cbk) => {
+const getPeerLiquidity = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -98,3 +98,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'liquidity'}, cbk));
   });
 };
+
+export { getPeerLiquidity }

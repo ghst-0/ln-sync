@@ -1,7 +1,7 @@
 import test from 'node:test';
 import { deepEqual, throws } from 'node:assert/strict';
 
-import method from '../../funding/bech32_address_as_script.js';
+import { bech32AddressAsScript } from '../../funding/bech32_address_as_script.js';
 
 const tests = [
   {
@@ -27,11 +27,11 @@ const tests = [
 for (const { args, description, error, expected } of tests) {
   test(description, (t, end) => {
     if (error) {
-      throws(() => method(args), new Error(error), 'Error returned');
+      throws(() => bech32AddressAsScript(args), new Error(error), 'Error returned');
 
       return end();
     }
-    const got = method(args);
+    const got = bech32AddressAsScript(args);
 
     deepEqual(got, expected, 'Got expected result');
 

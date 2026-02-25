@@ -19,7 +19,7 @@ const slowConfirmationTarget = 1e3;
     tokens_per_vbyte: <Chain Fee Tokens Per VByte Number>
   }
 */
-export default ({ask, lnd}, cbk) => {
+const askForFeeRate = ({ask, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -115,3 +115,5 @@ export default ({ask, lnd}, cbk) => {
     returnResult({reject, resolve, of: 'rate'}, cbk));
   });
 };
+
+export { askForFeeRate }

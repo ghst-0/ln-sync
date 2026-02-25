@@ -14,7 +14,7 @@ import styling from './log_line_styling.json' with { type: 'json' };
   @returns
   <Subject String>
 */
-export default args => {
+const styledSubject = args => {
   if (args.is_local && args.is_major) {
     return colorette.bold(colorette[styling.colors[args.event]](args.subject));
   }
@@ -25,3 +25,5 @@ export default args => {
 
   return args.subject;
 };
+
+export { styledSubject }

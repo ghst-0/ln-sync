@@ -2,9 +2,9 @@ import EventEmitter from 'node:events';
 import asyncDoUntil from 'async/doUntil.js';
 import { subscribeToChannels, subscribeToGraph } from 'lightning';
 
-import emitError from './emit_error.js';
-import subscribeToForwards from './subscribe_to_forwards.js';
-import syncFromDataEvents from './sync_from_data_events.js';
+import { emitError } from './emit_error.js';
+import { subscribeToForwards } from './subscribe_to_forwards.js';
+import { syncFromDataEvents } from './sync_from_data_events.js';
 
 const subRestartDelayMs = 1000 * 5;
 
@@ -27,7 +27,7 @@ const subRestartDelayMs = 1000 * 5;
     id: <Block Hash Hex String>
   }
 */
-export default ({db, lnd}) => {
+const subscribeToChanges = ({db, lnd}) => {
   if (!db) {
     throw new Error('ExpectedDatabaseToSubscribeToChanges');
   }
@@ -85,3 +85,5 @@ export default ({db, lnd}) => {
 
   return emitter;
 };
+
+export { subscribeToChanges }

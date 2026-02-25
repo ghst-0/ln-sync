@@ -1,4 +1,4 @@
-import changesToRecord from './changes_to_record.js';
+import { changesToRecord } from './changes_to_record.js';
 
 /** Local channel update
 
@@ -79,7 +79,7 @@ import changesToRecord from './changes_to_record.js';
     }
   }
 */
-export default ({channel, record}) => {
+const localChannelUpdate = ({channel, record}) => {
   if (!channel) {
     throw new Error('ExpectedChannelToDeriveLocalChannelUpdate');
   }
@@ -111,3 +111,5 @@ export default ({channel, record}) => {
     },
   });
 };
+
+export { localChannelUpdate }

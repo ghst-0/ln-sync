@@ -3,7 +3,7 @@ import { fundPsbt, signPsbt } from 'ln-service';
 import { returnResult } from 'asyncjs-util';
 import { Transaction } from 'bitcoinjs-lib';
 
-import askForFeeRate from './ask_for_fee_rate.js';
+import { askForFeeRate } from './ask_for_fee_rate.js';
 
 const {fromHex} = Transaction;
 const {isArray} = Array;
@@ -33,7 +33,7 @@ const {isArray} = Array;
     transaction: <Signed Raw Transaction Hex String>
   }
 */
-export default (args, cbk) => {
+const getInternalFundedTransaction = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -93,3 +93,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'funded'}, cbk));
   });
 };
+
+export { getInternalFundedTransaction }

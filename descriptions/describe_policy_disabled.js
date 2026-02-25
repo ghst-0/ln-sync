@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import { getGraphPair } from '../nodes/index.js';
+import { getGraphPair } from '../nodes/get_graph_pair.js';
 
 const {isArray} = Array;
 const isIntersecting = (arr1, arr2) => !!arr1.some(n => arr2.includes(n));
@@ -26,7 +26,7 @@ const shortKey = key => key.slice(0, 16);
     }
   }
 */
-export default (args, cbk) => {
+const describePolicyDisabled = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -80,3 +80,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'description'}, cbk));
   });
 };
+
+export { describePolicyDisabled }

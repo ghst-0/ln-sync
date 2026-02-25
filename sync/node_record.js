@@ -27,7 +27,7 @@ const createRecordRev = 0;
     }
   }
 */
-export default ({node}) => {
+const nodeRecord = ({node}) => {
   if (!node) {
     throw new Error('ExpectedNodeToDeriveNodeRecord');
   }
@@ -44,3 +44,5 @@ export default ({node}) => {
     },
   };
 };
+
+export { nodeRecord }

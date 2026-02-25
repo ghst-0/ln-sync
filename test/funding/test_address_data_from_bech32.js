@@ -1,7 +1,7 @@
 import test from 'node:test';
 import { deepEqual, throws } from 'node:assert/strict';
 
-import method from '../../funding/address_data_from_bech32.js';
+import { addressDataFromBech32 } from '../../funding/address_data_from_bech32.js';
 
 const tests = [
   {
@@ -19,11 +19,11 @@ const tests = [
 for (const { args, description, error, expected } of tests) {
   test(description, (t, end) => {
     if (error) {
-      throws(() => method(args), new Error(error), 'Error returned');
+      throws(() => addressDataFromBech32(args), new Error(error), 'Error returned');
 
       return end();
     }
-    const got = method(args);
+    const got = addressDataFromBech32(args);
 
     got.data = got.data.toString('hex');
 

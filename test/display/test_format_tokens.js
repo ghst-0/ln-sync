@@ -1,7 +1,7 @@
 import test from 'node:test';
 import { equal } from 'node:assert/strict';
 
-import { formatTokens } from '../../index.js';
+import { formatTokens } from '../../display/format_tokens.js';
 
 const asHex = str => Buffer.from(str).toString('hex');
 

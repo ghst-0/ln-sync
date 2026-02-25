@@ -2,8 +2,8 @@ import asyncAuto from 'async/auto.js';
 import { getChannels } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-import keyForRecord from './key_for_record.js';
-import localChannelUpdate from './local_channel_update.js';
+import { keyForRecord } from './key_for_record.js';
+import { localChannelUpdate } from './local_channel_update.js';
 
 const createRecordRev = 0;
 const fresh = ['id'];
@@ -76,7 +76,7 @@ const type = 'local_channel';
     }
   }
 */
-export default (args, cbk) => {
+const syncLocalChannel = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -308,3 +308,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'updates'}, cbk));
   });
 };
+
+export { syncLocalChannel }

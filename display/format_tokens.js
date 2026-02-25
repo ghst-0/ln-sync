@@ -18,7 +18,7 @@ const tokensAsBigTokens = tokens => (tokens / 1e8).toFixed(8);
     display: <Display Formatted Tokens String>
   }
 */
-export default args => {
+const formatTokens = args => {
   // Exit early and display nothing when there are no tokens
   if (!args.tokens) {
     return {display: emptyTokens};
@@ -43,3 +43,5 @@ export default args => {
 
   return {display: bold(green(tokensAsBigTokens(args.tokens)))};
 };
+
+export { formatTokens }

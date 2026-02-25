@@ -4,7 +4,7 @@ import asyncMapLimit from 'async/mapLimit.js';
 import { getPayment } from 'ln-service';
 import { returnResult } from 'asyncjs-util';
 
-import getAllInvoices from './get_all_invoices.js';
+import { getAllInvoices } from './get_all_invoices.js';
 
 const flatten = arr => [].concat(...arr);
 const {isArray} = Array;
@@ -93,7 +93,7 @@ const notFound = 404;
     }]
   }
 */
-export default ({after, lnds}, cbk) => {
+const getRebalancePayments = ({after, lnds}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -160,3 +160,5 @@ export default ({after, lnds}, cbk) => {
     returnResult({reject, resolve, of: 'getRebalances'}, cbk));
   });
 };
+
+export { getRebalancePayments }

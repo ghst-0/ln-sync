@@ -22,7 +22,7 @@ import { returnResult } from 'asyncjs-util';
     is_accepted: <Channel Proposal Is Accepted Bool>
   }
 */
-export default (args, cbk) => {
+const acceptsChannelOpen = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -76,3 +76,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'accepted'}, cbk));
   });
 };
+
+export { acceptsChannelOpen }

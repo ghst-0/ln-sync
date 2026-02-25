@@ -27,7 +27,7 @@ const shortKey = key => key.slice(0, 16);
     }
   }
 */
-export default (args, cbk) => {
+const describeMaxHtlcUpdated = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -87,3 +87,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'description'}, cbk));
   });
 };
+
+export { describeMaxHtlcUpdated }

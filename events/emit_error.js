@@ -7,7 +7,7 @@ const {isArray} = Array;
     err: <Error To Emit Object>
   }
 */
-export default ({emitter, err}) => {
+const emitError = ({emitter, err}) => {
   if (!emitter.listenerCount('error')) {
     return;
   }
@@ -18,3 +18,5 @@ export default ({emitter, err}) => {
 
   emitter.emit('error', err);
 };
+
+export { emitError }

@@ -50,7 +50,7 @@ const {isArray} = Array;
     psbt: <Unsigned PSBT Hex String>
   }
 */
-export default (args, cbk) => {
+const fundPsbtDisallowingInputs = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Import ECPair library
@@ -145,3 +145,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'funded'}, cbk));
   });
 };
+
+export { fundPsbtDisallowingInputs }

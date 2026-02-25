@@ -3,9 +3,9 @@ import asyncAuto from 'async/auto.js';
 import { createChainAddress, getPublicKey } from 'ln-service';
 import { returnResult } from 'asyncjs-util';
 
-import getFundedTransaction from './get_funded_transaction.js';
-import { getNetwork } from '../chain/index.js';
-import getTransitRefund from './get_transit_refund.js';
+import { getFundedTransaction } from './get_funded_transaction.js';
+import { getNetwork } from '../chain/get_network.js';
+import { getTransitRefund } from './get_transit_refund.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const familyTemporary = 805;
@@ -47,7 +47,7 @@ const {toOutputScript} = address;
     vout: <Funds Reserved At Output Index Number>
   }
 */
-export default ({ask, lnd, rate, tokens}, cbk) => {
+const reserveTransitFunds = ({ask, lnd, rate, tokens}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -215,3 +215,5 @@ export default ({ask, lnd, rate, tokens}, cbk) => {
     returnResult({reject, resolve, of: 'funding'}, cbk));
   });
 };
+
+export { reserveTransitFunds }

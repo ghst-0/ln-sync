@@ -23,7 +23,7 @@ const feeRateBuffer = 1;
 
   @returns via cbk or Promise
 */
-export default (args, cbk) => {
+const updateChannelFee = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -174,3 +174,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve}, cbk));
   });
 };
+
+export { updateChannelFee }

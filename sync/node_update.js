@@ -1,4 +1,4 @@
-import changesToRecord from './changes_to_record.js';
+import { changesToRecord } from './changes_to_record.js';
 
 /** Node update
 
@@ -60,7 +60,7 @@ import changesToRecord from './changes_to_record.js';
     }
   }
 */
-export default ({node, record}) => {
+const nodeUpdate = ({node, record}) => {
   if (!node) {
     throw new Error('ExpectedNodeoDeriveNodeUpdate');
   }
@@ -86,3 +86,5 @@ export default ({node, record}) => {
     },
   });
 };
+
+export { nodeUpdate }

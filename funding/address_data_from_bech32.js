@@ -15,7 +15,7 @@ import { bech32, bech32m } from 'bech32';
     version: <Address Version Number>
   }
 */
-export default ({address}) => {
+const addressDataFromBech32 = ({address}) => {
   // Support v0 stye bech32 addresses
   try {
     const [version, ...data] = bech32.decode(address).words;
@@ -29,3 +29,5 @@ export default ({address}) => {
 
   return {version, data: Buffer.from(bech32m.fromWords(data))};
 };
+
+export { addressDataFromBech32 }

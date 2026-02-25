@@ -14,7 +14,7 @@
     }
   }
 */
-export default ({height, id}) => {
+const describeBlockAdded = ({height, id}) => {
   return {
     description: {
       action: `advanced to height ${height}`,
@@ -23,3 +23,5 @@ export default ({height, id}) => {
     },
   };
 };
+
+export { describeBlockAdded }

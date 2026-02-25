@@ -4,7 +4,7 @@ import { getChainTransactions, getChannels, getClosedChannels, getNode, getPendi
 import { returnResult } from 'asyncjs-util';
 import { Transaction } from 'bitcoinjs-lib';
 
-import transactionRecords from './transaction_records.js';
+import { transactionRecords } from './transaction_records.js';
 
 const {fromHex} = Transaction;
 const uniq = arr => Array.from(new Set(arr));
@@ -113,7 +113,7 @@ const uniq = arr => Array.from(new Set(arr));
     [tx]: <Transaction Id Hex String>
   }
 */
-export default (args, cbk) => {
+const getTransactionRecord = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -406,3 +406,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'details'}, cbk));
   });
 };
+
+export { getTransactionRecord }

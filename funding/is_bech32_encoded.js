@@ -1,4 +1,4 @@
-import addressDataFromBech32 from './address_data_from_bech32.js';
+import { addressDataFromBech32 } from './address_data_from_bech32.js';
 
 /** Determine if a string is bech32 encoded
 
@@ -11,10 +11,12 @@ import addressDataFromBech32 from './address_data_from_bech32.js';
     is_bech32: <String is Bech32 Encoded Bool>
   }
 */
-export default ({input}) => {
+const isBech32Encoded = ({input}) => {
   try {
     return {is_bech32: !!addressDataFromBech32({address: input})};
   } catch {
     return {is_bech32: false};
   }
 };
+
+export { isBech32Encoded }

@@ -1,4 +1,4 @@
-import { syncBlock } from '../sync/index.js';
+import { syncBlock } from '../sync/sync_block.js';
 
 /** Handle a block mined event
 
@@ -17,7 +17,7 @@ import { syncBlock } from '../sync/index.js';
 
   @returns via Promise
 */
-export default async ({db, emitter, height, id}) => {
+const eventBlockMined = async ({db, emitter, height, id}) => {
   const {created} = await syncBlock({db, height, id});
 
   if (!created) {
@@ -26,3 +26,5 @@ export default async ({db, emitter, height, id}) => {
 
   return emitter.emit('block_added', {height, id});
 };
+
+export { eventBlockMined }

@@ -24,7 +24,7 @@ const slowConfirmationTarget = 1000;
     is_external: <Use External Funding Bool>
   }
 */
-export default ({ask, lnd, outputs}, cbk) => {
+const isExternalFunding = ({ask, lnd, outputs}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -125,3 +125,5 @@ export default ({ask, lnd, outputs}, cbk) => {
     returnResult({reject, resolve, of: 'isExternal'}, cbk));
   });
 };
+
+export { isExternalFunding }

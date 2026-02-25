@@ -1,7 +1,7 @@
 import test from 'node:test';
 import { deepEqual, throws } from 'node:assert/strict';
 
-import method from '../../funding/is_bech32_encoded.js';
+import { isBech32Encoded } from '../../funding/is_bech32_encoded.js';
 
 const tests = [
   {
@@ -21,9 +21,9 @@ const tests = [
 for (const { args, description, error, expected } of tests) {
   test(description, (t, end) => {
     if (error) {
-      throws(() => method(args), new Error(error), 'Error returned');
+      throws(() => isBech32Encoded(args), new Error(error), 'Error returned');
     } else {
-      const got = method(args);
+      const got = isBech32Encoded(args);
 
       deepEqual(got, expected, 'Got expected result');
     }

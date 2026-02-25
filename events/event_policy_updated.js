@@ -1,7 +1,8 @@
 import asyncEach from 'async/each.js';
 import asyncRetry from 'async/retry.js';
 
-import { syncChannelPolicy, syncNode } from '../sync/index.js';
+import { syncChannelPolicy } from '../sync/sync_channel_policy.js';
+import { syncNode } from '../sync/sync_node.js';
 
 const interval = () => Math.round(Math.random() * 1e5);
 const times = 1e3;
@@ -19,7 +20,7 @@ const times = 1e3;
 
   @returns via Promise
 */
-export default async (args) => {
+const eventPolicyUpdated = async (args) => {
   const {id} = args;
   const [key] = args.public_keys;
 
@@ -111,3 +112,5 @@ export default async (args) => {
     }
   });
 };
+
+export { eventPolicyUpdated }

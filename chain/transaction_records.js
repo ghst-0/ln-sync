@@ -65,7 +65,7 @@ const idFromHash = hash => hash.reverse().toString('hex');
     }]
   }
 */
-export default ({ended, id, original, pending, txs, vout}) => {
+const transactionRecords = ({ended, id, original, pending, txs, vout}) => {
   const records = [];
   const spendClosing = pending.find(n => n.close_transaction_id === id);
   const spendTx = txs.find(tx => tx.id === id);
@@ -178,3 +178,5 @@ export default ({ended, id, original, pending, txs, vout}) => {
 
   return {records};
 };
+
+export { transactionRecords }

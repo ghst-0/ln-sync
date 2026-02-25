@@ -2,9 +2,9 @@ import asyncAuto from 'async/auto.js';
 import { getNode } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-import keyForRecord from './key_for_record.js';
-import nodeRecord from './node_record.js';
-import nodeUpdate from './node_update.js';
+import { keyForRecord } from './key_for_record.js';
+import { nodeRecord } from './node_record.js';
+import { nodeUpdate } from './node_update.js';
 
 const fresh = ['public_key'];
 const hexAsBuffer = hex => Buffer.from(hex, 'hex');
@@ -50,7 +50,7 @@ const type = 'node';
     }
   }
 */
-export default ({db, id, lnd}, cbk) => {
+const syncNode = ({db, id, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -223,3 +223,5 @@ export default ({db, id, lnd}, cbk) => {
     returnResult({reject, resolve, of: 'updates'}, cbk));
   });
 };
+
+export { syncNode }

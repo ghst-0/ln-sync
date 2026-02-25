@@ -1,8 +1,8 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import changesToRecord from './changes_to_record.js';
-import keyForRecord from './key_for_record.js';
+import { changesToRecord } from './changes_to_record.js';
+import { keyForRecord } from './key_for_record.js';
 
 const createRecordRev = 1;
 const fresh = ['in_payment'];
@@ -65,7 +65,7 @@ const type = 'receive_htlc';
     }
   }
 */
-export default (args, cbk) => {
+const updateReceiveHtlc = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -244,3 +244,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'updates'}, cbk));
   });
 };
+
+export { updateReceiveHtlc }

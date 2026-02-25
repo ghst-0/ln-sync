@@ -35,7 +35,7 @@ const transitKeyFamily = 805;
     refund: <Fully Signed Refund Transaction Hex String>
   }
 */
-export default (args, cbk) => {
+const getTransitRefund = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Accepted networks are ones known to BitcoinJS
@@ -164,3 +164,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'refundTransaction'}, cbk));
   });
 };
+
+export { getTransitRefund }

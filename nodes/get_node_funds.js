@@ -3,7 +3,7 @@ import { getChainTransactions, getChannels, getLockedUtxos, getPendingChannels, 
 import { returnResult } from 'asyncjs-util';
 import { Transaction } from 'bitcoinjs-lib';
 
-import detailedBalances from './detailed_balances.js';
+import { detailedBalances } from './detailed_balances.js';
 
 const {fromHex} = Transaction;
 
@@ -27,7 +27,7 @@ const {fromHex} = Transaction;
     [utxos_count]: <Total UTXOs Count Number>
   }
 */
-export default (args, cbk) => {
+const getNodeFunds = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -146,3 +146,7 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'balance'}, cbk));
   });
 };
+
+
+export { getNodeFunds }
+

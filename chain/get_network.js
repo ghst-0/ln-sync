@@ -20,7 +20,7 @@ const reversedBytes = hex => Buffer.from(hex, 'hex').reverse().toString('hex');
     network: <Network Name String>
   }
 */
-export default ({lnd}, cbk) => {
+const getNetwork = ({lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -57,3 +57,5 @@ export default ({lnd}, cbk) => {
     returnResult({reject, resolve, of: 'network'}, cbk));
   });
 };
+
+export { getNetwork }

@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import { getGraphNode } from '../nodes/index.js';
+import { getGraphNode } from '../nodes/get_graph_node.js';
 
 const shortKey = key => key.slice(0, 16);
 
@@ -23,7 +23,7 @@ const shortKey = key => key.slice(0, 16);
     }
   }
 */
-export default ({db, from, node}, cbk) => {
+const describePeerDisconnected = ({db, from, node}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -64,3 +64,5 @@ export default ({db, from, node}, cbk) => {
     returnResult({reject, resolve, of: 'description'}, cbk));
   });
 };
+
+export { describePeerDisconnected }

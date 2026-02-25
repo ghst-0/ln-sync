@@ -5,7 +5,7 @@ import { createPsbt, decodePsbt, extendPsbt, unextractTransaction } from 'psbt';
 import { returnResult } from 'asyncjs-util';
 import * as tinysecp from 'tiny-secp256k1';
 
-import getMaxFundAmount from './get_max_fund_amount.js';
+import { getMaxFundAmount } from './get_max_fund_amount.js';
 
 const allowedAttributes = new Set(['non_witness_utxo', 'witness_utxo']);
 const bufferAsHex = buffer => buffer.toString('hex');
@@ -61,7 +61,7 @@ const spendAsOutpoint = n => `${n.hash.reverse().toString('hex')}:${n.index}`;
     psbt: <Partially Signed PSBT Hex String>
   }
 */
-export default ({lnd, psbt, utxos}, cbk) => {
+const signAndFundPsbt = ({lnd, psbt, utxos}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Import ECPair library
@@ -326,3 +326,5 @@ export default ({lnd, psbt, utxos}, cbk) => {
     returnResult({reject, resolve, of: 'result'}, cbk));
   });
 };
+
+export { signAndFundPsbt }

@@ -3,10 +3,10 @@ import asyncEach from 'async/each.js';
 import { getChannel } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-import keyForRecord from './key_for_record.js';
-import channelRecord from './channel_record.js';
-import channelUpdate from './channel_update.js';
-import syncNode from './sync_node.js';
+import { keyForRecord } from './key_for_record.js';
+import { channelRecord } from './channel_record.js';
+import { channelUpdate } from './channel_update.js';
+import { syncNode } from './sync_node.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const fresh = ['id'];
@@ -37,7 +37,7 @@ const type = 'channel';
     }
   }
 */
-export default ({db, id, lnd}, cbk) => {
+const syncChannel = ({db, id, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -187,3 +187,5 @@ export default ({db, id, lnd}, cbk) => {
     returnResult({reject, resolve, of: 'updates'}, cbk));
   });
 };
+
+export { syncChannel }

@@ -2,9 +2,9 @@ import asyncAuto from 'async/auto.js';
 import { getChannel } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-import keyForRecord from './key_for_record.js';
-import policyRecord from './policy_record.js';
-import policyUpdate from './policy_update.js';
+import { keyForRecord } from './key_for_record.js';
+import { policyRecord } from './policy_record.js';
+import { policyUpdate } from './policy_update.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const fresh = ['id'];
@@ -57,7 +57,7 @@ const type = 'policy';
     }
   }
 */
-export default (args, cbk) => {
+const syncChannelPolicy = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -236,3 +236,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'updates'}, cbk));
   });
 };
+
+export { syncChannelPolicy }

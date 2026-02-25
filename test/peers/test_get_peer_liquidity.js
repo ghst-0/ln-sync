@@ -1,13 +1,11 @@
 import test from 'node:test';
 import { equal, rejects } from 'node:assert/strict';
 
-import {
-  chanInfoResponse,
-  listChannelsResponse,
-  getNodeInfoResponse,
-  pendingChannelsResponse
-} from '../fixtures/index.js';
-import { getPeerLiquidity } from '../../index.js';
+import chanInfoResponse from '../fixtures/chan_info_response.json' with { type: 'json' };
+import listChannelsResponse from '../fixtures/list_channels_response.json' with { type: 'json' };
+import getNodeInfoResponse from '../fixtures/get_node_info_response.json' with { type: 'json' };
+import pendingChannelsResponse from '../fixtures/pending_channels_response.json' with { type: 'json' };
+import { getPeerLiquidity } from '../../peers/get_peer_liquidity.js';
 
 const tests = [
   {

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import { deepEqual, throws } from 'node:assert/strict';
 
-import method from '../../funding/is_base64_encoded.js';
+import { isBase64Encoded } from '../../funding/is_base64_encoded.js';
 
 const tests = [
   {
@@ -24,9 +24,9 @@ const tests = [
 for (const { args, description, error, expected } of tests) {
   test(description, (t, end) => {
     if (error) {
-      throws(() => method(args), new Error(error), 'Error returned');
+      throws(() => isBase64Encoded(args), new Error(error), 'Error returned');
     } else {
-      const got = method(args);
+      const got = isBase64Encoded(args);
 
       deepEqual(got, expected, 'Got expected result');
     }

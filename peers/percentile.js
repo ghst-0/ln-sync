@@ -17,7 +17,7 @@ const topOfRange = 1;
     top: <Top Percentile Number>
   }
 */
-export default ({above, tokens}) => {
+const percentile = ({above, tokens}) => {
   // Exit early when asking for a percentile on no values
   if (tokens.length === 0) {
     return {top: defaultValue};
@@ -52,3 +52,5 @@ export default ({above, tokens}) => {
 
   return {top: value + array[stopIndex] * adjust};
 };
+
+export { percentile }

@@ -1,8 +1,10 @@
 import test from 'node:test';
 import { rejects } from 'node:assert/strict';
 
-import { chanInfoResponse, pendingChannelsResponse } from '../fixtures/index.js';
-import updateChannelFee from '../../peers/update_channel_fee.js';
+import chanInfoResponse from '../fixtures/chan_info_response.json' with { type: 'json' };
+import pendingChannelsResponse from '../fixtures/pending_channels_response.json' with { type: 'json' };
+
+import { updateChannelFee } from '../../peers/update_channel_fee.js';
 
 const makeLnd = overrides => {
   return {

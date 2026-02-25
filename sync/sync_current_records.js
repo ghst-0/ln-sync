@@ -4,11 +4,11 @@ import asyncRetry from 'async/retry.js';
 import { getNetworkGraph, getPeers } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-import { shuffle } from '../arrays/index.js';
-import syncChannel from './sync_channel.js';
-import syncChannelPolicy from './sync_channel_policy.js';
-import syncNode from './sync_node.js';
-import syncPeer from './sync_peer.js';
+import { shuffle } from '../arrays/shuffle.js';
+import { syncChannel } from './sync_channel.js';
+import { syncChannelPolicy } from './sync_channel_policy.js';
+import { syncNode } from './sync_node.js';
+import { syncPeer } from './sync_peer.js';
 
 const flatten = arr => [].concat(...arr);
 const interval = () => Math.round(Math.random() * 1e4);
@@ -21,7 +21,7 @@ const times = 1e3;
     lnd: <Authenticated LND API Object>
   }
 */
-export default ({db, lnd}, cbk) => {
+const syncCurrentRecords = ({db, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -119,3 +119,5 @@ export default ({db, lnd}, cbk) => {
     returnResult({reject, resolve}, cbk));
   });
 };
+
+export { syncCurrentRecords }

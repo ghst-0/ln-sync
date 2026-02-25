@@ -1,6 +1,6 @@
 import asyncRetry from 'async/retry.js';
 
-import { syncNode } from '../sync/index.js';
+import { syncNode } from '../sync/sync_node.js';
 
 const interval = () => Math.round(Math.random() * 1e5);
 const times = 1e3;
@@ -16,7 +16,7 @@ const times = 1e3;
 
   @returns via Promise
 */
-export default async ({db, emitter, id, lnd}) => {
+const eventNodeUpdated = async ({db, emitter, id, lnd}) => {
   return await asyncRetry({interval, times}, async () => {
     const synced = await syncNode({db, id, lnd});
 
@@ -62,3 +62,5 @@ export default async ({db, emitter, id, lnd}) => {
     }
   });
 };
+
+export { eventNodeUpdated }

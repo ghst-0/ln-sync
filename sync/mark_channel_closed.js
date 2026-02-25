@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import keyForRecord from './key_for_record.js';
+import { keyForRecord } from './key_for_record.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const table = 'channels';
@@ -24,7 +24,7 @@ const type = 'channel';
     public_keys: [<Public Key Hex String>]
   }
 */
-export default ({db, height, id}, cbk) => {
+const markChannelClosed = ({db, height, id}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -82,3 +82,5 @@ export default ({db, height, id}, cbk) => {
     returnResult({reject, resolve, of: 'updated'}, cbk));
   });
 };
+
+export { markChannelClosed }

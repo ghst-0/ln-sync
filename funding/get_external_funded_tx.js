@@ -4,9 +4,9 @@ import { returnResult } from 'asyncjs-util';
 import * as tinysecp from 'tiny-secp256k1';
 import { Transaction } from 'bitcoinjs-lib';
 
-import isBech32Encoded from './is_bech32_encoded.js';
-import transactionFromPsbt from './transaction_from_psbt.js';
-import validateTransactionInput from './validate_transaction_input.js';
+import { isBech32Encoded } from './is_bech32_encoded.js';
+import { transactionFromPsbt } from './transaction_from_psbt.js';
+import { validateTransactionInput } from './validate_transaction_input.js';
 
 const base64AsHex = base64 => Buffer.from(base64, 'base64').toString('hex');
 const {fromHex} = Transaction;
@@ -35,7 +35,7 @@ const tokAsBigUnit = tokens => (tokens / 1e8).toFixed(8);
     transaction: <Signed Raw Transaction Hex String>
   }
 */
-export default ({ask, outputs}, cbk) => {
+const getExternalFundedTransaction = ({ask, outputs}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Import ECPair library
@@ -135,3 +135,5 @@ export default ({ask, outputs}, cbk) => {
     returnResult({reject, resolve, of: 'funding'}, cbk));
   });
 };
+
+export { getExternalFundedTransaction }

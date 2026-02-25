@@ -24,7 +24,7 @@ const table = 'peers';
     }]
   }
 */
-export default ({db, id}, cbk) => {
+const getNodePeers = ({db, id}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -64,3 +64,5 @@ export default ({db, id}, cbk) => {
     returnResult({reject, resolve, of: 'peers'}, cbk));
   });
 };
+
+export { getNodePeers }

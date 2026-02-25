@@ -1,5 +1,5 @@
 import EventEmitter from 'node:events';
-import { subscribeToForwards } from 'lightning';
+import { subscribeToForwards as ln_subscribeToForwards } from 'lightning';
 
 /** Subscribe to HTLC forwarding events
 
@@ -12,11 +12,13 @@ import { subscribeToForwards } from 'lightning';
     forwards: <Forwards EventEmitter Object>
   }
 */
-export default ({lnd}) => {
+const subscribeToForwards = ({lnd}) => {
   try {
-    return {forwards: subscribeToForwards({lnd})};
+    return {forwards: ln_subscribeToForwards({lnd})};
   } catch {
     // Return a dummy eventEmitter when subscribeToForwards is not supported
     return {forwards: new EventEmitter()};
   }
 };
+
+export { subscribeToForwards }

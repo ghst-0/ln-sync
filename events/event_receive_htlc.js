@@ -1,6 +1,6 @@
 import asyncRetry from 'async/retry.js';
 
-import { updateReceiveHtlc } from '../sync/index.js';
+import { updateReceiveHtlc } from '../sync/update_receive_htlc.js';
 
 const interval = 1e3;
 const times = 1e3;
@@ -20,7 +20,7 @@ const times = 1e3;
     public_key: <Received On Node With Public Key Hex String>
   }
 */
-export default async args => {
+const eventReceiveHtlc = async args => {
   return await asyncRetry({interval, times}, async () => {
     const synced = await updateReceiveHtlc({
       at: args.at,
@@ -53,3 +53,5 @@ export default async args => {
     }
   });
 };
+
+export { eventReceiveHtlc }

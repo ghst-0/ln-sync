@@ -44,7 +44,7 @@ const sumOf = arr => arr.reduce((sum, n) => sum + n, Number());
     }]
   }
 */
-export default ({delay, lnd}) => {
+const subscribeToPendingChannels = ({delay, lnd}) => {
   const emitter = new EventEmitter();
   const state = {};
 
@@ -116,3 +116,5 @@ export default ({delay, lnd}) => {
 
   return emitter;
 };
+
+export { subscribeToPendingChannels }

@@ -2,15 +2,15 @@ import asyncAuto from 'async/auto.js';
 import { getWalletInfo } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-import emitError from './emit_error.js';
-import eventChannelActive from './event_channel_active.js';
-import eventChannelClosed from './event_channel_closed.js';
-import eventCreateChannel from './event_create_channel.js';
-import eventForwardHtlc from './event_forward_htlc.js';
-import eventNodeUpdated from './event_node_updated.js';
-import eventPaymentHtlc from './event_payment_htlc.js';
-import eventPolicyUpdated from './event_policy_updated.js';
-import eventReceiveHtlc from './event_receive_htlc.js';
+import { emitError } from './emit_error.js';
+import { eventChannelActive } from './event_channel_active.js';
+import { eventChannelClosed } from './event_channel_closed.js';
+import { eventCreateChannel } from './event_create_channel.js';
+import { eventForwardHtlc } from './event_forward_htlc.js';
+import { eventNodeUpdated } from './event_node_updated.js';
+import { eventPaymentHtlc } from './event_payment_htlc.js';
+import { eventPolicyUpdated } from './event_policy_updated.js';
+import { eventReceiveHtlc } from './event_receive_htlc.js';
 
 const delay = ms => new Promise(resolve => {setTimeout(resolve, ms)});
 const flutterDelayMs = 1000 * 90;
@@ -28,7 +28,7 @@ const flutterDelayMs = 1000 * 90;
 
   @returns via cbk or Promise
 */
-export default (args, cbk) => {
+const syncFromDataEvents = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -248,3 +248,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve}, cbk));
   });
 };
+
+export { syncFromDataEvents }

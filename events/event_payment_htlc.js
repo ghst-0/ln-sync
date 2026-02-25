@@ -1,6 +1,6 @@
 import asyncRetry from 'async/retry.js';
 
-import { updatePaymentHtlc } from '../sync/index.js';
+import { updatePaymentHtlc } from '../sync/update_payment_htlc.js';
 
 const interval = 200;
 const times = 1e3;
@@ -22,7 +22,7 @@ const times = 1e3;
 
   @returns via Promise
 */
-export default async args => {
+const eventPaymentHtlc = async args => {
   return await asyncRetry({interval, times}, async () => {
     const synced = await updatePaymentHtlc({
       at: args.at,
@@ -61,3 +61,5 @@ export default async args => {
     }
   });
 };
+
+export { eventPaymentHtlc }

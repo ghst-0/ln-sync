@@ -14,7 +14,7 @@ import styling from './log_line_styling.json' with { type: 'json' };
   @returns
   <Action String>
 */
-export default args => {
+const styledAction = args => {
   if (args.is_local && args.is_major) {
     return colorette.bold(colorette[styling.colors[args.event]](args.action));
   }
@@ -25,3 +25,4 @@ export default args => {
 
   return colorette[styling.colors[args.event]](args.action);
 };
+export { styledAction }

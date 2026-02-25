@@ -1,4 +1,4 @@
-import { updateForwardHtlc } from '../sync/index.js';
+import { updateForwardHtlc } from '../sync/update_forward_htlc.js';
 
 /** Event forward HTLC
 
@@ -20,7 +20,7 @@ import { updateForwardHtlc } from '../sync/index.js';
     [timeout]: <Forward CLTV Timeout Height Number>
   }
 */
-export default async (args) => {
+const eventForwardHtlc = async (args) => {
   const synced = await updateForwardHtlc({
     at: args.at,
     db: args.db,
@@ -84,3 +84,5 @@ export default async (args) => {
     });
   }
 };
+
+export { eventForwardHtlc }

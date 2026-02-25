@@ -12,10 +12,12 @@ import { decodePsbt } from 'psbt';
     is_psbt: <String is PSBT Encoded Bool>
   }
 */
-export default ({ecp, input}) => {
+const isPsbtEncoded = ({ecp, input}) => {
   try {
     return {is_psbt: !!decodePsbt({ecp, psbt: input})};
   } catch {
     return {is_psbt: false};
   }
 };
+
+export { isPsbtEncoded }

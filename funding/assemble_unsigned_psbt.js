@@ -44,7 +44,7 @@ const sumOf = arr => arr.reduce((sum, n) => sum + n, 0);
     psbt: <Unsigned Funding Transaction PSBT Hex String>
   }
 */
-export default ({capacity, proposed, rate}, cbk) => {
+const assembleUnsignedPsbt = ({capacity, proposed, rate}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Import ECPair library
@@ -175,3 +175,5 @@ export default ({capacity, proposed, rate}, cbk) => {
     returnResult({reject, resolve, of: 'funding'}, cbk));
   });
 };
+
+export { assembleUnsignedPsbt }

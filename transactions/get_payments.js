@@ -1,6 +1,6 @@
 import asyncAuto from 'async/auto.js';
 import asyncUntil from 'async/until.js';
-import { getPayments } from 'ln-service';
+import { getPayments as ln_getPayments } from 'ln-service';
 import { returnResult } from 'asyncjs-util';
 
 const defaultLimit = 250;
@@ -85,7 +85,7 @@ const defaultLimit = 250;
     }]
   }
 */
-export default ({after, lnd}, cbk) => {
+const getPayments = ({after, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -105,7 +105,7 @@ export default ({after, lnd}, cbk) => {
         return asyncUntil(
           cbk => cbk(null, token === false),
           cbk => {
-            return getPayments({
+            return ln_getPayments({
               lnd,
               token,
               limit: token ? undefined : defaultLimit,
@@ -143,3 +143,5 @@ export default ({after, lnd}, cbk) => {
     returnResult({reject, resolve, of: 'getPayments'}, cbk));
   });
 };
+
+export { getPayments }

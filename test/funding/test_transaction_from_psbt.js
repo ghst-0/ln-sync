@@ -2,7 +2,8 @@ import test from 'node:test';
 import { deepEqual, throws } from 'node:assert/strict';
 
 import * as tinysecp from 'tiny-secp256k1';
-import method from '../../funding/transaction_from_psbt.js';
+
+import { transactionFromPsbt } from '../../funding/transaction_from_psbt.js';
 
 const tests = [
   {
@@ -37,9 +38,9 @@ for (const { args, description, error, expected } of tests) {
     args.ecp = ecp;
 
     if (error) {
-      throws(() => method(args), new Error(error), 'Error returned');
+      throws(() => transactionFromPsbt(args), new Error(error), 'Error returned');
     } else {
-      const got = method(args);
+      const got = transactionFromPsbt(args);
 
       deepEqual(got, expected, 'Got expected result');
     }

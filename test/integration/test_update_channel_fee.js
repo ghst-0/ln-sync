@@ -5,7 +5,7 @@ import asyncRetry from 'async/retry.js';
 import { getChannel, getChannels, openChannel } from 'ln-service';
 import { spawnLightningCluster } from 'ln-docker-daemons';
 
-import { updateChannelFee } from '../../index.js';
+import { updateChannelFee } from '../../peers/update_channel_fee.js';
 
 const capacity = 1e6;
 const interval = 10;

@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import { getGraphPair } from '../nodes/index.js';
+import { getGraphPair } from '../nodes/get_graph_pair.js';
 
 const bigUnits = tokens => tokens ? (tokens / 1e8).toFixed(8) : String();
 const short = key => key.slice(0, 16);
@@ -22,7 +22,7 @@ const short = key => key.slice(0, 16);
     }
   }
 */
-export default ({db, id}, cbk) => {
+const describeChannelClosed = ({db, id}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -63,3 +63,5 @@ export default ({db, id}, cbk) => {
     returnResult({reject, resolve, of: 'description'}, cbk));
   });
 };
+
+export { describeChannelClosed }

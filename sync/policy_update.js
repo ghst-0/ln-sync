@@ -1,4 +1,4 @@
-import changesToRecord from './changes_to_record.js';
+import { changesToRecord } from './changes_to_record.js';
 
 /** Policy update
 
@@ -79,7 +79,7 @@ import changesToRecord from './changes_to_record.js';
     }
   }
 */
-export default args => {
+const policyUpdate = args => {
   if (!args.channel) {
     throw new Error('ExpectedChannelToDerivePolicyUpdate');
   }
@@ -122,3 +122,5 @@ export default args => {
     },
   });
 };
+
+export { policyUpdate }

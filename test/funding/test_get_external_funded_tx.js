@@ -2,7 +2,8 @@ import test from 'node:test';
 import { deepEqual, rejects } from 'node:assert/strict';
 
 import { Transaction } from 'bitcoinjs-lib';
-import method from '../../funding/get_external_funded_tx.js';
+
+import { getExternalFundedTransaction } from '../../funding/get_external_funded_tx.js';
 
 const makeArgs = overrides => {
   const args = {
@@ -88,9 +89,9 @@ const tests = [
 for (const { args, description, error, expected } of tests) {
   test(description, async () => {
     if (error) {
-      await rejects(method(args), error, 'Got expected error');
+      await rejects(getExternalFundedTransaction(args), error, 'Got expected error');
     } else {
-      const got = await method(args);
+      const got = await getExternalFundedTransaction(args);
 
       deepEqual(got, expected, 'Got expected result');
     }

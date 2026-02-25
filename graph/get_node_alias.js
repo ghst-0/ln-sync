@@ -17,7 +17,7 @@ const isPublicKey = n => n && /^[0-9A-F]{66}$/i.test(n);
     id: <Node Identity Public Key Hex String>
   }
 */
-export default ({id, lnd}, cbk) => {
+const getNodeAlias = ({id, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -52,3 +52,5 @@ export default ({id, lnd}, cbk) => {
     returnResult({reject, resolve, of: 'getAlias'}, cbk));
   });
 };
+
+export { getNodeAlias }

@@ -1,4 +1,4 @@
-import changesToRecord from './changes_to_record.js';
+import { changesToRecord } from './changes_to_record.js';
 
 const {isArray} = Array;
 
@@ -62,7 +62,7 @@ const {isArray} = Array;
     }
   }
 */
-export default ({peer, record}) => {
+const peerUpdate = ({peer, record}) => {
   if (!peer) {
     throw new Error('ExpectedPeerToDeriveNodeUpdate');
   }
@@ -90,3 +90,5 @@ export default ({peer, record}) => {
     },
   });
 };
+
+export { peerUpdate }

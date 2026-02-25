@@ -1,4 +1,4 @@
-import percentile from './percentile.js';
+import { percentile } from './percentile.js';
 
 const above = 0.9;
 const {round} = Math;
@@ -29,7 +29,7 @@ const {round} = Math;
     tokens: [<Tokens Number>]
   }
 */
-export default args => {
+const liquidityTokens = args => {
   const inboundFeeRates = args.policies.reduce((sum, policies) => {
     const peer = policies.find(n => n.public_key !== args.public_key);
 
@@ -85,3 +85,5 @@ export default args => {
 
   return {tokens};
 };
+
+export { liquidityTokens }

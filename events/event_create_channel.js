@@ -1,6 +1,6 @@
 import asyncRetry from 'async/retry.js';
 
-import { syncChannel } from '../sync/index.js';
+import { syncChannel } from '../sync/sync_channel.js';
 
 const interval = () => Math.round(Math.random() * 1e5);
 const times = 1e3;
@@ -19,7 +19,7 @@ const times = 1e3;
     id: <Channel Id String>
   }
 */
-export default async ({db, emitter, lnd, id}) => {
+const eventCreateChannel = async ({db, emitter, lnd, id}) => {
   return await asyncRetry({interval, times}, async () => {
     const synced = await syncChannel({db, id, lnd});
 
@@ -31,3 +31,5 @@ export default async ({db, emitter, lnd, id}) => {
     return emitter.emit('channel_added', {id: synced.created.id});
   });
 };
+
+export { eventCreateChannel }

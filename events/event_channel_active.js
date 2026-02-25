@@ -1,6 +1,6 @@
 import asyncRetry from 'async/retry.js';
 
-import { syncLocalChannel } from '../sync/index.js';
+import { syncLocalChannel } from '../sync/sync_local_channel.js';
 
 const interval = () => Math.round(Math.random() * 1e5);
 const times = 20;
@@ -28,7 +28,7 @@ const times = 20;
     public_key: <Node Public Key Hex String>
   }
 */
-export default async args => {
+const eventChannelActive = async args => {
   return await asyncRetry({interval, times}, async () => {
     const synced = await syncLocalChannel({
       db: args.db,
@@ -53,3 +53,5 @@ export default async args => {
     }
   });
 };
+
+export { eventChannelActive }

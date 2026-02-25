@@ -1,10 +1,10 @@
 import { decodePsbt } from 'psbt';
 import { Transaction } from 'bitcoinjs-lib';
 
-import bech32AddressAsScript from './bech32_address_as_script.js';
-import isBase64Encoded from './is_base64_encoded.js';
-import isEncodedTransaction from './is_encoded_transaction.js';
-import isPsbtEncoded from './is_psbt_encoded.js';
+import { bech32AddressAsScript } from './bech32_address_as_script.js';
+import { isBase64Encoded } from './is_base64_encoded.js';
+import { isEncodedTransaction } from './is_encoded_transaction.js';
+import { isPsbtEncoded } from './is_psbt_encoded.js';
 
 const base64AsHex = base64 => Buffer.from(base64, 'base64').toString('hex');
 const bigTok = ({tokens}) => (tokens / 1e8).toFixed(8);
@@ -36,7 +36,7 @@ const txIdHexLength = 64;
     valid: <Error Message String Or Is Valid Boolean>
   }
 */
-export default ({ecp, input, outputs}) => {
+const validateTransactionInput = ({ecp, input, outputs}) => {
   // Exit early on no input to return a deliberate error
   if (!input) {
     return {valid: true};
@@ -93,3 +93,5 @@ export default ({ecp, input, outputs}) => {
 
   return {valid: true};
 };
+
+export { validateTransactionInput }

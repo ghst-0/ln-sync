@@ -27,7 +27,7 @@
     outbound_pending: <Pending Outbound Liquidity Tokens Number>
   }
 */
-export default ({channels, opening, settled}) => {
+const peerLiquidity = ({channels, opening, settled}) => {
   // Inbound is the sum of remote balances
   const inbound = channels.reduce((sum, channel) => {
     // Settled payment is known so it can be considered part of remote balance
@@ -83,3 +83,5 @@ export default ({channels, opening, settled}) => {
     outbound_pending: pendingOutbound,
   };
 };
+
+export { peerLiquidity }

@@ -36,7 +36,7 @@ const createRecordRev = 0;
     }
   }
 */
-export default args => {
+const policyRecord = args => {
   if (!args.channel) {
     throw new Error('ExpectedChannelToDerivePolicyRecord');
   }
@@ -73,3 +73,5 @@ export default args => {
     },
   };
 };
+
+export { policyRecord }

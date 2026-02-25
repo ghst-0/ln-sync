@@ -23,7 +23,7 @@ const uniq = arr => Array.from(new Set(arr));
     [public_key]: <Public Key Hex String>
   }
 */
-export default ({channels, lnd, query}, cbk) => {
+const findKey = ({channels, lnd, query}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -137,3 +137,5 @@ export default ({channels, lnd, query}, cbk) => {
     returnResult({reject, resolve, of: 'key'}, cbk));
   });
 };
+
+export { findKey }

@@ -3,7 +3,7 @@ import { deepEqual, throws } from 'node:assert/strict';
 
 import { Transaction } from 'bitcoinjs-lib';
 
-import method from '../../funding/is_encoded_transaction.js';
+import { isEncodedTransaction } from '../../funding/is_encoded_transaction.js';
 
 const tests = [
   {
@@ -21,9 +21,9 @@ const tests = [
 for (const { args, description, error, expected } of tests) {
   test(description, (t, end) => {
     if (error) {
-      throws(() => method(args), new Error(error), 'Error returned');
+      throws(() => isEncodedTransaction(args), new Error(error), 'Error returned');
     } else {
-      const got = method(args);
+      const got = isEncodedTransaction(args);
 
       deepEqual(got, expected, 'Got expected result');
     }

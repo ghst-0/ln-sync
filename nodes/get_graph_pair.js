@@ -2,8 +2,8 @@ import asyncAuto from 'async/auto.js';
 import asyncMap from 'async/map.js';
 import { returnResult } from 'asyncjs-util';
 
-import getGraphNode from './get_graph_node.js';
-import { keyForRecord } from '../sync/index.js';
+import { getGraphNode } from './get_graph_node.js';
+import { keyForRecord } from '../sync/key_for_record.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const {isArray} = Array;
@@ -32,7 +32,7 @@ const type = 'channel';
     }
   }
 */
-export default ({db, id}, cbk) => {
+const getGraphPair = ({db, id}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -97,3 +97,5 @@ export default ({db, id}, cbk) => {
     returnResult({reject, resolve, of: 'pair'}, cbk));
   });
 };
+
+export { getGraphPair }

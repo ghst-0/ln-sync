@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import { getGraphPair } from '../nodes/index.js';
+import { getGraphPair } from '../nodes/get_graph_pair.js';
 
 const asDisplay = rate => `${(rate / 1e4).toFixed(2)}% (${rate})`;
 const {isArray} = Array;
@@ -29,7 +29,7 @@ const shortKey = key => key.slice(0, 16);
     }
   }
 */
-export default (args, cbk) => {
+const describeFeeRateUpdated = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -89,3 +89,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'description'}, cbk));
   });
 };
+
+export { describeFeeRateUpdated }

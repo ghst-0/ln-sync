@@ -1,7 +1,8 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import { getGraphNode, getGraphPair } from '../nodes/index.js';
+import { getGraphNode} from '../nodes/get_graph_node.js';
+import { getGraphPair } from '../nodes/get_graph_pair.js';
 
 const shortKey = key => key.slice(0, 16);
 
@@ -23,7 +24,7 @@ const shortKey = key => key.slice(0, 16);
     }
   }
 */
-export default (args, cbk) => {
+const describeProbeReceived = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -75,3 +76,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'description'}, cbk));
   });
 };
+
+export { describeProbeReceived }

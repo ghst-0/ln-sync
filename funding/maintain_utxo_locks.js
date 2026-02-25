@@ -25,7 +25,7 @@ const {max} = Math;
 
   @returns via cbk or Promise
 */
-export default ({id, inputs, interval, lnd}, cbk) => {
+const maintainUtxoLocks = ({id, inputs, interval, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -116,3 +116,5 @@ export default ({id, inputs, interval, lnd}, cbk) => {
     returnResult({reject, resolve}, cbk));
   });
 };
+
+export { maintainUtxoLocks }

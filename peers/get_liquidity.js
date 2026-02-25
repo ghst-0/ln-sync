@@ -2,8 +2,8 @@ import asyncAuto from 'async/auto.js';
 import { getChannels, getNode, getWalletInfo } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-import liquidityTokens from './liquidity_tokens.js';
-import { getNetwork } from '../chain/index.js';
+import { liquidityTokens } from './liquidity_tokens.js';
+import { getNetwork } from '../chain/get_network.js';
 
 const {isArray} = Array;
 
@@ -22,7 +22,7 @@ const {isArray} = Array;
     tokens: [<Liquidity Tokens Number>]
   }
 */
-export default (args, cbk) => {
+const getLiquidity = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -90,3 +90,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'tokens'}, cbk));
   });
 };
+
+export { getLiquidity }

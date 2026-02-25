@@ -13,10 +13,12 @@ const {fromHex} = Transaction;
     is_transaction: <String is Encoded Transaction Bool>
   }
 */
-export default ({input}) => {
+const isEncodedTransaction = ({input}) => {
   try {
     return {is_transaction: !!fromHex(input)};
   } catch {
     return {is_transaction: false};
   }
 };
+
+export { isEncodedTransaction }

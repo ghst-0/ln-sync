@@ -3,7 +3,7 @@ import { deepEqual, rejects } from 'node:assert/strict';
 
 import { makeLnd } from 'mock-lnd';
 
-import method from '../../funding/get_internal_funded_tx.js';
+import { getInternalFundedTransaction } from '../../funding/get_internal_funded_tx.js';
 
 const makeArgs = overrides => {
   const args = {
@@ -91,9 +91,9 @@ const tests = [
 for (const { args, description, error, expected } of tests) {
   test(description, async () => {
     if (error) {
-      await rejects(method(args), error, 'Got expected error');
+      await rejects(getInternalFundedTransaction(args), error, 'Got expected error');
     } else {
-      const got = await method(args);
+      const got = await getInternalFundedTransaction(args);
 
       deepEqual(got, expected, 'Got expected result');
     }

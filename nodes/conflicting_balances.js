@@ -27,7 +27,7 @@ const uniq = arr => Array.from(new Set(arr));
     invalid_pending_balance: <Invalid Pending Balance Tokens Number>
   }
 */
-export default ({transactions, utxos}) => {
+const conflictingBalances = ({transactions, utxos}) => {
   const conflictingUtxos = [];
   const invalidUtxos = [];
   const spends = {}
@@ -94,3 +94,5 @@ export default ({transactions, utxos}) => {
     invalid_pending_balance: sumOf(invalidTokens),
   };
 };
+
+export { conflictingBalances }

@@ -2,8 +2,8 @@ import asyncAuto from 'async/auto.js';
 import { getPeers, getWalletInfo } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
-import keyForRecord from './key_for_record.js';
-import peerUpdate from './peer_update.js';
+import { keyForRecord } from './key_for_record.js';
+import { peerUpdate } from './peer_update.js';
 
 const add = 1;
 const createRecordRev = 0;
@@ -54,7 +54,7 @@ const type = 'peer';
     }
   }
 */
-export default ({db, id, lnd}, cbk) => {
+const syncPeer = ({db, id, lnd}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -246,3 +246,5 @@ export default ({db, id, lnd}, cbk) => {
     returnResult({reject, resolve, of: 'updates'}, cbk));
   });
 };
+
+export { syncPeer }

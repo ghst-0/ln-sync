@@ -1,6 +1,6 @@
 import styling from './log_line_styling.json' with { type: 'json' };
-import styledAction from './styled_action.js';
-import styledSubject from './styled_subject.js';
+import { styledAction } from './styled_action.js';
+import { styledSubject } from './styled_subject.js';
 
 /** Get a log line for a change event
 
@@ -21,7 +21,7 @@ import styledSubject from './styled_subject.js';
     [line]: <Log Line String>
   }
 */
-export default ({description, event, mode}) => {
+const logLineForChangeEvent = ({description, event, mode}) => {
   if (!description) {
     return {};
   }
@@ -50,3 +50,5 @@ export default ({description, event, mode}) => {
 
   return {line: `${date} ${emoji} ${subject} ${action} ${detail}`.trim()};
 };
+
+export { logLineForChangeEvent }

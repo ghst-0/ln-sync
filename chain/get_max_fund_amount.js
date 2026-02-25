@@ -32,7 +32,7 @@ const sumOf = arr => arr.reduce((sum, n) => sum + n, Number());
     max_tokens: <Maximum Spendable Tokens Number>
   }
 */
-export default (args, cbk) => {
+const getMaxFundAmount = (args, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -196,3 +196,5 @@ export default (args, cbk) => {
     returnResult({reject, resolve, of: 'max'}, cbk));
   });
 };
+
+export { getMaxFundAmount }

@@ -17,7 +17,7 @@ const stopHtlcsIntervalMs = 3000;
 
   @returns via cbk or Promise
 */
-export default ({id, ids, lnd, peer}, cbk) => {
+const stopAllHtlcs = ({id, ids, lnd, peer}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -106,3 +106,5 @@ export default ({id, ids, lnd, peer}, cbk) => {
     returnResult({reject, resolve}, cbk));
   });
 };
+
+export { stopAllHtlcs }

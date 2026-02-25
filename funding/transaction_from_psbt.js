@@ -12,7 +12,7 @@ import { extractTransaction, finalizePsbt } from 'psbt';
     transaction: <Raw Trarnsaction Hex String>
   }
 */
-export default ({ecp, psbt}) => {
+const transactionFromPsbt = ({ecp, psbt}) => {
   // Attempt extracting a transaction from a finalized PSBT
   try {
     const {transaction} = extractTransaction({ecp, psbt});
@@ -36,3 +36,5 @@ export default ({ecp, psbt}) => {
   // Return nothing when there are no remaining options to extract a tx
   return {};
 };
+
+export { transactionFromPsbt }

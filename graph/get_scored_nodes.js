@@ -20,7 +20,7 @@ const knownNetworks = ['btc', 'btctestnet'];
     }]
   }
 */
-export default ({network, request}, cbk) => {
+const getScoredNodes = ({network, request}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -69,3 +69,5 @@ export default ({network, request}, cbk) => {
     returnResult({reject, resolve, of: 'getNodes'}, cbk));
   });
 };
+
+export { getScoredNodes }

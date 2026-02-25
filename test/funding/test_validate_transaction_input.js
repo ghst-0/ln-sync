@@ -3,7 +3,7 @@ import { deepEqual, throws } from 'node:assert/strict';
 
 import * as tinysecp from 'tiny-secp256k1';
 
-import method from '../../funding/validate_transaction_input.js';
+import { validateTransactionInput } from '../../funding/validate_transaction_input.js';
 
 const tests = [
   {
@@ -87,9 +87,9 @@ for (const { args, description, error, expected } of tests) {
     args.ecp = ecp;
 
     if (error) {
-      throws(() => method(args), new Error(error), 'Error returned');
+      throws(() => validateTransactionInput(args), new Error(error), 'Error returned');
     } else {
-      const got = method(args);
+      const got = validateTransactionInput(args);
 
       deepEqual(got, expected, 'Got expected result');
     }

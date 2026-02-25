@@ -3,7 +3,7 @@ import { deepEqual, rejects } from 'node:assert/strict';
 
 import { makeLnd } from 'mock-lnd';
 
-import method from '../../nodes/get_node_funds.js';
+import { getNodeFunds } from '../../nodes/get_node_funds.js';
 
 const tests = [
   {
@@ -51,9 +51,9 @@ const tests = [
 for (const { args, description, error, expected } of tests) {
   test(description, async () => {
     if (error) {
-      await rejects(method(args), error, 'Got expected error');
+      await rejects(getNodeFunds(args), error, 'Got expected error');
     } else {
-      const res = await method(args);
+      const res = await getNodeFunds(args);
 
       deepEqual(res, expected, 'Got expected result');
     }

@@ -2,7 +2,8 @@ import test from 'node:test';
 import { deepEqual, rejects } from 'node:assert/strict';
 
 import { makeWalletVersionResponse, makeLnd } from 'mock-lnd';
-import method from '../../funding/is_external_funding.js';
+
+import { isExternalFunding } from '../../funding/is_external_funding.js';
 
 const makeArgs = overrides => {
   const args = {
@@ -58,9 +59,9 @@ const tests = [
 for (const { args, description, error, expected } of tests) {
   test(description, async () => {
     if (error) {
-      await rejects(method(args), error, 'Got expected error');
+      await rejects(isExternalFunding(args), error, 'Got expected error');
     } else {
-      const got = await method(args);
+      const got = await isExternalFunding(args);
 
       deepEqual(got, expected, 'Got expected result');
     }

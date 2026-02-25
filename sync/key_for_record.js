@@ -15,6 +15,8 @@ const separator = ':';
     key: <Key Buffer Object>
   }
 */
-export default ({id, type}) => {
+const keyForRecord = ({id, type}) => {
   return {key: hash160([type, id].join(separator))};
 };
+
+export { keyForRecord }

@@ -15,7 +15,7 @@ const isPublicKey = n => n && /^[0-9A-F]{66}$/i.test(n);
 
   @returns via cbk or Promise
 */
-export default ({id, lnd, timeout}, cbk) => {
+const waitForConnectedPeer = ({id, lnd, timeout}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -94,3 +94,5 @@ export default ({id, lnd, timeout}, cbk) => {
     returnResult({reject, resolve}, cbk));
   });
 };
+
+export { waitForConnectedPeer }

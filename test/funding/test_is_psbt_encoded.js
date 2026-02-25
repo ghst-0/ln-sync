@@ -3,7 +3,7 @@ import { deepEqual, throws } from 'node:assert/strict';
 
 import * as tinysecp from 'tiny-secp256k1';
 
-import method from '../../funding/is_psbt_encoded.js';
+import { isPsbtEncoded } from '../../funding/is_psbt_encoded.js';
 
 const tests = [
   {
@@ -27,9 +27,9 @@ for (const { args, description, error, expected } of tests) {
     args.ecp = ecp;
 
     if (error) {
-      throws(() => method(args), new Error(error), 'Error returned');
+      throws(() => isPsbtEncoded(args), new Error(error), 'Error returned');
     } else {
-      const got = method(args);
+      const got = isPsbtEncoded(args);
 
       deepEqual(got, expected, 'Got expected result');
     }

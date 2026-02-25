@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import keyForRecord from './key_for_record.js';
+import { keyForRecord } from './key_for_record.js';
 
 const fresh = ['id'];
 const hexAsBuffer = hex => Buffer.from(hex, 'hex');
@@ -27,7 +27,7 @@ const type = 'block';
     }
   }
 */
-export default ({db, height, id}, cbk) => {
+const syncBlock = ({db, height, id}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -74,3 +74,5 @@ export default ({db, height, id}, cbk) => {
     returnResult({reject, resolve, of: 'create'}, cbk));
   });
 };
+
+export { syncBlock }

@@ -35,7 +35,7 @@ const recordIncrement = 1;
     }
   }
 */
-export default ({channel, record}) => {
+const channelUpdate = ({channel, record}) => {
   if (!channel) {
     throw new Error('ExpectedChannelToDeriveChannelUpdate');
   }
@@ -57,3 +57,5 @@ export default ({channel, record}) => {
     },
   };
 };
+
+export { channelUpdate }

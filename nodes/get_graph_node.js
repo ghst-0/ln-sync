@@ -1,7 +1,7 @@
 import asyncAuto from 'async/auto.js';
 import { returnResult } from 'asyncjs-util';
 
-import { keyForRecord } from '../sync/index.js';
+import { keyForRecord } from '../sync/key_for_record.js';
 
 const defaultColor = '#000000';
 const table = 'nodes';
@@ -23,7 +23,7 @@ const type = 'node';
     sockets: [<Host and Port String>]
   }
 */
-export default ({db, id}, cbk) => {
+const getGraphNode = ({db, id}, cbk) => {
   return new Promise((resolve, reject) => {
     asyncAuto({
       // Check arguments
@@ -61,3 +61,5 @@ export default ({db, id}, cbk) => {
     returnResult({reject, resolve, of: 'node'}, cbk));
   });
 };
+
+export { getGraphNode }
