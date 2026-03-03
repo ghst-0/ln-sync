@@ -18,9 +18,7 @@ const tests = [
         default: {
           getInfo: ({}, cbk) => {
             const res = getInfoRes();
-
-            res.chains.push({chain: 'btc', network: 'mainnet'});
-
+            res.chains.push({chain: 'bitcoin', network: 'testnet'});
             return cbk(null, res);
           },
         },
@@ -35,9 +33,7 @@ const tests = [
         default: {
           getInfo: ({}, cbk) => {
             const res = getInfoRes();
-
             res.chains = [{chain: 'chain', network: 'network'}];
-
             return cbk(null, res);
           },
         },

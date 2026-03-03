@@ -43,8 +43,8 @@ const getNetwork = ({lnd}, cbk) => {
           return cbk([400, 'CannotDetermineChainFromNode']);
         }
 
-        const network = keys(networks.chains).find(network => {
-          return chain === reversedBytes(networks.chains[network]);
+        const network = keys(networks.chains).find(net => {
+          return chain === reversedBytes(networks.chains[net]);
         });
 
         if (!network) {
