@@ -8,13 +8,15 @@ import liquidityChannelsResponse from '../fixtures/liquidity_channels_response.j
 
 import { getLiquidity } from '../../peers/get_liquidity.js';
 
+const channels = liquidityChannelsResponse
+
 const makeLnd = () => {
   return {
     default: {
       getChanInfo: ({}, cbk) => cbk(null, chanInfoResponse),
       getInfo: ({}, cbk) => cbk(null, getInfoResponse),
       getNodeInfo: ({}, cbk) => cbk(null, getNodeInfoResponse),
-      listChannels: ({}, cbk) => cbk(null, {liquidityChannelsResponse}),
+      listChannels: ({}, cbk) => cbk(null, {channels}),
     },
   };
 };

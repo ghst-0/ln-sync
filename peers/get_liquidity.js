@@ -1,9 +1,9 @@
 import asyncAuto from 'async/auto.js';
-import { getChannels, getNode, getWalletInfo } from 'lightning';
+import { getChannels as ln_getChannels, getNode, getWalletInfo } from 'lightning';
 import { returnResult } from 'asyncjs-util';
 
 import { liquidityTokens } from './liquidity_tokens.js';
-import { getNetwork } from '../chain/get_network.js';
+import { getNetwork as chain_getNetwork } from '../chain/get_network.js';
 
 const {isArray} = Array;
 
@@ -44,11 +44,11 @@ const getLiquidity = (args, cbk) => {
 
       // Get the channels
       getChannels: ['validate', ({}, cbk) => {
-        return getChannels({lnd: args.lnd}, cbk);
+        return ln_getChannels({lnd: args.lnd}, cbk);
       }],
 
       // Determine which network the node is on
-      getNetwork: ['validate', ({}, cbk) => getNetwork({lnd: args.lnd}, cbk)],
+      getNetwork: ['validate', ({}, cbk) => chain_getNetwork({lnd: args.lnd}, cbk)],
 
       // Get the node's public key
       getNodeKey: ['validate', ({}, cbk) => {
