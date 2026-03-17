@@ -21,7 +21,7 @@
   "devDependencies": {
     "ln-docker-daemons": "workspace:ln-docker-daemons",
     "mock-lnd": "workspace:mock-lnd",
-    "oxlint": "^1.50.0"
+    "oxlint": "^1.56.0"
   },
   "engines": {
     "node": ">=20"
